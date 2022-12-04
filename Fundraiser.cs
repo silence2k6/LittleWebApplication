@@ -1,4 +1,4 @@
-﻿using Little_Web_Application;
+﻿using LittleWebApplication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,8 @@ namespace LittleWebApplication
 	    private CompanyInformations newFundraiser = new CompanyInformations();
         private AdressInformations newAdress = new AdressInformations();
         private BankAccountInformations newBankAccount = new BankAccountInformations();
-        private List<Terminal> fundraiserTerminalList = new List<Terminal>;
-        private List<Payment> fundraiserPaymentList = new List<Payment>;
+        private List<Terminal> fundraiserTerminalList = new List<Terminal>();
+        private List<Payment> fundraiserPaymentList = new List<Payment>();
     }
     public class Payment
     {

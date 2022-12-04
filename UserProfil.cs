@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Little_Web_Application
+namespace LittleWebApplication
 {
     public class UserProfil
     {
@@ -14,15 +14,14 @@ namespace Little_Web_Application
         private NameInformations newName = new NameInformations();
         private ContactInformations newContact = new ContactInformations();
         private AccountInformations newAccount = new AccountInformations();
-
     }
 
     public class AdressInformations
     {
-        string userAdressStreet;
-        string userAdressNumber;
-        string userAdressTown;
-        string userAdressFederalState;
+        public string userAdressStreet;
+        public string userAdressNumber;
+        public string userAdressTown;
+        public string userAdressFederalState;
     }
 
     public class LoginInformations

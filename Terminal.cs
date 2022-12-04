@@ -1,4 +1,4 @@
-﻿using Little_Web_Application;
+﻿using LittleWebApplication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +16,13 @@ namespace LittleWebApplication
         private Fundraiser terminalFundraiser = new Fundraiser();
         private List<Coupon> terminalCouponList = new List<Coupon>();
         private List<Goodie> terminalGoodieList = new List<Goodie>();
-        private List<Activities> terminalActivityList = new List<Activities>();
+        private List<TerminalActivities> terminalActivityList = new List<TerminalActivities>();
         private List<Donation> terminalDonationList = new List<Donation>();
         terminalActivityList.Add(terminalDonationList);
 	    private List<Service> terminalServiceList = new List<Service>();
         terminalActivityList.Add(terminalServiceList);
 	    private List<TerminalNotification> terminalNotificationList = new List<TerminalNotification>();
-        private TerminalNotification terminalNotification = new terminalNotification();
+        private TerminalNotification terminalNotification = new TerminalNotification();
         terminalNotificationList.Add(terminalNotification);
 	    string terminalStatus;
     }

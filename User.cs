@@ -33,19 +33,19 @@ namespace LittleWebApplication
         private Donation userDonation = new Donation();
         userDonationList.Add(userDonation);
 
-        private List<Rewards> userRewards = new List<Rewards>();
+        private List<Reward> userRewards = new List<Reward>();
         private List<Coupon> userCouponCollection = new List<Coupon>();
         userRewards.Add(userCouponCollection);
-        privateList<Goodie> userGoodieCollection = new List<Goodie>();
+        private List<Goodie> userGoodieCollection = new List<Goodie>();
         userReward.Add(userGoodieCollection);
 
-        private List<Challanges> userChallanges = new List<Challanges>();
+        private List<Challenge> userChallanges = new List<Challenge>();
         private List<Achievement> userAchievementCollection = new List<Achievement>();
         userChallenges.Add(userAchievementCollection);
         private List<Mission> userMissionCollection = new List<Mission>();
         userChallanges.Add(userMissionCollection);
 
-        private List<Notifications> userNotifications = new List<Notifications>();
+        private List<Notification> userNotifications = new List<Notification>();
         private List<AdminNotification> userAdminNotificationCollection = new List<AdminNotification>();
         userNotifications.Add(userAdminNotificationCollection);
         private List<News> userNewsCollection = new List<News>();
@@ -62,7 +62,7 @@ namespace LittleWebApplication
 
     public class BusinessUser
     {
-        enum ArtOfUser;
+        int ArtOfUser;
         string userNumber;
         private UserProfil newUserProfil = new UserProfil();
         private CompanyInformations newCompany = new CompanyInformations();
@@ -72,22 +72,22 @@ namespace LittleWebApplication
 
     public class ServiceUser
     {
-        enum ArtOfUser;
+        int ArtOfUser;
         string userNumber;
         private UserProfil newUserProfil = new UserProfil();
         private List<TerminalService> userServiceList = new List<TerminalService>();
-        private Service userService = new Service();
+        private TerminalService userService = new TerminalService();
         userServiceList.Add(userService);
-	    private List<adminTask> userTaskList = new List<adminTask>();
+	    private List<AdminTask> userTaskList = new List<AdminTask>();
     }
 
     public class AdminUser
     {
-        enum ArtOfUser;
+        int ArtOfUser;
         string userNumber;
         private UserProfil newUserProfil = new UserProfil();
 
-        private List<Users> userAdministration = new List<User>();
+        private List<User> userAdministration = new List<User>();
         userAdministration.Add(privatUserList);
         userAdministration.Add(businessUserList);
         userAdministration.Add(serviceUserLIst);
@@ -100,24 +100,24 @@ namespace LittleWebApplication
         private Terminal terminal = new Terminal();
         terminalAdministration.Add(terminal);
 
-	    private List<Rewards> rewardAdministration = new List<Rewards>();
+	    private List<Reward> rewardAdministration = new List<Reward>();
         rewardAdministration.Add(couponList);
 	    rewardAdministration.Add(goodieList);
 
-	    private List<Challanges> challangeAdministration = new List<Challanges>();
+	    private List<Challenge> challangeAdministration = new List<Challenge>();
         challangeAdministration.Add(achievementList);
 	    challangeAdministration.Add(missionList);
 	
-        private List<Notifications> notificationAdministration = new List<Notifications>();
+        private List<Notification> notificationAdministration = new List<Notification>();
         notificationAdministration.Add(adminNotificationList);
         notificationAdministration.Add(newsList);
         notificationAdministration.Add(adminTaskList);
         notifiactionAdministration.Add(terminalNotificationList);
 
-        private List<Payments> paymentAdministration = new List<Payments>();
+        private List<Payment> paymentAdministration = new List<Payment>();
         private List<Donation> totalDonationOverview = new List<Donation>();
         paymentAdministraiton.Add(totalDonationOverview);
-        private List<Service> totalEmptyingOverview = new List<Service>();
+        private List<TerminalService> totalEmptyingOverview = new List<TerminalService>();
         paymentAdministraion.Add(totalEmptyingOverview);
         private List<Payment> totalFundraiserPaymentOverview = new List<Payment>();
         private Payment fundraiserPayment = new Payment();

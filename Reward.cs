@@ -34,7 +34,7 @@ namespace LittleWebApplication
         int couponValidityPeriod;
         double couponWinningChance;
         int couponStocklevel;
-        enum couponStatus;
+        string couponStatus;
         doc couponPic;
     }
 
