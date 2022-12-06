@@ -23,23 +23,22 @@ namespace LittleWebApplication
         public string userAdressTown;
         public string userAdressFederalState;
     }
-
-    public class LoginInformations
-    {
-        string userLoginName;
-        string userLoginPasswort;
-    }
-
     public class NameInformations
     {
-        string userFirstname;
-        string userFamiliename;
+        public string userFirstName;
+        public string userLastName;
     }
 
     public class ContactInformations
     {
-        string userTel;
-        string userMail;
+        public string userTel;
+        public string userMail;
+    }
+
+    public class LoginInformations
+    {
+        public string userNumber;
+        public string userLoginPasswort;
     }
 
     public class CompanyInformations

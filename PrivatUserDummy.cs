@@ -34,12 +34,12 @@ namespace LittleWebApplication
             "Theodorsiedlung"
         };
 
-        public List<string> adressNumberDummyList = new()
+        public static List<string> adressNumberDummyList = new()
         {
             "1a", "1b", "1c", "1d", "1e", "1f", "1g", "1h", "1i", "1j", "1k", "1l", "1m", "1n", "1o", "1p", "1q", "1r", "1s", "1t"
         };
 
-        public List<string> adressTownDummyList = new()
+        public static List<string> adressTownDummyList = new()
         {
             "Antonstadt",
             "Bertastadt",
@@ -61,7 +61,7 @@ namespace LittleWebApplication
             "Theodorstadt"
         };
 
-        public List<string> adressFederalStateDummyList = new()
+        public static List<string> adressFederalStateDummyList = new()
         {
             "Wien",
             "Niederösterreich",
@@ -73,22 +73,137 @@ namespace LittleWebApplication
             "Steiermark",
             "Burgenland"
         };
-        public static List<AdressInformations> createAdress(List<AdressInformations> AdressRepository)
+        public static List<AdressInformations> CreateAdress(List<AdressInformations> adressRepository)
         {
             int randomAdressStreetIndex = randomGenerator.Next(adressStreetDummyList.Count);
-            int randomAdressNumberIndex = randomGenerator.Next(adressStreetDummyList.Count);
-            int randomAdressTownIndex = randomGenerator.Next(adressStreetDummyList.Count);
-            int randomAdressFederalStateIndex = randomGenerator.Next(adressStreetDummyList.Count);
+            int randomAdressNumberIndex = randomGenerator.Next(adressNumberDummyList.Count);
+            int randomAdressTownIndex = randomGenerator.Next(adressTownDummyList.Count);
+            int randomAdressFederalStateIndex = randomGenerator.Next(adressFederalStateDummyList.Count);
 
-            AdressInformations newAdress = new();
-            newAdress.userAdressStreet = adressStreetDummyList[randomAdressStreetIndex];
-            newAdress.userAdressNumber = adressStreetDummyList[randomAdressNumberIndex];
-            newAdress.userAdressTown = adressStreetDummyList[randomAdressTownIndex];
-            newAdress.userAdressFederalState = adressStreetDummyList[randomAdressFederalStateIndex];
+            AdressInformations userAdress = new()
+            {
+                userAdressStreet = adressStreetDummyList[randomAdressStreetIndex],
+                userAdressNumber = adressNumberDummyList[randomAdressNumberIndex],
+                userAdressTown = adressTownDummyList[randomAdressTownIndex],
+                userAdressFederalState = adressFederalStateDummyList[randomAdressFederalStateIndex]
+            };
 
-            AdressRepository.Add(newAdress);
+            adressRepository.Add(userAdress);
 
-            return AdressRepository;
+            return adressRepository;
         }
+
+        public static List<string> firstNameDummyList = new()
+        {
+            "Anton",
+            "Berta",
+            "Cesar",
+            "Dora",
+            "Emil",
+            "Friedrich",
+            "Gustav",
+            "Heinrich",
+            "Ida",
+            "Johann",
+            "Konrad",
+            "Ludwig",
+            "Marta",
+            "Norbert",
+            "Otto",
+            "Paula",
+            "Quentin",
+            "Richard",
+            "Siegfried",
+            "Theodor"
+        };
+
+        public static List<string> lastNameDummyList = new()
+        {
+            "Antoner",
+            "Bertaner",
+            "Cesarner",
+            "Doraner",
+            "Emilner",
+            "Friedrichner",
+            "Gustavner",
+            "Heinrichner",
+            "Idaner",
+            "Johanner",
+            "Konradner",
+            "Ludwigner",
+            "Martaner",
+            "Norbertner",
+            "Ottoner",
+            "Paulaner",
+            "Quentiner",
+            "Richardner",
+            "Siegfriedner",
+            "Theodorner"
+        };
+
+        public static List<NameInformations> CreateName(List<NameInformations> nameRepository)
+        {
+            int randomFirstNameIndex = randomGenerator.Next(firstNameDummyList.Count);
+            int randomLastNameIndex = randomGenerator.Next(lastNameDummyList.Count);
+
+            NameInformations userName = new()
+            {
+                userFirstName = firstNameDummyList[randomFirstNameIndex],
+                userLastName = lastNameDummyList[randomLastNameIndex]
+            };
+            nameRepository.Add(userName);
+
+            return nameRepository;
+        }
+
+        public static string CreateTel()
+        {
+            string praefix = "+43";
+            List<string> areaCodeList = new()
+            {
+                "0650", "0660", "0676", "0664", "0688", "0699"
+            };
+            int[] randomTelNumbers = new int[7];
+            for (int i = 0; i < randomTelNumbers.Length; i++)
+            {
+                randomTelNumbers[i] = randomGenerator.Next(0, 9);
+            }
+
+            string userTel = praefix + areaCodeList + randomTelNumbers;
+
+            return userTel;
+        }
+
+        public static string CreateMail(NameInformations userName)
+        {
+            string localPart1;
+            string localPart2;
+            List<string> domainList = new()
+            {
+                "gmail.com", "gmx.at", "chello.at", "a1.at", "yahoo.com"
+            };
+
+            localPart1 = userName.userFirstName;
+            localPart2 = userName.userLastName;
+
+            int randomMailDomainIndex = randomGenerator.Next(domainList.Count);
+            string randomMailDomain = domainList[randomMailDomainIndex];
+
+
+            string userMail = localPart1 + "." + localPart2 + "@" + randomMailDomain;
+
+            return userMail;
+        }
+  
+        public static int CreateUserNumber(NameInformations userName, List<int> possibleUserNumberList)
+        {
+            
+            
+        }
+
+
+
+        
+
     }
 }

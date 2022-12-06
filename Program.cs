@@ -2,38 +2,43 @@
 
 namespace LittleWebApplication
 {
-    public enum UserType
+    internal class Progamm
     {
-        privatUser,
-        businessUser,
-        serviceUser,
-        adminUser
-    }
+        public const int MAX_PRIVAT_USER_DUMMYS = 100;
 
-    public class DateTime
-    {
-        string donationDate;
-        string donationTime;
-    }
+        public enum UserType
+        {
+            privatUser,
+            businessUser,
+            serviceUser,
+            adminUser
+        }
 
-    public enum Status
-    {
-        activ,
-        disabled,
-        expired,
-        used
-    }
+        public class DateTime
+        {
+            string donationDate;
+            string donationTime;
+        }
 
-    public enum Service
-    {
-        emptying,
-        repair,
-        remove,
-        installation
-    }
+        public enum Status
+        {
+            activ,
+            disabled,
+            expired,
+            used
+        }
+
+        public enum Service
+        {
+            emptying,
+            repair,
+            remove,
+            installation
+        }
 
 
-    internal class Program
-    {
+        internal class Program
+        {
+        }
     }
 }
