@@ -73,7 +73,7 @@ namespace LittleWebApplication
             "Steiermark",
             "Burgenland"
         };
-        public static List<AdressInformations> CreateAdress(List<AdressInformations> adressRepository)
+        public static AdressInformations CreateAdress()
         {
             int randomAdressStreetIndex = randomGenerator.Next(adressStreetDummyList.Count);
             int randomAdressNumberIndex = randomGenerator.Next(adressNumberDummyList.Count);
@@ -88,9 +88,7 @@ namespace LittleWebApplication
                 userAdressFederalState = adressFederalStateDummyList[randomAdressFederalStateIndex]
             };
 
-            adressRepository.Add(userAdress);
-
-            return adressRepository;
+            return userAdress;
         }
 
         public static List<string> firstNameDummyList = new()
@@ -141,7 +139,7 @@ namespace LittleWebApplication
             "Theodorner"
         };
 
-        public static List<NameInformations> CreateName(List<NameInformations> nameRepository)
+        public static NameInformations CreateName()
         {
             int randomFirstNameIndex = randomGenerator.Next(firstNameDummyList.Count);
             int randomLastNameIndex = randomGenerator.Next(lastNameDummyList.Count);
@@ -151,9 +149,8 @@ namespace LittleWebApplication
                 userFirstName = firstNameDummyList[randomFirstNameIndex],
                 userLastName = lastNameDummyList[randomLastNameIndex]
             };
-            nameRepository.Add(userName);
 
-            return nameRepository;
+            return userName;
         }
 
         public static string CreateTel()
@@ -169,7 +166,7 @@ namespace LittleWebApplication
                 randomTelNumbers[i] = randomGenerator.Next(0, 9);
             }
 
-            string userTel = praefix + areaCodeList + randomTelNumbers;
+            string userTel = $"{praefix}{areaCodeList}{randomTelNumbers}";
 
             return userTel;
         }
@@ -190,20 +187,76 @@ namespace LittleWebApplication
             string randomMailDomain = domainList[randomMailDomainIndex];
 
 
-            string userMail = localPart1 + "." + localPart2 + "@" + randomMailDomain;
+            string userMail = $"{localPart1}.{localPart2}@{randomMailDomain}";
 
             return userMail;
         }
-  
-        public static int CreateUserNumber(NameInformations userName, List<int> possibleUserNumberList)
+
+        //create Array with 100 "unused" fields
+        //create Counter with starts with 0
+        //whenn create new UserNumber, use first "unused" field in List and set it to "new UserNumber"
+        //new UserNumber = Counter+1 plus "000" in front/if Counter > 9 plus "00" in front/if Counter >99 with "0" in front
+        //if first field is not "unused" look for second field (and so on)
+        //if User cancel his account, set field to "canceled"
+
+        public static string CreateUserNumber(List<string> userNumberList, int userNumberCounter, int userType)
         {
-            
-            
+            int x = 0;
+            string userPreNumber = "";
+            string userNumberPlaceholder = "";
+            string userNumber = "";
+            int freeUserNumberSlot = 1;
+
+            while (freeUserNumberSlot <= userNumberList.Count)
+            {
+                if (userNumberList[x] == "unused")
+                {
+                    if (userType == Enum.UserType.privatUser)
+                    {
+                        userPreNumber = "P#";
+                    }
+                    if (userType == 2)
+                    {
+                        userPreNumber = "B#";
+                    }
+                    if (userType == 3)
+                    {
+                        userPreNumber = "S#";
+                    }
+                    if (userType == 4)
+                    {
+                        userPreNumber = "A#";
+                    }
+                    if (userNumberCounter < 10)
+                    {
+                        userNumberPlaceholder = "000";
+                    }
+                    if (userNumberCounter > 10 && userNumberCounter < 100)
+                    {
+                        userNumberPlaceholder = "00";
+                    }
+
+                    userNumber = $"{userPreNumber}{userNumberPlaceholder}{userNumberCounter}";
+                    break;
+                }
+                else
+                {
+                    x++;
+                }
+            }
+            return userNumber;
+        }
+
+        public static string CreatePasswod()
+        {
+            string userPasswort = "0000";
+
+            return userPasswort;
         }
 
 
 
-        
+
 
     }
 }
