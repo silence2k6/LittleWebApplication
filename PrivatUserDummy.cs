@@ -192,71 +192,11 @@ namespace LittleWebApplication
             return userMail;
         }
 
-        //create Array with 100 "unused" fields
-        //create Counter with starts with 0
-        //whenn create new UserNumber, use first "unused" field in List and set it to "new UserNumber"
-        //new UserNumber = Counter+1 plus "000" in front/if Counter > 9 plus "00" in front/if Counter >99 with "0" in front
-        //if first field is not "unused" look for second field (and so on)
-        //if User cancel his account, set field to "canceled"
-
-        public static string CreateUserNumber(List<string> userNumberList, int userNumberCounter, int userType)
-        {
-            int x = 0;
-            string userPreNumber = "";
-            string userNumberPlaceholder = "";
-            string userNumber = "";
-            int freeUserNumberSlot = 1;
-
-            while (freeUserNumberSlot <= userNumberList.Count)
-            {
-                if (userNumberList[x] == "unused")
-                {
-                    if (userType == Enum.UserType.privatUser)
-                    {
-                        userPreNumber = "P#";
-                    }
-                    if (userType == 2)
-                    {
-                        userPreNumber = "B#";
-                    }
-                    if (userType == 3)
-                    {
-                        userPreNumber = "S#";
-                    }
-                    if (userType == 4)
-                    {
-                        userPreNumber = "A#";
-                    }
-                    if (userNumberCounter < 10)
-                    {
-                        userNumberPlaceholder = "000";
-                    }
-                    if (userNumberCounter > 10 && userNumberCounter < 100)
-                    {
-                        userNumberPlaceholder = "00";
-                    }
-
-                    userNumber = $"{userPreNumber}{userNumberPlaceholder}{userNumberCounter}";
-                    break;
-                }
-                else
-                {
-                    x++;
-                }
-            }
-            return userNumber;
-        }
-
         public static string CreatePasswod()
         {
             string userPasswort = "0000";
 
             return userPasswort;
         }
-
-
-
-
-
     }
 }

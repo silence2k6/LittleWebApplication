@@ -18,7 +18,7 @@ namespace LittleWebApplication
 
         public enum Status
         {
-            activ,
+            activ = 1,
             disabled,
             expired,
             used
@@ -26,7 +26,7 @@ namespace LittleWebApplication
 
         public enum Service
         {
-            emptying,
+            emptying = 1,
             repair,
             remove,
             installation
