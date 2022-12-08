@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static LittleWebApplication.ProfilData;
 
 namespace LittleWebApplication
 {
     public class Backup
     {
-        public static List<string> stringListRepository(List<string> stringList, XmlSerializer serializer, string path)
+        public static List<string> StringListRepository(List<string> stringList, XmlSerializer serializer, string path)
         {
             using (FileStream file = File.Create(path))
             {
@@ -22,19 +23,18 @@ namespace LittleWebApplication
             }
             return stringList;
         }
-
-        public static List<int> intListRepository(List<int> intList, XmlSerializer serializer, string path)
+        public static List<AccountInformations> ObjectListRepository(List<AccountInformations> objectList, XmlSerializer serializer, string path)
         {
             using (FileStream file = File.Create(path))
             {
-                serializer.Serialize(file, intList);
+                serializer.Serialize(file, objectList);
             }
 
             using (FileStream file = File.OpenRead(path))
             {
-                intList = serializer.Deserialize(file) as List<int>;
+                objectList = serializer.Deserialize(file) as List<AccountInformations>;
             }
-            return intList;
+            return objectList;
         }
     }
 }

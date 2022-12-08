@@ -27,7 +27,7 @@ namespace LittleWebApplication
     {
         string artOfUser;
 	    string userNumber;
-        private UserProfil newUserProfil = new UserProfil();
+        private ProfilData newUserProfil = new ProfilData();
 
         private List<Donation> userDonationList = new List<Donation>();
         private Donation userDonation = new Donation();
@@ -64,7 +64,7 @@ namespace LittleWebApplication
     {
         int ArtOfUser;
         string userNumber;
-        private UserProfil newUserProfil = new UserProfil();
+        private ProfilData newUserProfil = new ProfilData();
         private CompanyInformations newCompany = new CompanyInformations();
         private List<Terminal> businessTerminalList = new List<Terminal>();
         private List<Coupon> businessCouponList new List<Coupon>();
@@ -74,7 +74,7 @@ namespace LittleWebApplication
     {
         int ArtOfUser;
         string userNumber;
-        private UserProfil newUserProfil = new UserProfil();
+        private ProfilData newUserProfil = new ProfilData();
         private List<TerminalService> userServiceList = new List<TerminalService>();
         private TerminalService userService = new TerminalService();
         userServiceList.Add(userService);
@@ -85,7 +85,7 @@ namespace LittleWebApplication
     {
         int ArtOfUser;
         string userNumber;
-        private UserProfil newUserProfil = new UserProfil();
+        private ProfilData newUserProfil = new ProfilData();
 
         private List<User> userAdministration = new List<User>();
         userAdministration.Add(privatUserList);
