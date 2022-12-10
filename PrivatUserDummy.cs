@@ -9,6 +9,8 @@ namespace LittleWebApplication
 {
     internal class PrivatUserDummy
     {
+        public string userNumber;
+        public Enum.UserType artOfUser;
         public static Random randomGenerator = new();
 
         public static List<string> adressStreetDummyList = new()
@@ -150,7 +152,6 @@ namespace LittleWebApplication
                 userFirstName = firstNameDummyList[randomFirstNameIndex],
                 userLastName = lastNameDummyList[randomLastNameIndex]
             };
-
             return userName;
         }
 
