@@ -10,31 +10,32 @@ namespace LittleWebApplication
 {
     public class Backup
     {
-        public static List<string> StringListRepository(List<string> stringList, XmlSerializer serializer, string path)
+        public static List<AccountInformations> AccountListRepository(List<AccountInformations> accountList, XmlSerializer serializer, string path)
         {
             using (FileStream file = File.Create(path))
             {
-                serializer.Serialize(file, stringList);
+                serializer.Serialize(file, accountList);
             }
 
             using (FileStream file = File.OpenRead(path))
             {
-                stringList = serializer.Deserialize(file) as List<string>;
+                accountList = serializer.Deserialize(file) as List<AccountInformations>;
             }
-            return stringList;
+            return accountList;
         }
-        public static List<AccountInformations> ObjectListRepository(List<AccountInformations> objectList, XmlSerializer serializer, string path)
+
+        public static List<ProfilData> PrivatUserRepository(List<ProfilData> privatUserList, XmlSerializer serializer, string path)
         {
             using (FileStream file = File.Create(path))
             {
-                serializer.Serialize(file, objectList);
+                serializer.Serialize(file, privatUserList);
             }
 
             using (FileStream file = File.OpenRead(path))
             {
-                objectList = serializer.Deserialize(file) as List<AccountInformations>;
+                privatUserList = serializer.Deserialize(file) as List<ProfilData>;
             }
-            return objectList;
+            return privatUserList;
         }
     }
 }

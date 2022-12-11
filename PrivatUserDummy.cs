@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LittleWebApplication.ProfilData;
+using static LittleWebApplication.Enum;
 
 namespace LittleWebApplication
 {
-    internal class PrivatUserDummy
+    public class PrivatUserDummy
     {
-        public string userNumber;
-        public Enum.UserType artOfUser;
         public static Random randomGenerator = new();
 
         public static List<string> adressStreetDummyList = new()
@@ -155,50 +154,73 @@ namespace LittleWebApplication
             return userName;
         }
 
-        public static string CreateTel()
+        public static ContactInformations CreateContact(NameInformations userName)
         {
-            string praefix = "+43";
-            List<string> areaCodeList = new()
+            ContactInformations userContact = new();
+            userContact.userContactMail = CreateMail(userName);
+            userContact.userContactTel = CreateTel();
+            
+            static string CreateTel()
+            {
+                string praefix = "+43";
+                List<string> areaCodeList = new()
             {
                 "0650", "0660", "0676", "0664", "0688", "0699"
             };
-            int[] randomTelNumbers = new int[7];
-            for (int i = 0; i < randomTelNumbers.Length; i++)
-            {
-                randomTelNumbers[i] = randomGenerator.Next(0, 9);
+                int[] randomTelNumbers = new int[7];
+                for (int i = 0; i < randomTelNumbers.Length; i++)
+                {
+                    randomTelNumbers[i] = randomGenerator.Next(0, 9);
+                }
+
+                string userTel = $"{praefix}{areaCodeList}{randomTelNumbers}";
+
+                return userTel;
             }
 
-            string userTel = $"{praefix}{areaCodeList}{randomTelNumbers}";
-
-            return userTel;
-        }
-
-        public static string CreateMail(NameInformations userName)
-        {
-            string localPart1;
-            string localPart2;
-            List<string> domainList = new()
+            static string CreateMail(NameInformations userName)
             {
-                "gmail.com", "gmx.at", "chello.at", "a1.at", "yahoo.com"
-            };
+                string localPart1;
+                string localPart2;
+                List<string> domainList = new()
+                {
+                    "gmail.com", "gmx.at", "chello.at", "a1.at", "yahoo.com"
+                };
 
-            localPart1 = userName.userFirstName;
-            localPart2 = userName.userLastName;
+                localPart1 = userName.userFirstName;
+                localPart2 = userName.userLastName;
 
-            int randomMailDomainIndex = randomGenerator.Next(domainList.Count);
-            string randomMailDomain = domainList[randomMailDomainIndex];
+                int randomMailDomainIndex = randomGenerator.Next(domainList.Count);
+                string randomMailDomain = domainList[randomMailDomainIndex];
 
 
-            string userMail = $"{localPart1}.{localPart2}@{randomMailDomain}";
+                string userMail = $"{localPart1}.{localPart2}@{randomMailDomain}";
 
-            return userMail;
+                return userMail;
+            }
+            return userContact;
         }
 
-        public static string CreatePasswod()
-        {
-            string userPasswort = "0000";
+        //public static LoginInformations CreateLogin()
+        //{
+        //    static string CreatePasswod()
+        //    {
+        //        string userPasswort = "0000";
 
-            return userPasswort;
+        //        return userPasswort;
+        //    }
+        //}
+
+        public static PrivatUserDummy CreateNewPrivatUserDummy()
+        {
+            NameInformations newUserName = CreateName();
+            AdressInformations newUserAdress = CreateAdress();
+            ContactInformations newUserContact = CreateContact(newUserName);
+            LoginInformations newUserLogin = new()
+            {
+                userLoginNumber = CreateUserNumber(UserType.privatUser),
+                userLoginPasswort = "0000"
+            };
         }
     }
 }
