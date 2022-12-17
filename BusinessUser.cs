@@ -10,11 +10,8 @@ namespace LittleWebApplication
 {
     internal class BusinessUser
     {
-            int ArtOfUser;
-            string userNumber;
-            private ProfilData newUserProfil = new ProfilData();
-            private CompanyInformations newCompany = new CompanyInformations();
-            private List<Terminal> businessTerminalList = new List<Terminal>();
-            private List<Coupon> businessCouponList new List<Coupon>();
+            //private ProfilData newUserProfil = new ProfilData();
+            //private List<Terminal> businessTerminalList = new List<Terminal>();
+            //private List<Coupon> businessCouponList new List<Coupon>();
     }
 }

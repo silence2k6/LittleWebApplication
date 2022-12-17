@@ -12,17 +12,18 @@ namespace LittleWebApplication
     {
         string accountStatus;
 
+        public class NameInformations
+        {
+            public string userFirstName;
+            public string userLastName;
+        }
+
         public class AdressInformations
         {
             public string userAdressStreet;
             public string userAdressNumber;
             public string userAdressTown;
             public string userAdressFederalState;
-        }
-        public class NameInformations
-        {
-            public string userFirstName;
-            public string userLastName;
         }
 
         public class ContactInformations
@@ -34,7 +35,7 @@ namespace LittleWebApplication
         public class LoginInformations
         {
             public string userLoginNumber;
-            public string userLoginPasswort;
+            public string userLoginPassword;
         }
         public class AccountInformations
         {
@@ -76,7 +77,6 @@ namespace LittleWebApplication
 
             string userPreNumber = "";
             string userNumberPlaceholder = "";
-            string userNumber = "";
             int accountNumber = AccountNumber();
 
             int AccountNumber()
@@ -130,7 +130,8 @@ namespace LittleWebApplication
                 return userNumberPlaceholder;
             }
             userNumberPlaceholder = UserNumberPlaceholder(accountNumber);
-            userNumber = $"{userPreNumber}{userNumberPlaceholder}{accountNumber}";
+            
+            string userNumber = $"{userPreNumber}{userNumberPlaceholder}{accountNumber}";
             return userNumber;
         }
     }

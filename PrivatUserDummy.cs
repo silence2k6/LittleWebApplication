@@ -75,23 +75,6 @@ namespace LittleWebApplication
             "Steiermark",
             "Burgenland"
         };
-        public static AdressInformations CreateAdress()
-        {
-            int randomAdressStreetIndex = randomGenerator.Next(adressStreetDummyList.Count);
-            int randomAdressNumberIndex = randomGenerator.Next(adressNumberDummyList.Count);
-            int randomAdressTownIndex = randomGenerator.Next(adressTownDummyList.Count);
-            int randomAdressFederalStateIndex = randomGenerator.Next(adressFederalStateDummyList.Count);
-
-            AdressInformations userAdress = new()
-            {
-                userAdressStreet = adressStreetDummyList[randomAdressStreetIndex],
-                userAdressNumber = adressNumberDummyList[randomAdressNumberIndex],
-                userAdressTown = adressTownDummyList[randomAdressTownIndex],
-                userAdressFederalState = adressFederalStateDummyList[randomAdressFederalStateIndex]
-            };
-
-            return userAdress;
-        }
 
         public static List<string> firstNameDummyList = new()
         {
@@ -154,6 +137,24 @@ namespace LittleWebApplication
             return userName;
         }
 
+        public static AdressInformations CreateAdress()
+        {
+            int randomAdressStreetIndex = randomGenerator.Next(adressStreetDummyList.Count);
+            int randomAdressNumberIndex = randomGenerator.Next(adressNumberDummyList.Count);
+            int randomAdressTownIndex = randomGenerator.Next(adressTownDummyList.Count);
+            int randomAdressFederalStateIndex = randomGenerator.Next(adressFederalStateDummyList.Count);
+
+            AdressInformations userAdress = new()
+            {
+                userAdressStreet = adressStreetDummyList[randomAdressStreetIndex],
+                userAdressNumber = adressNumberDummyList[randomAdressNumberIndex],
+                userAdressTown = adressTownDummyList[randomAdressTownIndex],
+                userAdressFederalState = adressFederalStateDummyList[randomAdressFederalStateIndex]
+            };
+
+            return userAdress;
+        }
+
         public static ContactInformations CreateContact(NameInformations userName)
         {
             ContactInformations userContact = new();
@@ -200,27 +201,18 @@ namespace LittleWebApplication
             }
             return userContact;
         }
-
-        //public static LoginInformations CreateLogin()
-        //{
-        //    static string CreatePasswod()
-        //    {
-        //        string userPasswort = "0000";
-
-        //        return userPasswort;
-        //    }
-        //}
-
-        public static PrivatUserDummy CreateNewPrivatUserDummy()
+        public static ProfilData CreateNewPrivatUserDummy(List<PrivatUser> privatUserList)
         {
-            NameInformations newUserName = CreateName();
-            AdressInformations newUserAdress = CreateAdress();
-            ContactInformations newUserContact = CreateContact(newUserName);
-            LoginInformations newUserLogin = new()
-            {
-                userLoginNumber = CreateUserNumber(UserType.privatUser),
-                userLoginPasswort = "0000"
-            };
+            ProfilData newUserProfil = new();
+
+            //set NameInformations
+            //set AdressInformations
+            //set ContactInformations
+            //set LoginInformations
+            //set AccountInformations
+            //bring newUserProfil into privatUserList and make backup
+
+            return newUserProfil;
         }
     }
 }

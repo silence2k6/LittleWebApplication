@@ -8,9 +8,9 @@ namespace LittleWebApplication
 {
     internal class Donation
     {
-        private DateTime donationDateTime = new DateTime();
-        string terminalNumber;
-        string fundraiserNumber;
-        double donationAmmount;
+        //private DateTime donationDateTime = new DateTime();
+        //string terminalNumber;
+        //string fundraiserNumber;
+        //double donationAmmount;
     }
 }

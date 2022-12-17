@@ -13,8 +13,7 @@ namespace LittleWebApplication
             string privatUserListPath = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privatUserList.xml";
             List<ProfilData> privatUserList = new();
             privatUserList = Backup.PrivatUserRepository(privatUserList, serializer, privatUserListPath);
-
-            PrivatUserDummy newPrivatUser = CreateNewPrivatUserDummy();            
+            //for test phase: create each time starting the programm 5 new privatUserDummys and bring them into repository
         }
     }
 }
