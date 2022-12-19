@@ -1,4 +1,5 @@
-﻿using LittleWebApplication;
+﻿using LittleWebApplication.ProfileData;
+using LittleWebApplication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,8 @@ namespace LittleWebApplication
     public class ProfilData
     {
         string accountStatus;
+        public NameInformations NameInformations;
 
-        public class NameInformations
-        {
-            public string userFirstName;
-            public string userLastName;
-        }
 
         public class AdressInformations
         {
@@ -66,7 +63,14 @@ namespace LittleWebApplication
             string bankAccountOwner;
         }
 
-        public static string CreateUserNumber(Enum.UserType artOfUser)
+        public int AccountNumber()
+        {
+            int latestAccountIndex = accountInformationList.Count;
+            AccountInformations latestAccount = accountInformationList[latestAccountIndex];
+            int accountNumber = latestAccount.accountNumber + 1;
+            return accountNumber;
+        }
+        public static string CreateUserNumber(Enums.UserType artOfUser)
         {
             XmlSerializer serializer = new(typeof(List<AccountInformations>));
             string accountInformationListPath = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountInformationList.xml";
@@ -79,29 +83,23 @@ namespace LittleWebApplication
             string userNumberPlaceholder = "";
             int accountNumber = AccountNumber();
 
-            int AccountNumber()
-            {
-                int latestAccountIndex = accountInformationList.Count;
-                AccountInformations latestAccount = accountInformationList[latestAccountIndex];
-                int accountNumber = latestAccount.accountNumber + 1;
-                return accountNumber;
-            }          
+        
 
             string UserPreNumber()
             {
-                if (artOfUser == Enum.UserType.privatUser)
+                if (artOfUser == Enums.UserType.privatUser)
                 {
                     userPreNumber = "P#";
                 }
-                if (artOfUser == Enum.UserType.businessUser)
+                if (artOfUser == Enums.UserType.businessUser)
                 {
                     userPreNumber = "B#";
                 }
-                if (artOfUser == Enum.UserType.serviceUser)
+                if (artOfUser == Enums.UserType.serviceUser)
                 {
                     userPreNumber = "S#";
                 }
-                if (artOfUser == Enum.UserType.adminUser)
+                if (artOfUser == Enums.UserType.adminUser)
                 {
                     userPreNumber = "A#";
                 }

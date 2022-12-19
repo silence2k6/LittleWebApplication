@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LittleWebApplication.ProfilData;
-using static LittleWebApplication.Enum;
+using static LittleWebApplication.Enums;
 
 namespace LittleWebApplication
 {
@@ -160,7 +160,7 @@ namespace LittleWebApplication
             ContactInformations userContact = new();
             userContact.userContactMail = CreateMail(userName);
             userContact.userContactTel = CreateTel();
-            
+
             static string CreateTel()
             {
                 string praefix = "+43";
@@ -201,9 +201,11 @@ namespace LittleWebApplication
             }
             return userContact;
         }
-        public static ProfilData CreateNewPrivatUserDummy(List<PrivatUser> privatUserList)
+
+        public static ProfilData CreateProfileDataDummy()
         {
             ProfilData newUserProfil = new();
+            newUserProfil.NameInformations = CreateName();
 
             //set NameInformations
             //set AdressInformations

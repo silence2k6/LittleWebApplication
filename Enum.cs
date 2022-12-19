@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LittleWebApplication
 {
-    public class Enum
+    public class Enums
     {
         public enum UserType
         {

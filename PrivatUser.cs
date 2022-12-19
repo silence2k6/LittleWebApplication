@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace LittleWebApplication
 {
-    public class PrivatUser
+    public class User
     {
-        //private ProfilData newUserProfil = new ProfilData();
+        //private ProfilData UserProfil = new ProfilData();
+        //public Enums.UserType Type;
 
         //private List<Donation> userDonationList = new List<Donation>();
         //private Donation userDonation = new Donation();

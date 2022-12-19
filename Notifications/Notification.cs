@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LittleWebApplication
+namespace LittleWebApplication.Notifications
 {
     internal class Notification
     {
@@ -12,24 +12,15 @@ namespace LittleWebApplication
         //private AdminNotification adminNotification = new AdminNotification();
         //adminNotificationList.Add(adminNotification);
 
-	    //private List<News> newsList = new List<News>();
+        //private List<News> newsList = new List<News>();
         //private News news = new News();
         //newsList.Add(news);	
 
-	    //private List<AdminTask> adminTaskList = new List<AdminTask>();
+        //private List<AdminTask> adminTaskList = new List<AdminTask>();
         //private AdminTask adminTask = new AdminTask();
         //adminTaskList.Add(adminTask);
     }
 
-    public class AdminNotification
-    {
-        //string adminNotificationNumber;
-        //private DateTime adminNotificationDateTime = new DateTime();
-        //string notificationRecipient;
-        //string notificationTitel;
-        //string notificationText;
-        //doc notificationAttatchment;
-    }
 
     public class News
     {
