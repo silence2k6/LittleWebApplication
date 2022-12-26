@@ -1,7 +1,8 @@
 ﻿using System.Xml.Serialization;
-using static LittleWebApplication.ProfilData;
-using static LittleWebApplication.PrivatUserDummy;
+using static LittleWebApplication.ProfilData.ProfilData;
+using static LittleWebApplication.Users.PrivatUserDummy;
 using System.Security.Cryptography.X509Certificates;
+using LittleWebApplication.ProfilData;
 
 namespace LittleWebApplication
 {

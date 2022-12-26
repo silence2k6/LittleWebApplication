@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using static LittleWebApplication.ProfilData;
+using LittleWebApplication.ProfilData;
+using static LittleWebApplication.ProfilData.ProfilData;
 
 namespace LittleWebApplication
 {

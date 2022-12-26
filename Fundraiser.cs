@@ -16,10 +16,4 @@ namespace LittleWebApplication
      //   private List<Terminal> fundraiserTerminalList = new List<Terminal>();
      //   private List<Payment> fundraiserPaymentList = new List<Payment>();
     }
-    public class Payment
-    {
-        //doc paymentConfirmation;
-        //private DateTime paymentConfirmationDateTime = new DateTime();
-    }
-
 }
