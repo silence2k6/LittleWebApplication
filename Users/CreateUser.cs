@@ -1,96 +1,67 @@
-﻿using LittleWebApplication.ProfilData;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using static LittleWebApplication.Enums;
+using LittleWebApplication.Accounts;
+using LittleWebApplication.ProfilData;
+using LittleWebApplication.Users;
 
 namespace LittleWebApplication.Users
 {
-    internal class CreateUser
+    public class CreateUser
     {
+        public AccountInformations userAccount;
+        public NameInformations userName;
+        public AdressInformations userAdress;
+        public ContactInformations userContact;
+        public LoginInformations userLogin;
         public static Random randomGenerator = new();
 
-        public int AccountNumber()
+
+        public static int CreateAccountNumber(List<AccountInformations> accountList)
         {
-            int latestAccountIndex = accountInformationList.Count;
-            AccountInformations latestAccount = accountInformationList[latestAccountIndex];
-            int accountNumber = latestAccount.accountNumber + 1;
+            int accountNumber = accountList.Count + 1;
             return accountNumber;
         }
-        public static string CreateUserNumber(Enums.UserType artOfUser)
+        public static string CreateUserNumber(Enums.UserType artOfUser, int accountNumber)
         {
-            XmlSerializer serializer = new(typeof(List<AccountInformations>));
-            string accountInformationListPath = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountInformationList.xml";
-
-            List<AccountInformations> accountInformationList = new();
-
-            accountInformationList = Backup.AccountListRepository(accountInformationList, serializer, accountInformationListPath);
-
             string userPreNumber = "";
-            string userNumberPlaceholder = "";
-            int accountNumber = AccountNumber();
 
-            string UserPreNumber()
+            if (artOfUser == Enums.UserType.privatUser)
             {
-                if (artOfUser == Enums.UserType.privatUser)
-                {
-                    userPreNumber = "P#";
-                }
-                if (artOfUser == Enums.UserType.businessUser)
-                {
-                    userPreNumber = "B#";
-                }
-                if (artOfUser == Enums.UserType.serviceUser)
-                {
-                    userPreNumber = "S#";
-                }
-                if (artOfUser == Enums.UserType.adminUser)
-                {
-                    userPreNumber = "A#";
-                }
-                return userPreNumber;
+                userPreNumber = "P#";
             }
-            userPreNumber = UserPreNumber();
-
-            string UserNumberPlaceholder(int accountNumber)
+            if (artOfUser == Enums.UserType.businessUser)
             {
-                if (accountNumber < 10)
-                {
-                    userNumberPlaceholder = "0000";
-                }
-                if (accountNumber > 10 && accountNumber < 100)
-                {
-                    userNumberPlaceholder = "000";
-                }
-                if (accountNumber > 100 && accountNumber < 1000)
-                {
-                    userNumberPlaceholder = "00";
-                }
-                if (accountNumber > 1000 && accountNumber < 10000)
-                {
-                    userNumberPlaceholder = "0";
-                }
-                return userNumberPlaceholder;
+                userPreNumber = "B#";
             }
-            userNumberPlaceholder = UserNumberPlaceholder(accountNumber);
+            if (artOfUser == Enums.UserType.serviceUser)
+            {
+                userPreNumber = "S#";
+            }
+            if (artOfUser == Enums.UserType.adminUser)
+            {
+                userPreNumber = "A#";
+            }
 
-            string userNumber = $"{userPreNumber}{userNumberPlaceholder}{accountNumber}";
+            string userNumberPlaceholder = accountNumber.ToString("D6");
+            
+            string userNumber = $"{userPreNumber}{userNumberPlaceholder}";
             return userNumber;
         }
 
         public static NameInformations CreatePrivatUserDummyName()
         {
-            int randomFirstNameIndex = randomGenerator.Next(firstNameDummyList.Count);
-            int randomLastNameIndex = randomGenerator.Next(lastNameDummyList.Count);
+            int randomFirstNameIndex = randomGenerator.Next(PrivatUserDummy.firstNameDummyList.Count);
+            int randomLastNameIndex = randomGenerator.Next(PrivatUserDummy.lastNameDummyList.Count);
 
-            NameInformations userName = new()
-            {
-                userFirstName = firstNameDummyList[randomFirstNameIndex],
-                userLastName = lastNameDummyList[randomLastNameIndex]
-            };
+            NameInformations userName = new();
+            userName.userFirstName = PrivatUserDummy.firstNameDummyList[randomFirstNameIndex];
+            userName.userLastName = PrivatUserDummy.lastNameDummyList[randomLastNameIndex];
+
             return userName;
         }
 
@@ -141,26 +112,29 @@ namespace LittleWebApplication.Users
             return userContact;
         }
 
-        //public static LoginInformations CreatePrivatUserDummyLogin()
-        //{
-        //    static string CreatePasswod()
-        //    {
-        //        string userPasswort = "0000";
+        public static AdressInformations CreatePrivatUserDummyAdress()
+        {
+            int randomAdressStreetIndex = randomGenerator.Next(PrivatUserDummy.adressStreetDummyList.Count);
+            int randomAdressNumberIndex = randomGenerator.Next(PrivatUserDummy.adressNumberDummyList.Count);
+            int randomAdressTownIndex = randomGenerator.Next(PrivatUserDummy.adressTownDummyList.Count);
+            int randomAdressFederalStateIndex = randomGenerator.Next(PrivatUserDummy.adressFederalStateDummyList.Count);
 
-        //        return userPasswort;
-        //    }
-        //}
+            AdressInformations userAdress = new();
+            userAdress.userAdressStreet = PrivatUserDummy.adressStreetDummyList[randomAdressStreetIndex];
+            userAdress.userAdressNumber = PrivatUserDummy.adressNumberDummyList[randomAdressNumberIndex];
+            userAdress.userAdressTown = PrivatUserDummy.adressTownDummyList[randomAdressTownIndex];
+            userAdress.userAdressFederalState = PrivatUserDummy.adressFederalStateDummyList[randomAdressFederalStateIndex];
 
-        //public static PrivatUserDummy CreateNewPrivatUserDummy()
-        //{
-        //    NameInformations newUserName = CreatePrivatUserDummyName();
-        //    AdressInformations newUserAdress = CreateAdress();
-        //    ContactInformations newUserContact = CreatePrivatUserDummyContact(newUserName);
-        //    LoginInformations newUserLogin = new()
-        //    {
-        //        userLoginNumber = CreateUserNumber(UserType.privatUser),
-        //        userLoginPasswort = "0000"
-        //    };
-        //}
+            return userAdress;
+        }
+
+        public static LoginInformations CreatePrivatUserDummyLogin(string userNumber)
+        {
+            LoginInformations userLogin = new();
+            userLogin.userLoginNumber = userNumber;
+            userLogin.userLoginPassword = "0000";
+
+            return userLogin;
+        }
     }
 }

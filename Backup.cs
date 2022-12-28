@@ -4,37 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using LittleWebApplication.ProfilData;
-using static LittleWebApplication.ProfilData.ProfilData;
+using LittleWebApplication.Accounts;
+using LittleWebApplication.Users;
 
 namespace LittleWebApplication
 {
     public class Backup
     {
-        public static List<AccountInformations> AccountListRepository(List<AccountInformations> accountList, XmlSerializer serializer, string path)
+        public static List<AccountInformations> AccountListRepository(List<AccountInformations> accountList, XmlSerializer accountSerializer, string accountRepositoryPath)
         {
-            using (FileStream file = File.Create(path))
+            using (FileStream file = File.Create(accountRepositoryPath))
             {
-                serializer.Serialize(file, accountList);
+                accountSerializer.Serialize(file, accountList);
             }
 
-            using (FileStream file = File.OpenRead(path))
+            using (FileStream file = File.OpenRead(accountRepositoryPath))
             {
-                accountList = serializer.Deserialize(file) as List<AccountInformations>;
+                accountList = accountSerializer.Deserialize(file) as List<AccountInformations>;
             }
             return accountList;
         }
 
-        public static List<ProfilData> PrivatUserRepository(List<ProfilData> privatUserList, XmlSerializer serializer, string path)
+        public static List<CreateUser> PrivatUserRepository(List<CreateUser> privatUserList, XmlSerializer userSerializer, string userRepositoryPath)
         {
-            using (FileStream file = File.Create(path))
+            using (FileStream file = File.Create(userRepositoryPath))
             {
-                serializer.Serialize(file, privatUserList);
+                userSerializer.Serialize(file, privatUserList);
             }
 
-            using (FileStream file = File.OpenRead(path))
+            using (FileStream file = File.OpenRead(userRepositoryPath))
             {
-                privatUserList = serializer.Deserialize(file) as List<ProfilData>;
+                privatUserList = userSerializer.Deserialize(file) as List<CreateUser>;
             }
             return privatUserList;
         }

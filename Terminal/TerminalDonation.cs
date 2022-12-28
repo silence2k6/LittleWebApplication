@@ -10,8 +10,8 @@ namespace LittleWebApplication.Terminal
 {
     public class TerminalDonation
     {
-        private List<Donation> DonationList = new List<Donation>();
-        private Donation donation = new Donation();
-        //DonationList.Add(donation);
+        //private List<Donation> DonationList = new List<Donation>();
+        //private Donation donation = new Donation();
+        ////DonationList.Add(donation);
     }
 }

@@ -72,23 +72,6 @@ namespace LittleWebApplication.Users
             "Steiermark",
             "Burgenland"
         };
-        public static AdressInformations CreateAdress()
-        {
-            int randomAdressStreetIndex = randomGenerator.Next(adressStreetDummyList.Count);
-            int randomAdressNumberIndex = randomGenerator.Next(adressNumberDummyList.Count);
-            int randomAdressTownIndex = randomGenerator.Next(adressTownDummyList.Count);
-            int randomAdressFederalStateIndex = randomGenerator.Next(adressFederalStateDummyList.Count);
-
-            AdressInformations userAdress = new()
-            {
-                userAdressStreet = adressStreetDummyList[randomAdressStreetIndex],
-                userAdressNumber = adressNumberDummyList[randomAdressNumberIndex],
-                userAdressTown = adressTownDummyList[randomAdressTownIndex],
-                userAdressFederalState = adressFederalStateDummyList[randomAdressFederalStateIndex]
-            };
-
-            return userAdress;
-        }
 
         public static List<string> firstNameDummyList = new()
         {

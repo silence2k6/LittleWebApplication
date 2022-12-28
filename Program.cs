@@ -1,8 +1,7 @@
 ﻿using System.Xml.Serialization;
-using static LittleWebApplication.ProfilData.ProfilData;
-using static LittleWebApplication.Users.PrivatUserDummy;
 using System.Security.Cryptography.X509Certificates;
-using LittleWebApplication.ProfilData;
+using LittleWebApplication.Users;
+using LittleWebApplication.Accounts;
 
 namespace LittleWebApplication
 {
@@ -10,11 +9,32 @@ namespace LittleWebApplication
     {
         static void Main(string[] args)
         {
-            XmlSerializer serializer = new(typeof(List<ProfilData>));
+            XmlSerializer accountSerializer = new XmlSerializer(typeof(List<AccountInformations>));
+            string accountRepositoryPath = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
+            XmlSerializer userSerializer = new(typeof(List<CreateUser>));
             string privatUserListPath = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privatUserList.xml";
-            List<ProfilData> privatUserList = new();
-            privatUserList = Backup.PrivatUserRepository(privatUserList, serializer, privatUserListPath);
-            //for test phase: create each time starting the programm 5 new privatUserDummys and bring them into repository
+
+            List<AccountInformations> accountList = new();
+            accountList = Backup.AccountListRepository(accountList, accountSerializer, accountRepositoryPath);
+            List<CreateUser> privatUserList = new();
+            privatUserList = Backup.PrivatUserRepository(privatUserList, userSerializer, privatUserListPath);
+
+            int accountNumber = CreateUser.CreateAccountNumber(accountList);
+            string userNumber = CreateUser.CreateUserNumber(Enums.UserType.privatUser, accountNumber);
+            DateTime datetime = DateTime.Now;
+
+            CreateUser newPrivatUserDummy = new();
+            newPrivatUserDummy.userName = CreateUser.CreatePrivatUserDummyName();
+            newPrivatUserDummy.userAdress = CreateUser.CreatePrivatUserDummyAdress();
+            newPrivatUserDummy.userContact = CreateUser.CreatePrivatUserDummyContact(newPrivatUserDummy.userName);
+            newPrivatUserDummy.userLogin = CreateUser.CreatePrivatUserDummyLogin(userNumber);
+            privatUserList.Add(newPrivatUserDummy);
+
+            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privatUser, datetime);
+            accountList.Add(newAccount);
+
+            Backup.PrivatUserRepository(privatUserList, userSerializer, privatUserListPath);
+            Backup.AccountListRepository(accountList, accountSerializer, accountRepositoryPath);
         }
     }
 }
