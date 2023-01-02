@@ -1,42 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using LittleWebApplication.Accounts;
+﻿using LittleWebApplication.Accounts;
 using LittleWebApplication.Users;
+using System.Xml.Serialization;
 
 namespace LittleWebApplication
 {
     public class Backup
     {
-        public static List<AccountInformations> AccountListRepository(List<AccountInformations> accountList, XmlSerializer accountSerializer, string accountRepositoryPath)
-        {
-            using (FileStream file = File.Create(accountRepositoryPath))
-            {
-                accountSerializer.Serialize(file, accountList);
-            }
+        static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<AccountInformations>));
+        static string ACC_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
+        static XmlSerializer userSerializer = new(typeof(List<CreateUser>));
+        static string USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privatUserList.xml";
 
-            using (FileStream file = File.OpenRead(accountRepositoryPath))
+        public static void StoreAccountRepository(List<AccountInformations> accounts)
+        {
+            using (FileStream file = File.Create(ACC_PATH))
             {
-                accountList = accountSerializer.Deserialize(file) as List<AccountInformations>;
+                accountSerializer.Serialize(file, accounts);
             }
-            return accountList;
         }
 
-        public static List<CreateUser> PrivatUserRepository(List<CreateUser> privatUserList, XmlSerializer userSerializer, string userRepositoryPath)
+        public static List<AccountInformations> LoadAccountRepository()
         {
-            using (FileStream file = File.Create(userRepositoryPath))
-            {
-                userSerializer.Serialize(file, privatUserList);
-            }
+            List<AccountInformations> accounts = new();
+            bool backUpCheck = File.Exists(ACC_PATH);
 
-            using (FileStream file = File.OpenRead(userRepositoryPath))
+            if (backUpCheck == true)
             {
-                privatUserList = userSerializer.Deserialize(file) as List<CreateUser>;
+                using (FileStream file = File.OpenRead(ACC_PATH))
+                {
+                    accounts = accountSerializer.Deserialize(file) as List<AccountInformations>;
+                }
             }
-            return privatUserList;
+            else
+            {
+                StoreAccountRepository(accounts);
+            }
+            return accounts;
+        }
+
+        public static void StoreUserRepository(List<CreateUser> users)
+        {
+            using (FileStream file = File.Create(USER_PATH))
+            {
+                userSerializer.Serialize(file, users);
+            }
+        }
+
+        public static List<CreateUser> LoadUserRepository()
+        {
+            List<CreateUser> users = new();
+            bool backUpCheck = File.Exists(USER_PATH);
+
+            if (backUpCheck == true)
+            {
+                using (FileStream file = File.OpenRead(USER_PATH))
+                {
+                    users = userSerializer.Deserialize(file) as List<CreateUser>;
+                }
+            }
+            else
+            {
+                StoreUserRepository(users);
+            }
+            return users;
         }
     }
 }

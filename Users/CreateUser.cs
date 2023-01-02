@@ -1,19 +1,12 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using LittleWebApplication.Accounts;
+﻿using LittleWebApplication.Accounts;
 using LittleWebApplication.ProfilData;
-using LittleWebApplication.Users;
 
 namespace LittleWebApplication.Users
 {
     public class CreateUser
     {
         public AccountInformations userAccount;
+        public string userNumber;
         public NameInformations userName;
         public AdressInformations userAdress;
         public ContactInformations userContact;
@@ -58,58 +51,13 @@ namespace LittleWebApplication.Users
             int randomFirstNameIndex = randomGenerator.Next(PrivatUserDummy.firstNameDummyList.Count);
             int randomLastNameIndex = randomGenerator.Next(PrivatUserDummy.lastNameDummyList.Count);
 
-            NameInformations userName = new();
-            userName.userFirstName = PrivatUserDummy.firstNameDummyList[randomFirstNameIndex];
-            userName.userLastName = PrivatUserDummy.lastNameDummyList[randomLastNameIndex];
+            NameInformations userName = new()
+            {
+                userFirstName = PrivatUserDummy.firstNameDummyList[randomFirstNameIndex],
+                userLastName = PrivatUserDummy.lastNameDummyList[randomLastNameIndex]
+            };
 
             return userName;
-        }
-
-        public static ContactInformations CreatePrivatUserDummyContact(NameInformations userName)
-        {
-            ContactInformations userContact = new();
-            userContact.userContactMail = CreatePrivatUserDummyMail(userName);
-            userContact.userContactTel = CreateTel();
-
-            static string CreateTel()
-            {
-                string praefix = "+43";
-                List<string> areaCodeList = new()
-            {
-                "0650", "0660", "0676", "0664", "0688", "0699"
-            };
-                int[] randomTelNumbers = new int[7];
-                for (int i = 0; i < randomTelNumbers.Length; i++)
-                {
-                    randomTelNumbers[i] = randomGenerator.Next(0, 9);
-                }
-
-                string userTel = $"{praefix}{areaCodeList}{randomTelNumbers}";
-
-                return userTel;
-            }
-
-            static string CreatePrivatUserDummyMail(NameInformations userName)
-            {
-                string localPart1;
-                string localPart2;
-                List<string> domainList = new()
-                {
-                    "gmail.com", "gmx.at", "chello.at", "a1.at", "yahoo.com"
-                };
-
-                localPart1 = userName.userFirstName;
-                localPart2 = userName.userLastName;
-
-                int randomMailDomainIndex = randomGenerator.Next(domainList.Count);
-                string randomMailDomain = domainList[randomMailDomainIndex];
-
-
-                string userMail = $"{localPart1}.{localPart2}@{randomMailDomain}";
-
-                return userMail;
-            }
-            return userContact;
         }
 
         public static AdressInformations CreatePrivatUserDummyAdress()
@@ -127,14 +75,61 @@ namespace LittleWebApplication.Users
 
             return userAdress;
         }
+        public static ContactInformations CreatePrivatUserDummyContact(NameInformations userName)
+        {
+            int countryPraefixIndex = randomGenerator.Next(PrivatUserDummy.countryPraefixDummyList.Count);
+            string countryPraefix = PrivatUserDummy.countryPraefixDummyList[countryPraefixIndex];
+
+            int telProviderIndex = randomGenerator.Next(PrivatUserDummy.telProviderDummyList.Count);
+            string telProvider = PrivatUserDummy.telProviderDummyList[telProviderIndex];
+
+            int[] randomTelNumbers = new int[7];
+            for (int numberPos = 0; numberPos < randomTelNumbers.Length; numberPos++)
+            {
+                randomTelNumbers[numberPos] = randomGenerator.Next(0, 9);
+            }
+            string randomTel = String.Join("", randomTelNumbers);
+
+            string userTel = $"{countryPraefix}/{telProvider}/{randomTel}";
+
+            string mailLocalPart1 = userName.userFirstName;
+            string mailLocalPart2 = userName.userLastName;
+
+            int randomMailDomainIndex = randomGenerator.Next(PrivatUserDummy.domainProviderDummyList.Count);
+            string randomMailDomain = PrivatUserDummy.domainProviderDummyList[randomMailDomainIndex];
+
+            string userMail = $"{mailLocalPart1}.{mailLocalPart2}@{randomMailDomain}";
+
+            ContactInformations userContact = new()
+            {
+                userContactTel = userTel,
+                userContactMail = userMail
+            };
+
+            return userContact;
+        }
 
         public static LoginInformations CreatePrivatUserDummyLogin(string userNumber)
         {
-            LoginInformations userLogin = new();
-            userLogin.userLoginNumber = userNumber;
-            userLogin.userLoginPassword = "0000";
+            LoginInformations userLogin = new()
+            {
+                userLoginNumber = userNumber,
+                userLoginPassword = "0000"
+            };
 
             return userLogin;
+        }
+
+        public static CreateUser CreatePrivatUserDummy(string userNumber)
+        {
+            CreateUser privatUserDummy = new();
+            privatUserDummy.userName = CreateUser.CreatePrivatUserDummyName();
+            privatUserDummy.userAdress = CreateUser.CreatePrivatUserDummyAdress();
+            privatUserDummy.userContact = CreateUser.CreatePrivatUserDummyContact(privatUserDummy.userName);
+            privatUserDummy.userLogin = CreateUser.CreatePrivatUserDummyLogin(userNumber);
+            privatUserDummy.userNumber = privatUserDummy.userLogin.userLoginNumber;
+
+            return privatUserDummy;
         }
     }
 }

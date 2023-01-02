@@ -120,5 +120,20 @@ namespace LittleWebApplication.Users
             "Siegfriedner",
             "Theodorner"
         };
+
+        public static List<string> telProviderDummyList = new ()
+        {
+            "0650", "0660", "0676", "0664", "0688", "0699"
+        };
+
+        public static List<string> countryPraefixDummyList = new()
+        {
+            "+43"
+        };
+
+        public static List<string> domainProviderDummyList = new()
+        {
+            "gmail.com", "gmx.at", "chello.at", "a1.at", "yahoo.com"
+        };
     }
 }
