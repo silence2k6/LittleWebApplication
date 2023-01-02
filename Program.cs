@@ -24,7 +24,11 @@ namespace LittleWebApplication
             Backup.StoreAccountRepository(accountList);
             Backup.StoreUserRepository(privatUserList);
 
-            Console.WriteLine(privatUserList);
+            foreach (CreateUser user in privatUserList)
+            {
+                Console.WriteLine($"{user.userNumber}\n{user.userName}\n{user.userAdress}\n{user.userContact}\n{user.userLogin}\n");
+            }
+
         }
     }
 }
