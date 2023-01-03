@@ -9,7 +9,7 @@ using LittleWebApplication.Terminal;
 
 namespace LittleWebApplication.Users
 {
-    internal class BusinessUser
+    public class BusinessUser
     {
         //int ArtOfUser;
         //string userNumber;

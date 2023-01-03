@@ -109,25 +109,25 @@ namespace LittleWebApplication.Users
             return userContact;
         }
 
-        public static LoginInformations CreatePrivatUserDummyLogin(string userNumber)
+        public static LoginInformations CreatePrivatUserDummyLogin(int accountNumber)
         {
             LoginInformations userLogin = new()
             {
-                userLoginNumber = userNumber,
+                userLoginNumber = "P" + accountNumber,
                 userLoginPassword = "0000"
             };
 
             return userLogin;
         }
 
-        public static CreateUser CreatePrivatUserDummy(string userNumber)
+        public static CreateUser CreatePrivatUserDummy(int accountNumber)
         {
             CreateUser privatUserDummy = new();
             privatUserDummy.userName = CreateUser.CreatePrivatUserDummyName();
             privatUserDummy.userAdress = CreateUser.CreatePrivatUserDummyAdress();
             privatUserDummy.userContact = CreateUser.CreatePrivatUserDummyContact(privatUserDummy.userName);
-            privatUserDummy.userLogin = CreateUser.CreatePrivatUserDummyLogin(userNumber);
-            privatUserDummy.userNumber = privatUserDummy.userLogin.userLoginNumber;
+            privatUserDummy.userLogin = CreateUser.CreatePrivatUserDummyLogin(accountNumber);
+            privatUserDummy.userNumber = CreateUser.CreateUserNumber(Enums.UserType.privatUser, accountNumber);
 
             return privatUserDummy;
         }
