@@ -12,5 +12,10 @@ namespace LittleWebApplication.ProfilData
         public string userAdressNumber;
         public string userAdressTown;
         public string userAdressFederalState;
+
+        public override string ToString()
+        {
+            return $"{userAdressStreet} {userAdressNumber}\n\t\t{userAdressTown}\n\t\t{userAdressFederalState}";
+        }
     }
 }

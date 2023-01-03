@@ -10,5 +10,10 @@ namespace LittleWebApplication.ProfilData
     {
         string donationDate;
         string donationTime;
+
+        public override string ToString()
+        {
+            return $"{donationDate}\n{donationTime}";
+        }
     }
 }

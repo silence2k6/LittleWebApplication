@@ -7,9 +7,9 @@ namespace LittleWebApplication
     public class Backup
     {
         static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<AccountInformations>));
-        static string ACC_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
+        static string ACC_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
         static XmlSerializer userSerializer = new(typeof(List<CreateUser>));
-        static string USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privatUserList.xml";
+        static string USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privatUserList.xml";
 
         public static void StoreAccountRepository(List<AccountInformations> accounts)
         {

@@ -11,5 +11,10 @@ namespace LittleWebApplication.ProfilData
         string bankAccoungIBAN;
         string bankAccountInstitut;
         string bankAccountOwner;
+
+        public override string ToString()
+        {
+            return $"{bankAccoungIBAN}\n{bankAccountInstitut}\n{bankAccountOwner}";
+        }
     }
 }

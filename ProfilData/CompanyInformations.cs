@@ -12,6 +12,11 @@ namespace LittleWebApplication.ProfilData
         string contactPersonFirstname;
         string contactPersonFamilyname;
         string contactPersonFunction;
-        string contactPerson;
+        string contactPersonTel;
+
+        public override string ToString()
+        {
+            return $"{companyName}\n{contactPersonFirstname} {contactPersonFamilyname}\n{contactPersonFunction}\n{contactPersonTel}";
+        }
     }
 }

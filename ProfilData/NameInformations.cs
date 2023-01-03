@@ -10,5 +10,10 @@ namespace LittleWebApplication.ProfilData
     {
         public string userFirstName;
         public string userLastName;
+
+        public override string ToString()
+        {
+            return $"{userFirstName} {userLastName}";
+        }
     }
 }

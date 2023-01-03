@@ -26,7 +26,7 @@ namespace LittleWebApplication
 
             foreach (CreateUser user in privatUserList)
             {
-                Console.WriteLine($"{user.userNumber}\n{user.userName}\n{user.userAdress}\n{user.userContact}\n{user.userLogin}\n");
+                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
             }
 
         }
