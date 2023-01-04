@@ -20,11 +20,13 @@ namespace LittleWebApplication
             AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privatUser, datetime);
             accountList.Add(newAccount);
 
-            CreateUser newUser = CreateUser.CreatePrivatUserDummy(userNumber);
+            CreateUser newUser = CreateUser.CreatePrivatUserDummy(accountNumber);
             privatUserList.Add(newUser);
 
             Backup.StoreAccountRepository(accountList);
             Backup.StoreUserRepository(privatUserList);
+
+            string userLoginNumberInput = UImethods.AskForUserLoginNumber();
 
             //foreach (CreateUser user in privatUserList)
             //{
