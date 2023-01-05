@@ -7,7 +7,7 @@ using LittleWebApplication.ProfilData;
 
 namespace LittleWebApplication.Users
 {
-    public class PrivatUserDummy
+    public class PrivateUserDummy
     {
         public static List<string> adressStreetDummyList = new()
         {

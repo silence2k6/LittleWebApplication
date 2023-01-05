@@ -10,25 +10,34 @@ namespace LittleWebApplication
         static void Main(string[] args)
         {
             List<AccountInformations> accountList = Backup.LoadAccountRepository();
-            List<CreateUser> privatUserList = Backup.LoadUserRepository();
+            List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
 
             int accountNumber = CreateUser.CreateAccountNumber(accountList);
-            string userNumber = CreateUser.CreateUserNumber(Enums.UserType.privatUser, accountNumber);
+            string userNumber = CreateUser.CreateUserNumber(Enums.UserType.privateUser, accountNumber);
             DateTime datetime = DateTime.Now;
 
-            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privatUser, datetime);
+            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privateUser, datetime);
             accountList.Add(newAccount);
 
-            CreateUser newUser = CreateUser.CreatePrivatUserDummy(accountNumber);
-            privatUserList.Add(newUser);
+            CreateUser newUser = CreateUser.CreatePrivateUserDummy(accountNumber);
+            privateUserList.Add(newUser);
 
             Backup.StoreAccountRepository(accountList);
-            Backup.StoreUserRepository(privatUserList);
+            Backup.StorePrivateUserRepository(privateUserList);
 
-            string userLoginNumberInput = UImethods.AskForUserLoginNumber();
+            bool validUserNumberInput = true;
+            List<CreateUser> userList = new();
 
-            //foreach (CreateUser user in privatUserList)
+            while (validUserNumberInput == true)
+            {
+                string userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                Enums.UserType artOfUser = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
+                UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfUser);
+
+                
+            }
+            //foreach (CreateUser user in privateUserList)
             //{
             //    Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
             //}

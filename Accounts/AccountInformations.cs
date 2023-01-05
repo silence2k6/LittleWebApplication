@@ -19,7 +19,7 @@ namespace LittleWebApplication.Accounts
             userAccount.accountNumber = accountNumber;
             userAccount.accountCreationDateTime = dateTime;
             userAccount.artOfUser = artOfUser;
-            userAccount.accountStatus = Enums.Status.activ;
+            userAccount.accountStatus = Enums.Status.active;
 
             return userAccount;
         }

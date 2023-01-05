@@ -16,47 +16,85 @@ namespace LittleWebApplication
             return userLoginNumberInput;
         }
 
-        public static bool CheckUserLoginForUserNumberExist (string userLoginNumberInput, List<CreateUser> userList)
+        public static CreateUser CheckUserLoginForUserNumberExist(string userLoginNumberInput, Enums.UserType artOfUser)
         {
-            bool validUserNumber = false;
+            List<CreateUser> userList = new();
+
+            if (artOfUser == Enums.UserType.privateUser)
+            {
+                userList = Backup.LoadPrivateUserRepository();
+            }
+            //if(artOfUser == Enums.UserType.businessUser)
+            //{
+            //    userList = businessUserList;
+            //}
+            //if(artOfUser == Enums.UserType.serviceUser)
+            //{
+            //    userList = serviceUserList;
+            //}
+            //if(artOfUser == Enums.UserType.adminUser)
+            //{
+            //    userList = adminUserList;
+            //}
+
             int userObjectPos = 0;
+            CreateUser user = new();
 
             while (userObjectPos <= userList.Count)
             {
-                CreateUser user = userList[userObjectPos];
-
+                user = userList[userObjectPos];
+                
                 if (string.Equals(userLoginNumberInput, user.userLogin.userLoginNumber))
                 {
-                    validUserNumber = true;
+                    user = userList[userObjectPos];
                     break;
                 }
                 else
                 {
                     userObjectPos++;
+
+                    if (userObjectPos == userList.Count + 1)
+                    {
+                        Console.WriteLine("Benutzername exitiert nicht! (Bitte versuchen Sie es erneut oder Registrieren Sie sich)");
+                        break;
+                    }
+
                 }
             }
-            return validUserNumber;
+            return user;
         }
 
-        public static Enum CheckUserLoginForArtOfUser (string userLoginNumberInput)
+        public static Enums.UserType CheckUserLoginForArtOfUser (string userLoginNumberInput)
         {
             Enums.UserType artOfUser = new();
 
-            if (userLoginNumberInput[0].Equals("P"))
+            while (artOfUser == 0)
             {
-                artOfUser = Enums.UserType.privatUser;
-            }
-            if (userLoginNumberInput[0].Equals("B"))
-            {
-                artOfUser = Enums.UserType.businessUser;
-            }
-            if (userLoginNumberInput[0].Equals("S"))
-            {
-                artOfUser = Enums.UserType.serviceUser;
-            }
-            if (userLoginNumberInput[0].Equals("A"))
-            {
-                artOfUser = Enums.UserType.adminUser;
+                if (userLoginNumberInput[0].Equals('P'))
+                {
+                    artOfUser = Enums.UserType.privateUser;
+                    break;
+                }
+                if (userLoginNumberInput[0].Equals('B'))
+                {
+                    artOfUser = Enums.UserType.businessUser;
+                    break;
+                }
+                if (userLoginNumberInput[0].Equals('S'))
+                {
+                    artOfUser = Enums.UserType.serviceUser;
+                    break;
+                }
+                if (userLoginNumberInput[0].Equals('A'))
+                {
+                    artOfUser = Enums.UserType.adminUser;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Eingabe ungültig (Achten Sie darauf dass Ihr Benutzername mit einem Buchstaben beginnen und mit einer Zahlenfolge enden muss)");
+                    userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                }
             }
             return artOfUser;
         }
@@ -79,20 +117,20 @@ namespace LittleWebApplication
             return validUserPassword;
         }
 
-        //public static void CheckUserLoginForValidity(bool validUserNumber, bool validUserPassword)
-        //{
-        //    while (validUserNumber == false || validUserPassword == false)
-        //    {
-        //        if (validUserNumber == false)
-        //        {
-        //            Console.WriteLine("Ihr eingegebener Benutzername existiert leider nicht!");
-        //        }
-        //        if (validUserPassword == false)
-        //        {
-        //            Console.WriteLine("Ihr eingegebenes Password stimmt leider nicht mit Ihrem Benutzer überein!");
-        //        }
-        //        Console.Write("Bitte wählen Sie aus folgenden Optionen:\n(1) Erneut versuchen\n(2) Neu registrieren\n(3) Password vergessen");
-        //    }
+        public static void CheckUserLoginForValidity(bool validUserNumber, bool validUserPassword)
+        {
+            while (validUserNumber == false || validUserPassword == false)
+            {
+                if (validUserNumber == false)
+                {
+                    Console.WriteLine("Ihr eingegebener Benutzername existiert leider nicht!");
+                }
+                if (validUserPassword == false)
+                {
+                    Console.WriteLine("Ihr eingegebenes Password stimmt leider nicht mit Ihrem Benutzer überein!");
+                }
+                Console.Write("Bitte wählen Sie aus folgenden Optionen:\n(1) Erneut versuchen\n(2) Neu registrieren\n(3) Password vergessen");
+            }
         }
     }
 }

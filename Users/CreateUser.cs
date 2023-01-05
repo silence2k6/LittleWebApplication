@@ -23,7 +23,7 @@ namespace LittleWebApplication.Users
         {
             string userPreNumber = "";
 
-            if (artOfUser == Enums.UserType.privatUser)
+            if (artOfUser == Enums.UserType.privateUser)
             {
                 userPreNumber = "P#";
             }
@@ -46,42 +46,42 @@ namespace LittleWebApplication.Users
             return userNumber;
         }
 
-        public static NameInformations CreatePrivatUserDummyName()
+        public static NameInformations CreatePrivateUserDummyName()
         {
-            int randomFirstNameIndex = randomGenerator.Next(PrivatUserDummy.firstNameDummyList.Count);
-            int randomLastNameIndex = randomGenerator.Next(PrivatUserDummy.lastNameDummyList.Count);
+            int randomFirstNameIndex = randomGenerator.Next(PrivateUserDummy.firstNameDummyList.Count);
+            int randomLastNameIndex = randomGenerator.Next(PrivateUserDummy.lastNameDummyList.Count);
 
             NameInformations userName = new()
             {
-                userFirstName = PrivatUserDummy.firstNameDummyList[randomFirstNameIndex],
-                userLastName = PrivatUserDummy.lastNameDummyList[randomLastNameIndex]
+                userFirstName = PrivateUserDummy.firstNameDummyList[randomFirstNameIndex],
+                userLastName = PrivateUserDummy.lastNameDummyList[randomLastNameIndex]
             };
 
             return userName;
         }
 
-        public static AdressInformations CreatePrivatUserDummyAdress()
+        public static AdressInformations CreatePrivateUserDummyAdress()
         {
-            int randomAdressStreetIndex = randomGenerator.Next(PrivatUserDummy.adressStreetDummyList.Count);
-            int randomAdressNumberIndex = randomGenerator.Next(PrivatUserDummy.adressNumberDummyList.Count);
-            int randomAdressTownIndex = randomGenerator.Next(PrivatUserDummy.adressTownDummyList.Count);
-            int randomAdressFederalStateIndex = randomGenerator.Next(PrivatUserDummy.adressFederalStateDummyList.Count);
+            int randomAdressStreetIndex = randomGenerator.Next(PrivateUserDummy.adressStreetDummyList.Count);
+            int randomAdressNumberIndex = randomGenerator.Next(PrivateUserDummy.adressNumberDummyList.Count);
+            int randomAdressTownIndex = randomGenerator.Next(PrivateUserDummy.adressTownDummyList.Count);
+            int randomAdressFederalStateIndex = randomGenerator.Next(PrivateUserDummy.adressFederalStateDummyList.Count);
 
             AdressInformations userAdress = new();
-            userAdress.userAdressStreet = PrivatUserDummy.adressStreetDummyList[randomAdressStreetIndex];
-            userAdress.userAdressNumber = PrivatUserDummy.adressNumberDummyList[randomAdressNumberIndex];
-            userAdress.userAdressTown = PrivatUserDummy.adressTownDummyList[randomAdressTownIndex];
-            userAdress.userAdressFederalState = PrivatUserDummy.adressFederalStateDummyList[randomAdressFederalStateIndex];
+            userAdress.userAdressStreet = PrivateUserDummy.adressStreetDummyList[randomAdressStreetIndex];
+            userAdress.userAdressNumber = PrivateUserDummy.adressNumberDummyList[randomAdressNumberIndex];
+            userAdress.userAdressTown = PrivateUserDummy.adressTownDummyList[randomAdressTownIndex];
+            userAdress.userAdressFederalState = PrivateUserDummy.adressFederalStateDummyList[randomAdressFederalStateIndex];
 
             return userAdress;
         }
-        public static ContactInformations CreatePrivatUserDummyContact(NameInformations userName)
+        public static ContactInformations CreatePrivateUserDummyContact(NameInformations userName)
         {
-            int countryPraefixIndex = randomGenerator.Next(PrivatUserDummy.countryPraefixDummyList.Count);
-            string countryPraefix = PrivatUserDummy.countryPraefixDummyList[countryPraefixIndex];
+            int countryPraefixIndex = randomGenerator.Next(PrivateUserDummy.countryPraefixDummyList.Count);
+            string countryPraefix = PrivateUserDummy.countryPraefixDummyList[countryPraefixIndex];
 
-            int telProviderIndex = randomGenerator.Next(PrivatUserDummy.telProviderDummyList.Count);
-            string telProvider = PrivatUserDummy.telProviderDummyList[telProviderIndex];
+            int telProviderIndex = randomGenerator.Next(PrivateUserDummy.telProviderDummyList.Count);
+            string telProvider = PrivateUserDummy.telProviderDummyList[telProviderIndex];
 
             int[] randomTelNumbers = new int[7];
             for (int numberPos = 0; numberPos < randomTelNumbers.Length; numberPos++)
@@ -95,8 +95,8 @@ namespace LittleWebApplication.Users
             string mailLocalPart1 = userName.userFirstName;
             string mailLocalPart2 = userName.userLastName;
 
-            int randomMailDomainIndex = randomGenerator.Next(PrivatUserDummy.domainProviderDummyList.Count);
-            string randomMailDomain = PrivatUserDummy.domainProviderDummyList[randomMailDomainIndex];
+            int randomMailDomainIndex = randomGenerator.Next(PrivateUserDummy.domainProviderDummyList.Count);
+            string randomMailDomain = PrivateUserDummy.domainProviderDummyList[randomMailDomainIndex];
 
             string userMail = $"{mailLocalPart1}.{mailLocalPart2}@{randomMailDomain}";
 
@@ -109,7 +109,7 @@ namespace LittleWebApplication.Users
             return userContact;
         }
 
-        public static LoginInformations CreatePrivatUserDummyLogin(int accountNumber)
+        public static LoginInformations CreatePrivateUserDummyLogin(int accountNumber)
         {
             LoginInformations userLogin = new()
             {
@@ -120,14 +120,14 @@ namespace LittleWebApplication.Users
             return userLogin;
         }
 
-        public static CreateUser CreatePrivatUserDummy(int accountNumber)
+        public static CreateUser CreatePrivateUserDummy(int accountNumber)
         {
             CreateUser privatUserDummy = new();
-            privatUserDummy.userName = CreateUser.CreatePrivatUserDummyName();
-            privatUserDummy.userAdress = CreateUser.CreatePrivatUserDummyAdress();
-            privatUserDummy.userContact = CreateUser.CreatePrivatUserDummyContact(privatUserDummy.userName);
-            privatUserDummy.userLogin = CreateUser.CreatePrivatUserDummyLogin(accountNumber);
-            privatUserDummy.userNumber = CreateUser.CreateUserNumber(Enums.UserType.privatUser, accountNumber);
+            privatUserDummy.userName = CreateUser.CreatePrivateUserDummyName();
+            privatUserDummy.userAdress = CreateUser.CreatePrivateUserDummyAdress();
+            privatUserDummy.userContact = CreateUser.CreatePrivateUserDummyContact(privatUserDummy.userName);
+            privatUserDummy.userLogin = CreateUser.CreatePrivateUserDummyLogin(accountNumber);
+            privatUserDummy.userNumber = CreateUser.CreateUserNumber(Enums.UserType.privateUser, accountNumber);
 
             return privatUserDummy;
         }

@@ -14,8 +14,8 @@ namespace LittleWebApplication.Users
     //public class User
     //{
     //    private List<PrivatUser> privatUserList = new List<PrivatUser>();
-    //    private PrivatUser privatUser = new PrivatUser();
-    //    privatUserList.Add(privatUser);
+    //    private PrivatUser privateUser = new PrivatUser();
+    //    privatUserList.Add(privateUser);
 
     // private List<BusinessUser> businessUserList = new List<BusinessUser>();
     //    private BusinessUser businessUser = new BusinessUser();
@@ -26,7 +26,7 @@ namespace LittleWebApplication.Users
     //    serviceUserList.Add(serviceUser);
     //}
 
-    public class PrivatUser
+    public class PrivateUser
     {
         //string artOfUser;
         //string userNumber;

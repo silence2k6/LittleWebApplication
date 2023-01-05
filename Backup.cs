@@ -9,8 +9,8 @@ namespace LittleWebApplication
     {
         static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<AccountInformations>));
         static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
-        static XmlSerializer userSerializer = new(typeof(List<CreateUser>));
-        static string USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privatUserList.xml";
+        static XmlSerializer privateUserSerializer = new(typeof(List<CreateUser>));
+        static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
         static XmlSerializer terminalSerializer = new(typeof(List<CreateTerminal>));
         static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
 
@@ -41,29 +41,29 @@ namespace LittleWebApplication
             return accounts;
         }
 
-        public static void StoreUserRepository(List<CreateUser> users)
+        public static void StorePrivateUserRepository(List<CreateUser> users)
         {
-            using (FileStream file = File.Create(USER_PATH))
+            using (FileStream file = File.Create(PRIVATE_USER_PATH))
             {
-                userSerializer.Serialize(file, users);
+                privateUserSerializer.Serialize(file, users);
             }
         }
 
-        public static List<CreateUser> LoadUserRepository()
+        public static List<CreateUser> LoadPrivateUserRepository()
         {
             List<CreateUser> users = new();
-            bool backUpCheck = File.Exists(USER_PATH);
+            bool backUpCheck = File.Exists(PRIVATE_USER_PATH);
 
             if (backUpCheck == true)
             {
-                using (FileStream file = File.OpenRead(USER_PATH))
+                using (FileStream file = File.OpenRead(PRIVATE_USER_PATH))
                 {
-                    users = userSerializer.Deserialize(file) as List<CreateUser>;
+                    users = privateUserSerializer.Deserialize(file) as List<CreateUser>;
                 }
             }
             else
             {
-                StoreUserRepository(users);
+                StorePrivateUserRepository(users);
             }
             return users;
         }

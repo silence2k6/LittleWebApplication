@@ -10,7 +10,7 @@ namespace LittleWebApplication
     {
         public enum UserType
         {
-            privatUser = 1,
+            privateUser = 1,
             businessUser,
             serviceUser,
             adminUser
@@ -18,7 +18,7 @@ namespace LittleWebApplication
 
         public enum Status
         {
-            activ = 1,
+            active = 1,
             disabled,
             expired,
             used
