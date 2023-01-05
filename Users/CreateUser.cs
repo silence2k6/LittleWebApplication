@@ -14,12 +14,13 @@ namespace LittleWebApplication.Users
         public static Random randomGenerator = new();
 
 
-        public static int CreateAccountNumber(List<AccountInformations> accountList)
+        public static string CreateAccountNumber(List<AccountInformations> accountList)
         {
-            int accountNumber = accountList.Count + 1;
+            int listNumber = accountList.Count + 1;
+            string accountNumber = listNumber.ToString("D6");
             return accountNumber;
         }
-        public static string CreateUserNumber(Enums.UserType artOfUser, int accountNumber)
+        public static string CreateUserNumber(Enums.UserType artOfUser, string accountNumber)
         {
             string userPreNumber = "";
 
@@ -39,10 +40,8 @@ namespace LittleWebApplication.Users
             {
                 userPreNumber = "A#";
             }
-
-            string userNumberPlaceholder = accountNumber.ToString("D6");
-            
-            string userNumber = $"{userPreNumber}{userNumberPlaceholder}";
+           
+            string userNumber = $"{userPreNumber}{accountNumber}";
             return userNumber;
         }
 
@@ -109,7 +108,7 @@ namespace LittleWebApplication.Users
             return userContact;
         }
 
-        public static LoginInformations CreatePrivateUserDummyLogin(int accountNumber)
+        public static LoginInformations CreatePrivateUserDummyLogin(string accountNumber)
         {
             LoginInformations userLogin = new()
             {
@@ -120,7 +119,7 @@ namespace LittleWebApplication.Users
             return userLogin;
         }
 
-        public static CreateUser CreatePrivateUserDummy(int accountNumber)
+        public static CreateUser CreatePrivateUserDummy(string accountNumber)
         {
             CreateUser privatUserDummy = new();
             privatUserDummy.userName = CreateUser.CreatePrivateUserDummyName();

@@ -16,6 +16,30 @@ namespace LittleWebApplication
             return userLoginNumberInput;
         }
 
+        public static Enums.UserType CheckUserLoginForArtOfUser(string userLoginNumberInput)
+        {
+            Enums.UserType artOfUser = new();
+
+            if (userLoginNumberInput[0].Equals('P'))
+            {
+                artOfUser = Enums.UserType.privateUser;
+            }
+            if (userLoginNumberInput[0].Equals('B'))
+            {
+                artOfUser = Enums.UserType.businessUser;
+            }
+            if (userLoginNumberInput[0].Equals('S'))
+            {
+                artOfUser = Enums.UserType.serviceUser;
+            }
+            if (userLoginNumberInput[0].Equals('A'))
+            {
+                artOfUser = Enums.UserType.adminUser;
+            }
+            return artOfUser;
+        }
+
+
         public static CreateUser CheckUserLoginForUserNumberExist(string userLoginNumberInput, Enums.UserType artOfUser)
         {
             List<CreateUser> userList = new();
@@ -53,50 +77,15 @@ namespace LittleWebApplication
                 {
                     userObjectPos++;
 
-                    if (userObjectPos == userList.Count + 1)
+                    if (userObjectPos == userList.Count)
                     {
-                        Console.WriteLine("Benutzername exitiert nicht! (Bitte versuchen Sie es erneut oder Registrieren Sie sich)");
+                        Console.WriteLine("Benutzername exitiert nicht!");
+                        user = null;
                         break;
                     }
-
                 }
             }
             return user;
-        }
-
-        public static Enums.UserType CheckUserLoginForArtOfUser (string userLoginNumberInput)
-        {
-            Enums.UserType artOfUser = new();
-
-            while (artOfUser == 0)
-            {
-                if (userLoginNumberInput[0].Equals('P'))
-                {
-                    artOfUser = Enums.UserType.privateUser;
-                    break;
-                }
-                if (userLoginNumberInput[0].Equals('B'))
-                {
-                    artOfUser = Enums.UserType.businessUser;
-                    break;
-                }
-                if (userLoginNumberInput[0].Equals('S'))
-                {
-                    artOfUser = Enums.UserType.serviceUser;
-                    break;
-                }
-                if (userLoginNumberInput[0].Equals('A'))
-                {
-                    artOfUser = Enums.UserType.adminUser;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Eingabe ungültig (Achten Sie darauf dass Ihr Benutzername mit einem Buchstaben beginnen und mit einer Zahlenfolge enden muss)");
-                    userLoginNumberInput = UImethods.AskForUserLoginNumber();
-                }
-            }
-            return artOfUser;
         }
 
         public static string AskForUserLoginPassword()

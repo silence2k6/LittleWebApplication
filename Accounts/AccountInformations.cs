@@ -8,12 +8,12 @@ namespace LittleWebApplication.Accounts
 {
     public class AccountInformations
     {
-        public int accountNumber;
+        public string accountNumber;
         public DateTime accountCreationDateTime;
         public Enums.Status accountStatus;
         public Enums.UserType artOfUser;
 
-        public static AccountInformations CreateAccount(int accountNumber, Enums.UserType artOfUser, DateTime dateTime)
+        public static AccountInformations CreateAccount(string accountNumber, Enums.UserType artOfUser, DateTime dateTime)
         {
             AccountInformations userAccount = new();
             userAccount.accountNumber = accountNumber;
