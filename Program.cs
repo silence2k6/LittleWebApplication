@@ -30,6 +30,7 @@ namespace LittleWebApplication
             bool validArtOfUser = false;
             string userLoginNumberInput = "";
             Enums.UserType artOfUser = 0;
+            CreateUser user = new();
 
             while (validUserLogin == false)
             {
@@ -42,16 +43,33 @@ namespace LittleWebApplication
                     {
                         break;
                     }
-                    Console.WriteLine("Eingabe ungültig (Achten Sie darauf dass Ihr Benutzername mit einem Buchstaben beginnen und mit einer Zahlenfolge enden muss)");
                 }
 
-                CreateUser user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfUser);
+                user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfUser);
 
                 if (user != null)
                 {
                     break;
                 }
             }
+
+            bool validUserPassword = false;
+            string userLoginPasswordInput = "";
+
+            while (validUserPassword == false)
+            {
+                userLoginPasswordInput = UImethods.AskForUserLoginPassword();
+                validUserPassword = UImethods.CheckUserLoginForValidPassword(user, userLoginPasswordInput);
+
+                if (validUserPassword == true)
+                {
+                    break;
+                }
+            }
+
+            //Console.WriteLine(new string('-', 10));
+            //Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
+            //Console.WriteLine(new string('-', 10));
 
             //foreach (CreateUser user in privateUserList)
             //{
