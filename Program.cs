@@ -54,14 +54,31 @@ namespace LittleWebApplication
             }
 
             bool validUserPassword = false;
-            string userLoginPasswordInput = "";
 
             while (validUserPassword == false)
             {
-                userLoginPasswordInput = UImethods.AskForUserLoginPassword();
+                string userLoginPasswordInput = UImethods.AskForUserLoginPassword();
                 validUserPassword = UImethods.CheckUserLoginForValidPassword(user, userLoginPasswordInput);
 
                 if (validUserPassword == true)
+                {
+                    break;
+                }
+            }
+            
+            int menueSelectingOptions = UImethods.ShowMainMenue(artOfUser);
+
+            bool validUserMenueSelection = false;
+
+            while (validUserMenueSelection == false)
+            {
+                int userMenueSelectionInput = UImethods.AskforMenueSelection();
+
+                if (userMenueSelectionInput <= 0 ||userMenueSelectionInput > menueSelectingOptions)
+                {
+                    continue;
+                }
+                else
                 {
                     break;
                 }

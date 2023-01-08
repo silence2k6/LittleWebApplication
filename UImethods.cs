@@ -122,55 +122,39 @@ namespace LittleWebApplication
             return validUserPassword;
         }
 
-        public static void ShowUserMenue(Enums.UserType artOfUser)
+        public static int ShowMainMenue(Enums.UserType artOfUser)
         {
+            int maxSelectionOptions = 0;
+            Console.WriteLine("\nHAUPTMENÜ");
+
             if (artOfUser == Enums.UserType.privateUser)
             {
-                Console.WriteLine("1)Spendenübersicht\n2)Sammlungen\n3)Little-Standorte\n4)Meldungen\n5)Einstellungen\n6)Kontakt");
+                Console.WriteLine("1.Spendenübersicht\n2.Sammlungen\n3.Meldungen\n4.Einstellungen\n5.Little-Standorte\n6.Kontakt\n7.Logout");
+                maxSelectionOptions = 7;
             }
             if (artOfUser == Enums.UserType.businessUser)
             {
-                Console.WriteLine("1)Terminalübsersicht\n2)Couponübersicht\n3)Einstellungen");
+                Console.WriteLine("1.Terminalübersicht\n2.Couponübersicht\n3.Einstellungen\n4.Logout");
+                maxSelectionOptions = 4;
             }
             if (artOfUser == Enums.UserType.serviceUser)
             {
-                Console.WriteLine("1)Terminalübersicht\n2)Meldungen");
+                Console.WriteLine("1.Terminalübersicht\n2.Meldungen\n3.Logout");
+                maxSelectionOptions = 3;
             }
-            if (artOfUser == Enums.UserType.adminUser) ;
+            if (artOfUser == Enums.UserType.adminUser)
             {
-                Console.WriteLine("1)Userverwaltung\n2)Finanzverwaltung\n3)Terminalverwaltung\n4)Sammlungen\n5)Little-Standorte\n6)Meldungen");
+                Console.WriteLine("1.Userverwaltung\n2.Finanzverwaltung\n3.Terminalverwaltung\n4.Organisationsveraltung\n5.Spendenübersicht\n6.Gewinnverwaltung\n7.Achievementverwaltung\n8.Postfach\n9.Logout");
+                maxSelectionOptions = 9;
             }
+            return maxSelectionOptions;
         }
 
-        public static int AskForMenueSelection(Enums.UserType artOfUser)
+        public static int AskforMenueSelection()
         {
-            int userMenueSelectionInput = 0;
-            int maxBusinessUserMenueSelections = 3;
-            int maxServiceUserMenueSelections = 2;
-            int maxAdminUserMenueSelections = 6;
-            bool validMenueSelectionInput = false;
-
-            //while (validMenueSelectionInput == false)
-            //{
-            //    Console.WriteLine("Menüauswahl:");
-            //    validMenueSelectionInput = int.TryParse(Console.ReadLine(), out userMenueSelectionInput);
-            ////Find way to go out of loop when selection is done (not check every if condition anymore)
-            //    if(artOfUser == Enums.UserType.privateUser)
-            //    {
-            //        int maxPrivatUserMenueSelections = 6;
-
-            //        if (userMenueSelectionInput <= 0 || userMenueSelectionInput > maxServiceUserMenueSelections)
-            //        {
-            //            Console.WriteLine("Menüauswahl nicht korrekt!");
-            //            continue;
-            //        }
-            //        else
-            //        {
-            //            break;
-            //        }
-            //    }
-            //}
-
+            Console.Write("Auswahl:\t");
+            int userMenueSelection = Convert.ToInt32(Console.ReadLine());
+            return userMenueSelection;
         }
     }
 }
