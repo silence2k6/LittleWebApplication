@@ -32,39 +32,39 @@ namespace LittleWebApplication
             installation
         }
 
-        public enum MainMenueSection
-        {
-            adminAdministration = 1,
-            finances,
-            terminals,
-            donations,
-            rewards,
-            littleLocations,
-            notifications,
-            settings,
-            contact
-        }
+        //public enum MainMenueSection
+        //{
+        //    adminAdministration = 1,
+        //    finances,
+        //    terminals,
+        //    donations,
+        //    rewards,
+        //    littleLocations,
+        //    notifications,
+        //    settings,
+        //    contact
+        //}
 
-        public enum SubMenueSection
-        {
-            privatUserAdministration = 1,
-            businessUserAdministraion,
-            serviceUserAdministraion,
-            adminUserAdministraion,
-            fundraiserAdministration,
-            terminalAdministration,
-            rewardAdministration,
-            notificationAdministration,
-            terminalOverview,
-            donationOverview,
-            terminalEmptyingOverview,
-            fundraiserPaymentOverview,
-            rewardOverview,
-            achievementOverview,
-            couponOverview,
-            notificationOverview,
-            userSettings,
-            safetySettings,
+        //public enum SubMenueSection
+        //{
+        //    privatUserAdministration = 1,
+        //    businessUserAdministraion,
+        //    serviceUserAdministraion,
+        //    adminUserAdministraion,
+        //    fundraiserAdministration,
+        //    terminalAdministration,
+        //    rewardAdministration,
+        //    notificationAdministration,
+        //    terminalOverview,
+        //    donationOverview,
+        //    terminalEmptyingOverview,
+        //    fundraiserPaymentOverview,
+        //    rewardOverview,
+        //    achievementOverview,
+        //    couponOverview,
+        //    notificationOverview,
+        //    userSettings,
+        //    safetySettings,
         }
     }
 }

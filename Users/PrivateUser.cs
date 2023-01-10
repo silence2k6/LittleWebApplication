@@ -11,21 +11,6 @@ using LittleWebApplication.Challenges;
 
 namespace LittleWebApplication.Users
 {
-    //public class User
-    //{
-    //    private List<PrivatUser> privatUserList = new List<PrivatUser>();
-    //    private PrivatUser privateUser = new PrivatUser();
-    //    privatUserList.Add(privateUser);
-
-    // private List<BusinessUser> businessUserList = new List<BusinessUser>();
-    //    private BusinessUser businessUser = new BusinessUser();
-    //    businessUserList.Add(businessUser);
-
-    // private List<ServiceUser> serviceUserList = new List<ServiceUser>();
-    //    private ServiceUser serviceUser = new ServiceUser();
-    //    serviceUserList.Add(serviceUser);
-    //}
-
     public class PrivateUser
     {
         //string artOfUser;

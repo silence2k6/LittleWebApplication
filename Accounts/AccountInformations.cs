@@ -13,11 +13,11 @@ namespace LittleWebApplication.Accounts
         public Enums.Status accountStatus;
         public Enums.UserType artOfUser;
 
-        public static AccountInformations CreateAccount(string accountNumber, Enums.UserType artOfUser, DateTime dateTime)
+        public static AccountInformations CreateAccount(string accountNumber, Enums.UserType artOfUser)
         {
             AccountInformations userAccount = new();
             userAccount.accountNumber = accountNumber;
-            userAccount.accountCreationDateTime = dateTime;
+            userAccount.accountCreationDateTime = DateTime.Now;
             userAccount.artOfUser = artOfUser;
             userAccount.accountStatus = Enums.Status.active;
 

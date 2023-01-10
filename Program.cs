@@ -15,9 +15,8 @@ namespace LittleWebApplication
 
             string accountNumber = CreateUser.CreateAccountNumber(accountList);
             string userNumber = CreateUser.CreateUserNumber(Enums.UserType.privateUser, accountNumber);
-            DateTime datetime = DateTime.Now;
 
-            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privateUser, datetime);
+            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privateUser);
             accountList.Add(newAccount);
 
             CreateUser newUser = CreateUser.CreatePrivateUserDummy(accountNumber);
@@ -65,25 +64,41 @@ namespace LittleWebApplication
                     break;
                 }
             }
-            
-            int menueSelectingOptions = UImethods.ShowMainMenue(artOfUser);
 
-            bool validUserMenueSelection = false;
+            bool mainMenueNavigation = false;
 
-            while (validUserMenueSelection == false)
+            while (mainMenueNavigation == false)
             {
-                int userMenueSelectionInput = UImethods.AskforMenueSelection();
+                int mainMainMenueOptions = UImethods.ShowMainMenue(artOfUser);
+                int userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
 
-                if (userMenueSelectionInput <= 0 ||userMenueSelectionInput > menueSelectingOptions)
+                if (userMainMenueSelection == mainMainMenueOptions)
                 {
-                    continue;
+                    Environment.Exit(0);
+                    //Go Back To Login
                 }
                 else
                 {
-                    break;
+                    bool subMenueNavigation = false;
+
+                    while (subMenueNavigation == false)
+                    {
+                        int subMenueOptions = UImethods.ShowSubMenue(artOfUser, userMainMenueSelection);
+                        int userSubMenueSelection = UImethods.AskforMenueSelection(subMenueOptions);
+
+                        if (userSubMenueSelection == subMenueOptions)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                            //open Menue Selection
+                        }
+                    }
                 }
             }
-
+            
             //Console.WriteLine(new string('-', 10));
             //Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
             //Console.WriteLine(new string('-', 10));

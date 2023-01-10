@@ -8,11 +8,12 @@ namespace LittleWebApplication.ProfilData
 {
     public class CompanyInformations
     {
-        string companyName;
-        string contactPersonFirstname;
-        string contactPersonFamilyname;
-        string contactPersonFunction;
-        string contactPersonTel;
+        public string companyName;
+        public string contactPersonFirstname;
+        public string contactPersonFamilyname;
+        public string contactPersonFunction;
+        public string contactPersonTel;
+        public string contactPersonMail;
 
         public override string ToString()
         {
