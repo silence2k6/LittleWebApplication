@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Donations;
-using LittleWebApplication.Rewards;
+﻿using LittleWebApplication.Rewards;
 using LittleWebApplication.Users;
 using System;
 using System.Collections.Generic;
@@ -12,9 +11,9 @@ namespace LittleWebApplication.Terminal
 {
     public class CreateTerminal
     {
+        TerminalInformations terminalProfil;
         BusinessUser terminalOwner;
         Fundraiser terminalFundraiser;
-        TerminalInformations terminalInformations;
         List<Coupon> terminalCouponList;
         List<Cosmetic> terminalCosmeticList;
         List<Picture> terminalPictureList;

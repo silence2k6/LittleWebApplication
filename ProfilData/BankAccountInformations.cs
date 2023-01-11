@@ -8,9 +8,9 @@ namespace LittleWebApplication.ProfilData
 {
     public class BankAccountInformations
     {
-        string bankAccoungIBAN;
-        string bankAccountInstitut;
-        string bankAccountOwner;
+        public string bankAccoungIBAN;
+        public string bankAccountInstitut;
+        public string bankAccountOwner;
 
         public override string ToString()
         {

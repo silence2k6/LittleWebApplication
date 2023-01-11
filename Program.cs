@@ -14,9 +14,9 @@ namespace LittleWebApplication
             //List<CreateTerminal> terminalList = 
 
             string accountNumber = CreateUser.CreateAccountNumber(accountList);
-            string userNumber = CreateUser.CreateUserNumber(Enums.UserType.privateUser, accountNumber);
+            string userNumber = CreateUser.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
 
-            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.UserType.privateUser);
+            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.AccountType.privateUser);
             accountList.Add(newAccount);
 
             CreateUser newUser = CreateUser.CreatePrivateUserDummy(accountNumber);
@@ -28,7 +28,7 @@ namespace LittleWebApplication
             bool validUserLogin = false;
             bool validArtOfUser = false;
             string userLoginNumberInput = "";
-            Enums.UserType artOfUser = 0;
+            Enums.AccountType artOfAccount = 0;
             CreateUser user = new();
 
             while (validUserLogin == false)
@@ -36,15 +36,15 @@ namespace LittleWebApplication
                 while (validArtOfUser == false)
                 {
                     userLoginNumberInput = UImethods.AskForUserLoginNumber();
-                    artOfUser = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
+                    artOfAccount = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
 
-                    if (artOfUser != 0)
+                    if (artOfAccount != 0)
                     {
                         break;
                     }
                 }
 
-                user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfUser);
+                user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
 
                 if (user != null)
                 {
@@ -69,7 +69,7 @@ namespace LittleWebApplication
 
             while (mainMenueNavigation == false)
             {
-                int mainMainMenueOptions = UImethods.ShowMainMenue(artOfUser);
+                int mainMainMenueOptions = UImethods.ShowMainMenue(artOfAccount);
                 int userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
 
                 if (userMainMenueSelection == mainMainMenueOptions)
@@ -83,7 +83,7 @@ namespace LittleWebApplication
 
                     while (subMenueNavigation == false)
                     {
-                        int subMenueOptions = UImethods.ShowSubMenue(artOfUser, userMainMenueSelection);
+                        int subMenueOptions = UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
                         int userSubMenueSelection = UImethods.AskforMenueSelection(subMenueOptions);
 
                         if (userSubMenueSelection == subMenueOptions)
@@ -92,7 +92,20 @@ namespace LittleWebApplication
                         }
                         else
                         {
-                            Environment.Exit(0);
+                            bool subSubMenueNavigation = false;
+
+                            while (subSubMenueNavigation == false)
+                            {
+                                int subSubMenueOptions = UImethods.ShowSubSubMenue(artOfAccount, userSubMenueSelection);
+                                int userSubSubMenueSelection = UImethods.AskforMenueSelection(subSubMenueOptions);
+
+                                if (userSubSubMenueSelection == subSubMenueOptions)
+                                {
+                                    break;
+                                }
+                        
+                            }
+                            //Environment.Exit(0);
                             //open Menue Selection
                         }
                     }

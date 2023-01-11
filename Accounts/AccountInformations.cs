@@ -11,9 +11,9 @@ namespace LittleWebApplication.Accounts
         public string accountNumber;
         public DateTime accountCreationDateTime;
         public Enums.Status accountStatus;
-        public Enums.UserType artOfUser;
+        public Enums.AccountType artOfUser;
 
-        public static AccountInformations CreateAccount(string accountNumber, Enums.UserType artOfUser)
+        public static AccountInformations CreateAccount(string accountNumber, Enums.AccountType artOfUser)
         {
             AccountInformations userAccount = new();
             userAccount.accountNumber = accountNumber;

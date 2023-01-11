@@ -11,7 +11,7 @@ namespace LittleWebApplication.Terminal
     {
         string terminalNumber;
         string terminalName;
-        private AdressInformations newAdress = new AdressInformations();
+        private AdressInformations terminalAdress;
         string terminalAdressExtraText;
         string terminalLocation;
         string terminalStatus;

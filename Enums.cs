@@ -8,12 +8,14 @@ namespace LittleWebApplication
 {
     public class Enums
     {
-        public enum UserType
+        public enum AccountType
         {
             privateUser = 1,
             businessUser,
             serviceUser,
-            adminUser
+            adminUser,
+            fundraiser,
+            terminal
         }
 
         public enum Status
@@ -65,6 +67,6 @@ namespace LittleWebApplication
         //    notificationOverview,
         //    userSettings,
         //    safetySettings,
-        }
+        //}
     }
 }

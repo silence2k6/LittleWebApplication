@@ -15,35 +15,17 @@ namespace LittleWebApplication
         public AdressInformations fundraiserAdress;
         public BankAccountInformations fundraiserBankAccount;
         
-        public static Fundraiser CreateNewFundraiser(List<Fundraiser> fundraiserList)
+        public static Fundraiser CreateNewFundraiser(List<Fundraiser> fundraiserList, Enums.AccountType artOfAccount)
         {
             int listNumber = fundraiserList.Count + 1;
 
-            CompanyInformations newFundraiserCompany = new();
-            Console.WriteLine("Name Spendenorganisation:\t");
-            newFundraiserCompany.companyName = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Vorname:\t");
-            newFundraiserCompany.contactPersonFirstname = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Familienname:\t");
-            newFundraiserCompany.contactPersonFamilyname = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Firmenfunktion:\t");
-            newFundraiserCompany.contactPersonFunction = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Telefonnummer:\t");
-            newFundraiserCompany.contactPersonTel = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Email-Adresse:\t");
-            newFundraiserCompany.contactPersonMail = Console.ReadLine();
-
-            AdressInformations newFundraiserAdress = new();
-            //set adress informations
-
-            BankAccountInformations newFundraiserBankAccount = new();
-            //set bankaccount informations
-
             Fundraiser fundraiser = new();
             fundraiser.fundraiserNumber = "F#" + listNumber.ToString("D6");
-            fundraiser.fundraiserCompany = newFundraiserCompany;
+            fundraiser.fundraiserCompany = UImethods.AskForCompanyInformations(artOfAccount);
+            fundraiser.fundraiserAdress = UImethods.AskForAdressInformations();
+            fundraiser.fundraiserBankAccount = UImethods.AskForBankAccountInformations();
 
-    
+            return fundraiser;
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using LittleWebApplication.Terminal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LittleWebApplication.Donations
+namespace LittleWebApplication
 {
     public class Donation
     {
@@ -20,12 +19,10 @@ namespace LittleWebApplication.Donations
         //{
         //    int randomTerminalIndex = randomGenerator.Next(terminalList.Count);
         //    TerminalInformations donationTerminal = terminalList[randomTerminalIndex];
-            
+
         //    Donation userDonation = new();
         //    userDonation.donationDateTime = DateTime.Now;
         //    userDonation.terminalNumber = //donationTerminal.terminalNumber
         //}
     }
-
-
 }

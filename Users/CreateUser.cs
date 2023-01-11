@@ -5,11 +5,12 @@ namespace LittleWebApplication.Users
 {
     public class CreateUser
     {
-        public AccountInformations userAccount;
         public string userNumber;
         public NameInformations userName;
         public AdressInformations userAdress;
         public ContactInformations userContact;
+        public CompanyInformations userCompany;
+        public BankAccountInformations userBankAccount;
         public LoginInformations userLogin;
         public static Random randomGenerator = new();
 
@@ -20,23 +21,23 @@ namespace LittleWebApplication.Users
             string accountNumber = listNumber.ToString("D6");
             return accountNumber;
         }
-        public static string CreateUserNumber(Enums.UserType artOfUser, string accountNumber)
+        public static string CreateUserNumber(Enums.AccountType artOfAccount, string accountNumber)
         {
             string userPreNumber = "";
 
-            if (artOfUser == Enums.UserType.privateUser)
+            if (artOfAccount == Enums.AccountType.privateUser)
             {
                 userPreNumber = "P#";
             }
-            if (artOfUser == Enums.UserType.businessUser)
+            if (artOfAccount == Enums.AccountType.businessUser)
             {
                 userPreNumber = "B#";
             }
-            if (artOfUser == Enums.UserType.serviceUser)
+            if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 userPreNumber = "S#";
             }
-            if (artOfUser == Enums.UserType.adminUser)
+            if (artOfAccount == Enums.AccountType.adminUser)
             {
                 userPreNumber = "A#";
             }
@@ -121,14 +122,37 @@ namespace LittleWebApplication.Users
 
         public static CreateUser CreatePrivateUserDummy(string accountNumber)
         {
-            CreateUser privatUserDummy = new();
-            privatUserDummy.userName = CreateUser.CreatePrivateUserDummyName();
-            privatUserDummy.userAdress = CreateUser.CreatePrivateUserDummyAdress();
-            privatUserDummy.userContact = CreateUser.CreatePrivateUserDummyContact(privatUserDummy.userName);
-            privatUserDummy.userLogin = CreateUser.CreatePrivateUserDummyLogin(accountNumber);
-            privatUserDummy.userNumber = CreateUser.CreateUserNumber(Enums.UserType.privateUser, accountNumber);
+            CreateUser newPrivatUserDummy = new();
+            newPrivatUserDummy.userNumber = CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
+            newPrivatUserDummy.userName = CreatePrivateUserDummyName();
+            newPrivatUserDummy.userAdress = CreatePrivateUserDummyAdress();
+            newPrivatUserDummy.userContact = CreatePrivateUserDummyContact(newPrivatUserDummy.userName);
+            newPrivatUserDummy.userLogin = CreatePrivateUserDummyLogin(accountNumber);
 
-            return privatUserDummy;
+            return newPrivatUserDummy;
+        }
+
+        public static CreateUser CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
+        {
+            CreateUser newBusinessUser = new();
+            newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
+            newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
+            newBusinessUser.userAdress = UImethods.AskForAdressInformations();
+            newBusinessUser.userLogin.userLoginNumber = "B" + accountNumber;
+            newBusinessUser.userLogin.userLoginPassword = UImethods.AskForUserPassword();
+
+            return newBusinessUser;
+        }
+
+        public static CreateUser CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
+        {
+            CreateUser newAdminUser = new();
+            newAdminUser.userNumber = CreateUserNumber(Enums.AccountType.adminUser, accountNumber);
+            newAdminUser.userName = UImethods.AskForNameInformations();
+            newAdminUser.userLogin.userLoginNumber = "A" + accountNumber;
+            newAdminUser.userLogin.userLoginPassword = UImethods.AskForUserLoginPassword();
+
+            return newAdminUser;
         }
     }
 }

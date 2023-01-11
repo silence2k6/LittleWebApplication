@@ -1,9 +1,5 @@
-﻿using LittleWebApplication.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LittleWebApplication.ProfilData;
+using LittleWebApplication.Users;
 
 namespace LittleWebApplication
 {
@@ -16,31 +12,31 @@ namespace LittleWebApplication
             return userLoginNumberInput;
         }
 
-        public static Enums.UserType CheckUserLoginForArtOfUser(string userLoginNumberInput)
+        public static Enums.AccountType CheckUserLoginForArtOfUser(string userLoginNumberInput)
         {
-            Enums.UserType artOfUser = new();
+            Enums.AccountType artOfUser = new();
             bool validPreNumberInput = false;
 
             while (validPreNumberInput == false)
             {
                 if (userLoginNumberInput[0].Equals('P'))
                 {
-                    artOfUser = Enums.UserType.privateUser;
+                    artOfUser = Enums.AccountType.privateUser;
                     break;
                 }
                 if (userLoginNumberInput[0].Equals('B'))
                 {
-                    artOfUser = Enums.UserType.businessUser;
+                    artOfUser = Enums.AccountType.businessUser;
                     break;
                 }
                 if (userLoginNumberInput[0].Equals('S'))
                 {
-                    artOfUser = Enums.UserType.serviceUser;
+                    artOfUser = Enums.AccountType.serviceUser;
                     break;
                 }
                 if (userLoginNumberInput[0].Equals('A'))
                 {
-                    artOfUser = Enums.UserType.adminUser;
+                    artOfUser = Enums.AccountType.adminUser;
                     break;
                 }
                 Console.WriteLine("Eingabe ungültig (Achten Sie darauf dass Ihr Benutzername mit einem Buchstaben beginnen und mit einer Zahlenfolge enden muss)");
@@ -49,23 +45,23 @@ namespace LittleWebApplication
             return artOfUser;
         }
 
-        public static CreateUser CheckUserLoginForUserNumberExist(string userLoginNumberInput, Enums.UserType artOfUser)
+        public static CreateUser CheckUserLoginForUserNumberExist(string userLoginNumberInput, Enums.AccountType artOfAccount)
         {
             List<CreateUser> userList = new(); 
 
-            if (artOfUser == Enums.UserType.privateUser)
+            if (artOfAccount == Enums.AccountType.privateUser)
             {
                 userList = Backup.LoadPrivateUserRepository();
             }
-            if (artOfUser == Enums.UserType.businessUser)
+            if (artOfAccount == Enums.AccountType.businessUser)
             {
                 userList = Backup.LoadBusinessUserRepository();
             }
-            if (artOfUser == Enums.UserType.serviceUser)
+            if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 userList = Backup.LoadServiceUserRepository();
             }
-            if (artOfUser == Enums.UserType.adminUser)
+            if (artOfAccount == Enums.AccountType.adminUser)
             {
                 userList = Backup.LoadAdminUserRepository();
             }
@@ -139,27 +135,27 @@ namespace LittleWebApplication
             return userMenueSelection;
         }
 
-        public static int ShowMainMenue(Enums.UserType artOfUser)
+        public static int ShowMainMenue(Enums.AccountType artOfAccount)
         {
             int mainMenueOptions = 0;
             Console.WriteLine("\nHAUPTMENÜ");
 
-            if (artOfUser == Enums.UserType.privateUser)
+            if (artOfAccount == Enums.AccountType.privateUser)
             {
                 Console.WriteLine("1.Spendenübersicht\n2.Sammlungen\n3.Meldungen\n4.Einstellungen\n5.Kontakt\n6.Little-Standorte\n7.Logout");
                 mainMenueOptions = 7;
             }
-            if (artOfUser == Enums.UserType.businessUser)
+            if (artOfAccount == Enums.AccountType.businessUser)
             {
                 Console.WriteLine("1.Terminalübersicht\n2.Couponübersicht\n3.Einstellungen\n4.Logout");
                 mainMenueOptions = 4;
             }
-            if (artOfUser == Enums.UserType.serviceUser)
+            if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 Console.WriteLine("1.Terminalübersicht\n2.Meldungen\n3.Logout");
                 mainMenueOptions = 3;
             }
-            if (artOfUser == Enums.UserType.adminUser)
+            if (artOfAccount == Enums.AccountType.adminUser)
             {
                 Console.WriteLine("1.Userverwaltung\n2.Finanzverwaltung\n3.Terminalverwaltung\n4.Spendenorganisationsverwaltung\n5.Gewinnverwaltung\n6.Achievementverwaltung\n7.Nachrichten\n8.Logout");
                 mainMenueOptions = 8;
@@ -167,11 +163,11 @@ namespace LittleWebApplication
             return mainMenueOptions;
         }
 
-        public static int ShowSubMenue(Enums.UserType artOfUser, int userMenueSelection)
+        public static int ShowSubMenue(Enums.AccountType artOfAccount, int userMenueSelection)
         {
             int subMenueOptions = 0;
 
-            if (artOfUser == Enums.UserType.privateUser)
+            if (artOfAccount == Enums.AccountType.privateUser)
             {
                 if (userMenueSelection == 1)
                 {
@@ -204,7 +200,7 @@ namespace LittleWebApplication
                     subMenueOptions = 2;
                 }
             }
-            if (artOfUser == Enums.UserType.businessUser)
+            if (artOfAccount == Enums.AccountType.businessUser)
             {
                 if (userMenueSelection == 1)
                 {
@@ -222,7 +218,7 @@ namespace LittleWebApplication
                     subMenueOptions = 3;
                 }
             }
-            if (artOfUser == Enums.UserType.serviceUser)
+            if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 if (userMenueSelection == 1)
                 {
@@ -235,7 +231,7 @@ namespace LittleWebApplication
                     subMenueOptions = 3;
                 }
             }
-            if (artOfUser == Enums.UserType.adminUser)
+            if (artOfAccount == Enums.AccountType.adminUser)
             {
                 if (userMenueSelection == 1)
                 {
@@ -274,6 +270,138 @@ namespace LittleWebApplication
                 }
             }
             return subMenueOptions;
+        }
+
+        public static int ShowSubSubMenue (Enums.AccountType artOfAccount, int userMenueSelection)
+        {
+            int subSubMenueOtions = 0;
+
+            if(artOfAccount == Enums.AccountType.privateUser)
+            {
+                //
+            }
+            if(artOfAccount == Enums.AccountType.businessUser)
+            {
+                //
+            }
+            if(artOfAccount == Enums.AccountType.serviceUser)
+            {
+                //
+            }
+            if (artOfAccount == Enums.AccountType.adminUser)
+            {
+                if (userMenueSelection == 1)
+                {
+                    Console.WriteLine("USERVERWALTUNG PRIVAT-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
+                    subSubMenueOtions = 3;
+                }
+                if (userMenueSelection == 2)
+                {
+                    Console.WriteLine("USERVERWALTUNG BUSINESS-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
+                    subSubMenueOtions = 3;
+                }
+                if (userMenueSelection == 3)
+                {
+                    Console.WriteLine("USERVERWALTUNG SERVICE-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
+                    subSubMenueOtions = 3;
+                }
+                if (userMenueSelection == 4)
+                {
+                    Console.WriteLine("USERVERWALTUNG ADMIN-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
+                    subSubMenueOtions = 3;
+                }
+            }
+            return subSubMenueOtions;
+        }
+
+        public static NameInformations AskForNameInformations()
+        {
+            NameInformations newName = new();
+            Console.WriteLine("Vorname:\t");
+            newName.userFirstName = Console.ReadLine();
+            Console.WriteLine("Familienname:\t");
+            newName.userLastName = Console.ReadLine();
+
+            return newName;
+        }
+
+        public static CompanyInformations AskForCompanyInformations(Enums.AccountType artOfAccount)
+        {
+            CompanyInformations newCompany = new();
+
+            if (artOfAccount == Enums.AccountType.fundraiser)
+            {
+                Console.WriteLine("Name Spendenorganisation:\t");
+            }
+            if (artOfAccount == Enums.AccountType.businessUser)
+            {
+                Console.WriteLine("Name Firma:\t");
+            }
+            newCompany.companyName = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Vorname:\t");
+            newCompany.contactPersonFirstname = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Familienname:\t");
+            newCompany.contactPersonFamilyname = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Firmenfunktion:\t");
+            newCompany.contactPersonFunction = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Telefonnummer:\t");
+            newCompany.contactPersonTel = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Email-Adresse:\t");
+            newCompany.contactPersonMail = Console.ReadLine();
+
+            return newCompany;
+        }
+
+        public static AdressInformations AskForAdressInformations()
+        {
+            AdressInformations newAdress = new();
+            Console.WriteLine("Straße:\t");
+            newAdress.userAdressStreet = Console.ReadLine();
+            Console.WriteLine("Hausnummer:\t");
+            newAdress.userAdressNumber = Console.ReadLine();
+            Console.WriteLine("Stadt:\t");
+            newAdress.userAdressTown = Console.ReadLine();
+            Console.WriteLine("Bundesland:\t");
+            newAdress.userAdressFederalState = Console.ReadLine();
+
+            return newAdress;
+        }
+
+        public static BankAccountInformations AskForBankAccountInformations()
+        {
+            BankAccountInformations newBankAccount = new();
+            Console.WriteLine("IBAN:\t");
+            newBankAccount.bankAccoungIBAN = Console.ReadLine();
+            Console.WriteLine("Bankinstitut:\t");
+            newBankAccount.bankAccountInstitut = Console.ReadLine();
+            Console.WriteLine("Kontoinhaber:\t");
+            newBankAccount.bankAccountOwner = Console.ReadLine();
+
+            return newBankAccount;
+        }
+
+        public static string AskForUserPassword()
+        {
+            bool validPaswordConfirmation = false;
+
+            Console.WriteLine("Passwort wählen:\t");
+            string newPassword = Console.ReadLine();
+
+            while (validPaswordConfirmation == false)
+            {
+                Console.WriteLine("Passwort wiederholen:\t");
+                string passwordConfirmation = Console.ReadLine();
+
+                if (passwordConfirmation == passwordConfirmation)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Passwortbestätigung stimmt nicht mit dem gewählten Passwort überein!");
+                }
+            }
+            return newPassword;
         }
 
         //public static Donation ShowUserDonation(User user)
