@@ -9,6 +9,7 @@ namespace LittleWebApplication
     {
         static void Main(string[] args)
         {
+            ConsoleKeyInfo pressEscape;
             List<AccountInformations> accountList = Backup.LoadAccountRepository();
             List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
@@ -98,10 +99,24 @@ namespace LittleWebApplication
                             {
                                 int subSubMenueOptions = UImethods.ShowSubSubMenue(artOfAccount, userSubMenueSelection);
                                 int userSubSubMenueSelection = UImethods.AskforMenueSelection(subSubMenueOptions);
+                                pressEscape = Console.ReadKey();
 
                                 if (userSubSubMenueSelection == subSubMenueOptions)
                                 {
                                     break;
+                                }
+                                if (pressEscape.Key == ConsoleKey.Escape)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    bool subSubSubMenueNavigation = false;
+
+                                    while (subSubSubMenueNavigation == false)
+                                    {
+                                        
+                                    }
                                 }
                         
                             }

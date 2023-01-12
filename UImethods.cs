@@ -171,8 +171,8 @@ namespace LittleWebApplication
             {
                 if (userMenueSelection == 1)
                 {
-                    Console.WriteLine("\nSPENDENÜBERSICHT\n1.Meine Spenden anzeigen\n2.Zurück");
-                    subMenueOptions = 2;
+                    //show all donations
+                    Console.WriteLine("(Press ESC to go back)");
                 }
                 if (userMenueSelection == 2)
                 {
@@ -204,13 +204,13 @@ namespace LittleWebApplication
             {
                 if (userMenueSelection == 1)
                 {
-                    Console.WriteLine("\nTERMINALÜBERSICHT\n1.Meine Terminals anzeigen\n2.Zurück");
-                    subMenueOptions = 2;
+                    //show userTerminals
+                    Console.WriteLine("(Press ESC to go back)");
                 }
                 if (userMenueSelection == 2)
                 {
-                    Console.WriteLine("\nCOUPONÜBERSICHT\n1.Meine Coupons anzeigen\n2.Zurück");
-                    subMenueOptions = 2;
+                    //show userCoupons
+                    Console.WriteLine("(Press ESC to go back)");
                 }
                 if (userMenueSelection == 3)
                 {
@@ -222,12 +222,12 @@ namespace LittleWebApplication
             {
                 if (userMenueSelection == 1)
                 {
-                    Console.WriteLine("\nTERMINALÜBERSICHT\n1.Meine Terminals anzeigen\n2.Zurück");
-                    subMenueOptions = 2;
+                    //show userTerminals
+                    Console.WriteLine("(Press ESC to go back)");
                 }
                 if (userMenueSelection == 2)
                 {
-                    Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Aufgaben\n3.Zurück");
+                    Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n3.Zurück");
                     subMenueOptions = 3;
                 }
             }
@@ -272,46 +272,27 @@ namespace LittleWebApplication
             return subMenueOptions;
         }
 
-        public static int ShowSubSubMenue (Enums.AccountType artOfAccount, int userMenueSelection)
+        public static int ShowSubSubMenue (Enums.AccountType artOfAccount, int userSubMenueSelection)
         {
-            int subSubMenueOtions = 0;
+            int subSubMenueOptions = 0; 
 
             if(artOfAccount == Enums.AccountType.privateUser)
             {
-                //
+               
             }
             if(artOfAccount == Enums.AccountType.businessUser)
             {
-                //
+                
             }
             if(artOfAccount == Enums.AccountType.serviceUser)
             {
-                //
+               
             }
             if (artOfAccount == Enums.AccountType.adminUser)
             {
-                if (userMenueSelection == 1)
-                {
-                    Console.WriteLine("USERVERWALTUNG PRIVAT-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
-                    subSubMenueOtions = 3;
-                }
-                if (userMenueSelection == 2)
-                {
-                    Console.WriteLine("USERVERWALTUNG BUSINESS-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
-                    subSubMenueOtions = 3;
-                }
-                if (userMenueSelection == 3)
-                {
-                    Console.WriteLine("USERVERWALTUNG SERVICE-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
-                    subSubMenueOtions = 3;
-                }
-                if (userMenueSelection == 4)
-                {
-                    Console.WriteLine("USERVERWALTUNG ADMIN-USER\n1.User anzeigen\n2.User erstellen\n3.Zurück");
-                    subSubMenueOtions = 3;
-                }
+                
             }
-            return subSubMenueOtions;
+            return subSubMenueOptions;
         }
 
         public static NameInformations AskForNameInformations()
