@@ -9,7 +9,7 @@ namespace LittleWebApplication
     {
         static void Main(string[] args)
         {
-            ConsoleKeyInfo pressEscape;
+            ConsoleKey pressESC = ConsoleKey.Escape;
             List<AccountInformations> accountList = Backup.LoadAccountRepository();
             List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
@@ -84,44 +84,38 @@ namespace LittleWebApplication
 
                     while (subMenueNavigation == false)
                     {
-                        int subMenueOptions = UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
+                        int subMenueOptions = 0;
+
+                        if(artOfAccount == Enums.AccountType.privateUser)
+                        {
+                            subMenueOptions = UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
+                        }
+                        if(artOfAccount == Enums.AccountType.businessUser)
+                        {
+                            subMenueOptions = UImethods.ShowBusinessUserSubMenue(userMainMenueSelection);
+                        }
+                        if(artOfAccount == Enums.AccountType.serviceUser)
+                        {
+                            subMenueOptions = UImethods.ShowServiceUserSubMenue(userMainMenueSelection);
+                        }
+                        if(artOfAccount == Enums.AccountType.adminUser)
+                        {
+                            subMenueOptions = UImethods.ShowAdminUserSubMenue(userMainMenueSelection);
+                        }
+
                         int userSubMenueSelection = UImethods.AskforMenueSelection(subMenueOptions);
 
                         if (userSubMenueSelection == subMenueOptions)
                         {
                             break;
                         }
+                        if (pressESC == ConsoleKey.Escape)
+                        {
+                            break;
+                        }
                         else
                         {
-                            bool subSubMenueNavigation = false;
-
-                            while (subSubMenueNavigation == false)
-                            {
-                                int subSubMenueOptions = UImethods.ShowSubSubMenue(artOfAccount, userSubMenueSelection);
-                                int userSubSubMenueSelection = UImethods.AskforMenueSelection(subSubMenueOptions);
-                                pressEscape = Console.ReadKey();
-
-                                if (userSubSubMenueSelection == subSubMenueOptions)
-                                {
-                                    break;
-                                }
-                                if (pressEscape.Key == ConsoleKey.Escape)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    bool subSubSubMenueNavigation = false;
-
-                                    while (subSubSubMenueNavigation == false)
-                                    {
-                                        
-                                    }
-                                }
-                        
-                            }
-                            //Environment.Exit(0);
-                            //open Menue Selection
+                            Console.WriteLine("Hier kommt userSubSubMenü");
                         }
                     }
                 }

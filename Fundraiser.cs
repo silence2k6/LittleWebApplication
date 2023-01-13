@@ -15,7 +15,7 @@ namespace LittleWebApplication
         public AdressInformations fundraiserAdress;
         public BankAccountInformations fundraiserBankAccount;
         
-        public static Fundraiser CreateNewFundraiser(List<Fundraiser> fundraiserList, Enums.AccountType artOfAccount)
+        public static Fundraiser CreateFundraiser(List<Fundraiser> fundraiserList, Enums.AccountType artOfAccount)
         {
             int listNumber = fundraiserList.Count + 1;
 

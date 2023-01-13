@@ -126,7 +126,7 @@ namespace LittleWebApplication
                 Console.Write("Auswahl:\t");
                 validUserInput = int.TryParse(Console.ReadLine(), out userMenueSelection);
 
-                if(userMenueSelection <= 0 || userMenueSelection > menueOptions)
+                if (userMenueSelection <= 0 || userMenueSelection > menueOptions)
                 {
                     Console.WriteLine("Menüauswahl nicht korrekt!");
                     validUserInput = false;
@@ -137,162 +137,149 @@ namespace LittleWebApplication
 
         public static int ShowMainMenue(Enums.AccountType artOfAccount)
         {
-            int mainMenueOptions = 0;
+            int mainMainMenueOptions = 0;
             Console.WriteLine("\nHAUPTMENÜ");
 
             if (artOfAccount == Enums.AccountType.privateUser)
             {
                 Console.WriteLine("1.Spendenübersicht\n2.Sammlungen\n3.Meldungen\n4.Einstellungen\n5.Kontakt\n6.Little-Standorte\n7.Logout");
-                mainMenueOptions = 7;
+                mainMainMenueOptions = 7;
             }
             if (artOfAccount == Enums.AccountType.businessUser)
             {
                 Console.WriteLine("1.Terminalübersicht\n2.Couponübersicht\n3.Einstellungen\n4.Logout");
-                mainMenueOptions = 4;
+                mainMainMenueOptions = 4;
             }
             if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 Console.WriteLine("1.Terminalübersicht\n2.Meldungen\n3.Logout");
-                mainMenueOptions = 3;
+                mainMainMenueOptions = 3;
             }
             if (artOfAccount == Enums.AccountType.adminUser)
             {
                 Console.WriteLine("1.Userverwaltung\n2.Finanzverwaltung\n3.Terminalverwaltung\n4.Spendenorganisationsverwaltung\n5.Gewinnverwaltung\n6.Achievementverwaltung\n7.Nachrichten\n8.Logout");
-                mainMenueOptions = 8;
+                mainMainMenueOptions = 8;
             }
-            return mainMenueOptions;
+            return mainMainMenueOptions;
         }
 
-        public static int ShowSubMenue(Enums.AccountType artOfAccount, int userMenueSelection)
+        public static int ShowPrivatUserSubMenue(int userMainMenueSelection)
         {
             int subMenueOptions = 0;
 
-            if (artOfAccount == Enums.AccountType.privateUser)
+            if(userMainMenueSelection == 1)
             {
-                if (userMenueSelection == 1)
-                {
-                    //show all donations
-                    Console.WriteLine("(Press ESC to go back)");
-                }
-                if (userMenueSelection == 2)
-                {
-                    Console.WriteLine("\nSAMMLUNGEN\n1.Meine Gewinne\n2.Meine Achievements\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 3)
-                {
-                    Console.WriteLine("\nMELDUNGEN\n1.Nachrichten\n2.Couponerinnerungen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 4)
-                {
-                    Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 5)
-                {
-                    Console.WriteLine("\nKONTAKT\n1.neues Ticket erstellen\n2.Zurück");
-                    subMenueOptions = 2;
-                }
-                if (userMenueSelection == 6)
-                {
-                    Console.WriteLine("\nLITTLE-STANDORTE\n1.Terminalstandorte anzeigen\n2.Zurück");
-                    subMenueOptions = 2;
-                }
+                //Show all userDonations
+                Console.WriteLine("(Press ESC to go back)");
             }
-            if (artOfAccount == Enums.AccountType.businessUser)
+            if (userMainMenueSelection == 2)
             {
-                if (userMenueSelection == 1)
-                {
-                    //show userTerminals
-                    Console.WriteLine("(Press ESC to go back)");
-                }
-                if (userMenueSelection == 2)
-                {
-                    //show userCoupons
-                    Console.WriteLine("(Press ESC to go back)");
-                }
-                if (userMenueSelection == 3)
-                {
-                    Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
+                Console.WriteLine("\nSAMMLUNGEN\n1.Meine Gewinne\n2.Meine Achievements\n3.Zurück");
+                subMenueOptions = 3;
             }
-            if (artOfAccount == Enums.AccountType.serviceUser)
+            if (userMainMenueSelection == 3)
             {
-                if (userMenueSelection == 1)
-                {
-                    //show userTerminals
-                    Console.WriteLine("(Press ESC to go back)");
-                }
-                if (userMenueSelection == 2)
-                {
-                    Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n3.Zurück");
-                    subMenueOptions = 3;
-                }
+                Console.WriteLine("\nMELDUNGEN\n1.Nachrichten\n2.Couponerinnerungen\n3.Zurück");
+                subMenueOptions = 3;
             }
-            if (artOfAccount == Enums.AccountType.adminUser)
+            if (userMainMenueSelection == 4)
             {
-                if (userMenueSelection == 1)
-                {
-                    Console.WriteLine("\nUSERVERWALTUNG\n1.PrivatUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n5.Zurück");
-                    subMenueOptions = 5;
-                }
-                if (userMenueSelection == 2)
-                {
-                    Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n5.Zurück");
-                    subMenueOptions = 5;
-                }
-                if (userMenueSelection == 3)
-                {
-                    Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 4)
-                {
-                    Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 5)
-                {
-                    Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n4.Zurück");
-                    subMenueOptions = 4;
-                }
-                if (userMenueSelection == 6)
-                {
-                    Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n3.Zurück");
-                    subMenueOptions = 3;
-                }
-                if (userMenueSelection == 7)
-                {
-                    Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n6.Zurück");
-                    subMenueOptions = 6;
-                }
+                Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n3.Zurück");
+                subMenueOptions = 3;
+            }
+            if (userMainMenueSelection == 5)
+            {
+                Console.WriteLine("\nKONTAKT\n1.neues Ticket erstellen\n2.Zurück");
+                subMenueOptions = 2;
+            }
+            if (userMainMenueSelection == 6)
+            {
+                Console.WriteLine("\nLITTLE-STANDORTE\n1.Terminalstandorte anzeigen\n2.Zurück");
+                subMenueOptions = 2;
             }
             return subMenueOptions;
         }
 
-        public static int ShowSubSubMenue (Enums.AccountType artOfAccount, int userSubMenueSelection)
+        public static int ShowBusinessUserSubMenue(int userMainMenueSelection)
         {
-            int subSubMenueOptions = 0; 
+            int subMenueOptions = 0;
 
-            if(artOfAccount == Enums.AccountType.privateUser)
+            if (userMainMenueSelection == 1)
             {
-               
+                //show userTerminals
+                Console.WriteLine("(Press ESC to go back)");
             }
-            if(artOfAccount == Enums.AccountType.businessUser)
+            if (userMainMenueSelection == 2)
             {
-                
+                //show userCoupons
+                Console.WriteLine("(Press ESC to go back)");
             }
-            if(artOfAccount == Enums.AccountType.serviceUser)
+            if (userMainMenueSelection == 3)
             {
-               
+                Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n3.Zurück");
+                subMenueOptions = 3;
             }
-            if (artOfAccount == Enums.AccountType.adminUser)
+            return subMenueOptions;
+        }
+
+        public static int ShowServiceUserSubMenue(int userMainMenueSelection)
+        {
+            int subMenueOptions = 0;
+
+            if (userMainMenueSelection == 1)
             {
-                
+                //show userTerminals
+                Console.WriteLine("(Press ESC to go back)");
             }
-            return subSubMenueOptions;
+            if (userMainMenueSelection == 2)
+            {
+                Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n3.Zurück");
+                subMenueOptions = 3;
+            }
+            return subMenueOptions;
+        }
+
+        public static int ShowAdminUserSubMenue(int userMainMenueSelection)
+        {
+            int subMenueOptions = 0;
+
+            if (userMainMenueSelection == 1)
+            {
+                Console.WriteLine("\nUSERVERWALTUNG\n1.PrivatUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n5.Zurück");
+                subMenueOptions = 5;
+            }
+            if (userMainMenueSelection == 2)
+            {
+                Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n5.Zurück");
+                subMenueOptions = 5;
+            }
+            if (userMainMenueSelection == 3)
+            {
+                Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n3.Zurück");
+                subMenueOptions = 3;
+            }
+            if (userMainMenueSelection == 4)
+            {
+                Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n3.Zurück");
+                subMenueOptions = 3;
+            }
+            if (userMainMenueSelection == 5)
+            {
+                Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n4.Zurück");
+                subMenueOptions = 4;
+            }
+            if (userMainMenueSelection == 6)
+            {
+                Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n3.Zurück");
+                subMenueOptions = 3;
+            }
+            if (userMainMenueSelection == 7)
+            {
+                Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n6.Zurück");
+                subMenueOptions = 6;
+            }
+            return subMenueOptions;
+
         }
 
         public static NameInformations AskForNameInformations()

@@ -9,11 +9,11 @@ namespace LittleWebApplication.Terminal
 {
     public class TerminalInformations
     {
-        string terminalNumber;
-        string terminalName;
-        private AdressInformations terminalAdress;
-        string terminalAdressExtraText;
-        string terminalLocation;
-        string terminalStatus;
+        public string terminalNumber;
+        public string terminalName;
+        public AdressInformations terminalAdress;
+        public string terminalAdressExtraText;
+        public string terminalLocation;
+        public string terminalStatus;
     }
 }
