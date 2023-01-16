@@ -1,15 +1,17 @@
 ﻿using LittleWebApplication.Accounts;
 using LittleWebApplication.Terminal;
 using LittleWebApplication.Users;
+using System.Reflection.Metadata;
 using System.Xml.Serialization;
 
 namespace LittleWebApplication
 {
     internal class Progamm
     {
+        const int ESC_HASH = 1769499;
+
         static void Main(string[] args)
         {
-            ConsoleKey pressESC = ConsoleKey.Escape;
             List<AccountInformations> accountList = Backup.LoadAccountRepository();
             List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
@@ -73,51 +75,41 @@ namespace LittleWebApplication
                 int mainMainMenueOptions = UImethods.ShowMainMenue(artOfAccount);
                 int userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
 
-                if (userMainMenueSelection == mainMainMenueOptions)
+                if (userMainMenueSelection == ESC_HASH)
                 {
                     Environment.Exit(0);
                     //Go Back To Login
                 }
                 else
                 {
-                    bool subMenueNavigation = false;
-
-                    while (subMenueNavigation == false)
+                    if (artOfAccount == Enums.AccountType.privateUser)
                     {
-                        int subMenueOptions = 0;
-
-                        if(artOfAccount == Enums.AccountType.privateUser)
-                        {
-                            subMenueOptions = UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
-                        }
-                        if(artOfAccount == Enums.AccountType.businessUser)
-                        {
-                            subMenueOptions = UImethods.ShowBusinessUserSubMenue(userMainMenueSelection);
-                        }
-                        if(artOfAccount == Enums.AccountType.serviceUser)
-                        {
-                            subMenueOptions = UImethods.ShowServiceUserSubMenue(userMainMenueSelection);
-                        }
-                        if(artOfAccount == Enums.AccountType.adminUser)
-                        {
-                            subMenueOptions = UImethods.ShowAdminUserSubMenue(userMainMenueSelection);
-                        }
-
-                        int userSubMenueSelection = UImethods.AskforMenueSelection(subMenueOptions);
-
-                        if (userSubMenueSelection == subMenueOptions)
-                        {
-                            break;
-                        }
-                        if (pressESC == ConsoleKey.Escape)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Hier kommt userSubSubMenü");
-                        }
+                        UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
                     }
+
+                    //bool subMenueNavigation = false;
+
+                    //while (subMenueNavigation == false)
+                    //{
+                    //    int subMenueOptions = 0;
+
+                    //    if(artOfAccount == Enums.AccountType.privateUser)
+                    //    {
+                    //        UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
+                    //        break;
+                    //    }
+                    //    else if(artOfAccount == Enums.AccountType.businessUser)
+                    //    {
+                    //        subMenueOptions = UImethods.ShowBusinessUserSubMenue(userMainMenueSelection);
+                    //    }
+                    //    else if(artOfAccount == Enums.AccountType.serviceUser)
+                    //    {
+                    //        subMenueOptions = UImethods.ShowServiceUserSubMenue(userMainMenueSelection);
+                    //    }
+                    //    else if(artOfAccount == Enums.AccountType.adminUser)
+                    //    {
+                    //        subMenueOptions = UImethods.ShowAdminUserSubMenue(userMainMenueSelection);
+                    //    }
                 }
             }
             
