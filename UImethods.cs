@@ -208,17 +208,22 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != ESC_HASH)
                     {
-                        userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
                 else if (userMainMenueSelection == 2)
                 {
-                    Console.WriteLine("\nSAMMLUNGEN\n1.Meine Gewinne\n2.Meine Achievements\n(Press ESC to go back)");
-                    subMenueOptions = 2;
+                    Console.WriteLine("\nSAMMLUNGEN\n1.Meine Gewinne\n2.Achievements\n3.Dailys\n4.Little-Missions\n(Press ESC to go back)");
+                    subMenueOptions = 4;
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
 
                     while (userSubMenueSelection != ESC_HASH)
                     {
@@ -230,6 +235,11 @@ namespace LittleWebApplication
                             subSubMenueOptions = 6;
 
                             int userSubSubMenueSelection = AskforMenueSelection(subSubMenueOptions);
+
+                            if (userSubSubMenueSelection == ESC_HASH)
+                            {
+                                break;
+                            }
 
                             while (userSubSubMenueSelection != ESC_HASH)
                             {
@@ -312,9 +322,7 @@ namespace LittleWebApplication
 
                                     int userSubSubSubMenueSelection = AskforMenueSelection(subSubSubMenueOptions);
 
-                                    bool subSubSubMenueNavigation = false;
-
-                                    while (subSubSubMenueNavigation == false)
+                                    while (userSubSubMenueSelection != ESC_HASH)
                                     {
                                         if (userSubSubSubMenueSelection == 1)
                                         {
@@ -376,28 +384,135 @@ namespace LittleWebApplication
                                 }
                             }
                         }
-                        userSubMenueSelection = ESC_HASH;
+                        else if(userSubMenueSelection == 2)
+                        {
+                            //show all achievements (finished ones in color and lighted)
+                        }
+                        else if(userSubMenueSelection == 3)
+                        {
+                            //show daily challenges
+                        }
+                        else if(userSubMenueSelection == 4)
+                        {
+                            //show regular events
+                        }
                     }
                 }
                 else if (userMainMenueSelection == 3)
                 {
                     Console.WriteLine("\nMELDUNGEN\n1.Nachrichten\n2.Couponerinnerungen\n(Press ESC to go back)");
                     subMenueOptions = 2;
+
+                    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
+
+                    while (userSubMenueSelection != ESC_HASH)
+                    {
+                        if (userSubMenueSelection == 1)
+                        {
+                            //show all notifications (non read in bold)
+                            Console.WriteLine("NACHRICHTEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE EINGEGANGENEN NACHRICHTEN ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                        if (userSubMenueSelection == 2)
+                        {
+                            //show all couponreminder
+                            Console.WriteLine("COUPONERINNERUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE COUPONERINNERUNGEN ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                    }
                 }
                 else if (userMainMenueSelection == 4)
                 {
                     Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n(Press ESC to go back)");
                     subMenueOptions = 2;
+
+                    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
+
+                    while (userSubMenueSelection != ESC_HASH)
+                    {
+                        if (userSubMenueSelection == 1)
+                        {
+                            //show userProfil
+                            Console.WriteLine("PROFILEINSTELLUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WIRD USERPROFIL ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                        if (userSubMenueSelection == 2)
+                        {
+                            //show password administration
+                            Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER KANN USER SEIN PASSOWRT ÄNDERN");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                    }
                 }
                 else if (userMainMenueSelection == 5)
                 {
-                    Console.WriteLine("\nKONTAKT\n1.neues Ticket erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 1;
+                    //userNotification administration
+                    Console.WriteLine("TICKET ERSTELLEN");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("HIER KANN USER EINE NEUE NACHRICHT FÜR DEN LITTLE-KUNDENSERVICE ERSTELLEN");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("(Press ESC to go back)");
+
+                    while (userMainMenueSelection != ESC_HASH)
+                    {
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
+                    }
                 }
                 else if (userMainMenueSelection == 6)
                 {
-                    Console.WriteLine("\nLITTLE-STANDORTE\n1.Terminalstandorte anzeigen\n(Press ESC to go back)");
-                    subMenueOptions = 1;
+                    //show map(Google) with all terminal destinations
+                    Console.WriteLine("LITTLE-STANDORTE");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("HIER WIRD EINE MAP MIT ALLEN TERMINALSTANDORTEN ANGEZEIGT");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("(Press ESC to go back)");
+
+                    while (userMainMenueSelection != ESC_HASH)
+                    {
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
+                    }
                 }
             }
         }
