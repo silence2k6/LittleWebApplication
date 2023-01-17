@@ -6,6 +6,7 @@ namespace LittleWebApplication.Users
     public class CreateUser
     {
         public string userNumber;
+        public DateTime joinDateTime;
         public NameInformations userName;
         public AdressInformations userAdress;
         public ContactInformations userContact;
@@ -128,6 +129,7 @@ namespace LittleWebApplication.Users
             newPrivatUserDummy.userAdress = CreatePrivateUserDummyAdress();
             newPrivatUserDummy.userContact = CreatePrivateUserDummyContact(newPrivatUserDummy.userName);
             newPrivatUserDummy.userLogin = CreatePrivateUserDummyLogin(accountNumber);
+            newPrivatUserDummy.joinDateTime = DateTime.Now;
 
             return newPrivatUserDummy;
         }

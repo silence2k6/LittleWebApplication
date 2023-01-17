@@ -86,42 +86,8 @@ namespace LittleWebApplication
                     {
                         UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
                     }
-
-                    //bool subMenueNavigation = false;
-
-                    //while (subMenueNavigation == false)
-                    //{
-                    //    int subMenueOptions = 0;
-
-                    //    if(artOfAccount == Enums.AccountType.privateUser)
-                    //    {
-                    //        UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
-                    //        break;
-                    //    }
-                    //    else if(artOfAccount == Enums.AccountType.businessUser)
-                    //    {
-                    //        subMenueOptions = UImethods.ShowBusinessUserSubMenue(userMainMenueSelection);
-                    //    }
-                    //    else if(artOfAccount == Enums.AccountType.serviceUser)
-                    //    {
-                    //        subMenueOptions = UImethods.ShowServiceUserSubMenue(userMainMenueSelection);
-                    //    }
-                    //    else if(artOfAccount == Enums.AccountType.adminUser)
-                    //    {
-                    //        subMenueOptions = UImethods.ShowAdminUserSubMenue(userMainMenueSelection);
-                    //    }
                 }
             }
-            
-            //Console.WriteLine(new string('-', 10));
-            //Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
-            //Console.WriteLine(new string('-', 10));
-
-            //foreach (CreateUser user in privateUserList)
-            //{
-            //    Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nLogindaten:\t{user.userLogin}\n");
-            //}
-
         }
     }
 }

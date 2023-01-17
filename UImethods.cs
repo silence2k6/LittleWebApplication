@@ -201,7 +201,7 @@ namespace LittleWebApplication
             {
                 if (userMainMenueSelection == 1)
                 {
-                    //show donation list
+                    //show donation list + sort/print function
                     Console.WriteLine("SPENDENÜBERSICHT");
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("HIER WIRD SPENDENLISTE ANGEZEIGT");
@@ -387,14 +387,45 @@ namespace LittleWebApplication
                         else if(userSubMenueSelection == 2)
                         {
                             //show all achievements (finished ones in color and lighted)
+                            Console.WriteLine("ACHIEVEMENTS\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE ACHIEVEMENTS ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
                         }
                         else if(userSubMenueSelection == 3)
                         {
                             //show daily challenges
+                            Console.WriteLine("DAILY CHALLENGES\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE DAILY CHALLENGES ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+
                         }
                         else if(userSubMenueSelection == 4)
                         {
-                            //show regular events
+                            //show regular events if if eventList isn't empty
+                            Console.WriteLine("EVENTS\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE AKTIVEN LITTLE-EVENTS ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
                         }
                     }
                 }
@@ -475,7 +506,7 @@ namespace LittleWebApplication
                             //show password administration
                             Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
                             Console.WriteLine(new string('-', 10));
-                            Console.WriteLine("HIER KANN USER SEIN PASSOWRT ÄNDERN");
+                            Console.WriteLine("HIER KANN USER SEIN PASSWORT ÄNDERN");
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
@@ -521,26 +552,77 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            if (userMainMenueSelection == 1)
+            while (userMainMenueSelection != ESC_HASH)
             {
-                //show userTerminals
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("HIER WIRD TERMINALLISTE ANGEZEIGT");
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("(Press ESC to go back)");
-            }
-            else if (userMainMenueSelection == 2)
-            {
-                //show userCoupons
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("HIER WIRD COUPONLISTE ANGEZEIGT");
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("(Press ESC to go back)");
-            }
-            else if (userMainMenueSelection == 3)
-            {
-                Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n(Press ESC to go back)");
-                subMenueOptions = 2;
+                if (userMainMenueSelection == 1)
+                {
+                    //show userTerminals
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("HIER WIRD TERMINALLISTE ANGEZEIGT");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("(Press ESC to go back)");
+
+                    while (userMainMenueSelection != ESC_HASH)
+                    {
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
+                    }
+                }
+                else if (userMainMenueSelection == 2)
+                {
+                    //show userCoupons
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("HIER WIRD COUPONLISTE ANGEZEIGT");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("(Press ESC to go back)");
+
+                    while (userMainMenueSelection != ESC_HASH)
+                    {
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
+                    }
+                }
+                else if (userMainMenueSelection == 3)
+                {
+                    Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n(Press ESC to go back)");
+                    subMenueOptions = 2;
+
+                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
+                    while (userSubMenueSelection != ESC_HASH)
+                    {
+                        if (userSubMenueSelection == 1)
+                        {
+                            //show userProfil
+                            Console.WriteLine("PROFILEINSTELLUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WIRD USERPROFIL ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                        else if(userSubMenueSelection == 2)
+                        {
+                            //show password administration
+                            Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER KANN USER SEIN PASSWORT ÄNDERN");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                    }
+                }
             }
             return subMenueOptions;
         }
@@ -549,18 +631,64 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            if (userMainMenueSelection == 1)
+            while (userMainMenueSelection != ESC_HASH)
             {
-                //show userTerminals
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("HIER WIRD TERMINALLISTE ANGEZEIGT");
-                Console.WriteLine(new string('-', 10));
-                Console.WriteLine("(Press ESC to go back)");
-            }
-            else if (userMainMenueSelection == 2)
-            {
-                Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n(Press ESC to go back)");
-                subMenueOptions = 2;
+                if (userMainMenueSelection == 1)
+                {
+                    //show userTerminals
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("HIER WIRD TERMINALLISTE ANGEZEIGT");
+                    Console.WriteLine(new string('-', 10));
+                    Console.WriteLine("(Press ESC to go back)");
+
+                    while (userMainMenueSelection != ESC_HASH)
+                    {
+                        userMainMenueSelection = AskforMenueSelection(subMenueOptions);
+                    }
+                }
+                else if (userMainMenueSelection == 2)
+                {
+                    Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n(Press ESC to go back)");
+                    subMenueOptions = 2;
+
+                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+    
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
+                    while (userSubMenueSelection != ESC_HASH)
+                    {
+                        if (userSubMenueSelection == 1)
+                        {
+                            //show all terminalNotifications (complete notification to disapear)
+                            Console.WriteLine("TERMINALMELDUNGEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WERDEN ALLE TERMINALMELDUNGEN ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                        if (userSubMenueSelection == 1)
+                        {
+                            //show all adminTasks (add note and complete task to disapear)
+                            Console.WriteLine("MEINE AUFGABEN\n");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("HIER WIRD EINE AUFGABENLISTE ANGEZEIGT");
+                            Console.WriteLine(new string('-', 10));
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                    }
+                }
             }
             return subMenueOptions;
         }
@@ -569,40 +697,62 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            if (userMainMenueSelection == 1)
+            while (userMainMenueSelection != ESC_HASH)
             {
-                Console.WriteLine("\nUSERVERWALTUNG\n1.PrivatUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
-                subMenueOptions = 4;
-            }
-            else if (userMainMenueSelection == 2)
-            {
-                Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
-                subMenueOptions = 4;
-            }
-            else if (userMainMenueSelection == 3)
-            {
-                Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n(Press ESC to go back)");
-                subMenueOptions = 2;
-            }
-            else if (userMainMenueSelection == 4)
-            {
-                Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
-                subMenueOptions = 2;
-            }
-            else if (userMainMenueSelection == 5)
-            {
-                Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
-                subMenueOptions = 3;
-            }
-            else if (userMainMenueSelection == 6)
-            {
-                Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
-                subMenueOptions = 2;
-            }
-            else if (userMainMenueSelection == 7)
-            {
-                Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
-                subMenueOptions = 5;
+                if (userMainMenueSelection == 1)
+                {
+                    Console.WriteLine("\nUSERVERWALTUNG\n1.PrivatUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
+                    subMenueOptions = 4;
+
+                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                    if (userSubMenueSelection == ESC_HASH)
+                    {
+                        break;
+                    }
+                    while (userSubMenueSelection != ESC_HASH)
+                    {
+                        if (userSubMenueSelection == 1)
+                        {
+                            List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
+
+                            foreach (CreateUser user in privateUserList)
+                            {
+                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\n");
+                            }
+                        }
+                    }
+                }
+                else if (userMainMenueSelection == 2)
+                {
+                    Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
+                    subMenueOptions = 4;
+                }
+                else if (userMainMenueSelection == 3)
+                {
+                    Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n(Press ESC to go back)");
+                    subMenueOptions = 2;
+                }
+                else if (userMainMenueSelection == 4)
+                {
+                    Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
+                    subMenueOptions = 2;
+                }
+                else if (userMainMenueSelection == 5)
+                {
+                    Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
+                    subMenueOptions = 3;
+                }
+                else if (userMainMenueSelection == 6)
+                {
+                    Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
+                    subMenueOptions = 2;
+                }
+                else if (userMainMenueSelection == 7)
+                {
+                    Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
+                    subMenueOptions = 5;
+                }
             }
             return subMenueOptions;
         }
