@@ -7,6 +7,7 @@ namespace LittleWebApplication
     public class UImethods
     {
         const int ESC_HASH = 1769499;
+        const int FONE_HASH = 112;
 
         public static string AskForUserLoginNumber()
         {
@@ -151,7 +152,12 @@ namespace LittleWebApplication
                         break;
                     }
                 }
-                else if(userInput.Key == ConsoleKey.Escape)
+                else if (userInput.Key == ConsoleKey.Escape)
+                {
+                    userMenueSelection = userInput.GetHashCode();
+                    break;
+                }
+                else if (userInput.Key == ConsoleKey.F1)
                 {
                     userMenueSelection = userInput.GetHashCode();
                     break;
@@ -701,7 +707,7 @@ namespace LittleWebApplication
             {
                 if (userMainMenueSelection == 1)
                 {
-                    Console.WriteLine("\nUSERVERWALTUNG\n1.PrivatUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
+                    Console.WriteLine("\nUSERVERWALTUNG\n1.PrivateUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
                     subMenueOptions = 4;
 
                     int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
@@ -714,11 +720,57 @@ namespace LittleWebApplication
                     {
                         if (userSubMenueSelection == 1)
                         {
+                            //add sort/search function
                             List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
+
+                            Console.WriteLine("PRIVATE-USER ÜBERSICHT\n");
 
                             foreach (CreateUser user in privateUserList)
                             {
                                 Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\n");
+                            }
+
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            while (userSubMenueSelection != ESC_HASH)
+                            {
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                            }
+                        }
+                        else if (userSubMenueSelection == 2)
+                        {
+                            //add sort/search function
+                            List<CreateUser> businessUserList = Backup.LoadBusinessUserRepository();
+
+                            Console.WriteLine("BUSINESS-USER ÜBERSICHT\n(Press 'F1' to create new businessUser)\n");
+
+                            foreach (CreateUser user in businessUserList)
+                            {
+                                //show all businessUsers
+                            }
+
+                            Console.WriteLine("(Press ESC to go back)");
+
+                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                            if (userSubMenueSelection == ESC_HASH)
+                            {
+                                break;
+                            }
+                            while (userSubMenueSelection == FONE_HASH)
+                            {
+                                //createBusinessUser method
+                                Console.WriteLine(new string('-', 10));
+                                Console.WriteLine("NEUEN BUSINESS-USER ANLEGEN");
+                                Console.WriteLine(new string('-', 10));
+                                Console.WriteLine("(Press ESC to go back or F1 to create another businessUser)");
+
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                                if (userSubMenueSelection == ESC_HASH)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
