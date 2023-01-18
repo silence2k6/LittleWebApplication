@@ -137,6 +137,7 @@ namespace LittleWebApplication.Users
         public static CreateUser CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
         {
             CreateUser newBusinessUser = new();
+            newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
             newBusinessUser.userAdress = UImethods.AskForAdressInformations();

@@ -1,4 +1,5 @@
-﻿using LittleWebApplication.ProfilData;
+﻿using LittleWebApplication.Accounts;
+using LittleWebApplication.ProfilData;
 using LittleWebApplication.Users;
 using System.Reflection.Metadata.Ecma335;
 
@@ -8,6 +9,7 @@ namespace LittleWebApplication
     {
         const int ESC_HASH = 1769499;
         const int FONE_HASH = 112;
+        const int FTWO_HASH = 113;
 
         public static string AskForUserLoginNumber()
         {
@@ -158,6 +160,11 @@ namespace LittleWebApplication
                     break;
                 }
                 else if (userInput.Key == ConsoleKey.F1)
+                {
+                    userMenueSelection = userInput.GetHashCode();
+                    break;
+                }
+                else if (userInput.Key == ConsoleKey.F2)
                 {
                     userMenueSelection = userInput.GetHashCode();
                     break;
@@ -727,7 +734,9 @@ namespace LittleWebApplication
 
                             foreach (CreateUser user in privateUserList)
                             {
+                                Console.WriteLine(new string('-', 10));
                                 Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\n");
+                                Console.WriteLine(new string('-', 10));
                             }
 
                             Console.WriteLine("(Press ESC to go back)");
@@ -742,11 +751,13 @@ namespace LittleWebApplication
                             //add sort/search function
                             List<CreateUser> businessUserList = Backup.LoadBusinessUserRepository();
 
-                            Console.WriteLine("BUSINESS-USER ÜBERSICHT\n(Press 'F1' to create new businessUser)\n");
+                            Console.WriteLine("BUSINESS-USER ÜBERSICHT\n(Press 'F1' to create new businessUser or 'F2' to edit businessUser)\n");
 
                             foreach (CreateUser user in businessUserList)
                             {
-                                //show all businessUsers
+                                Console.WriteLine(new string('-', 10));
+                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress}\nPasswort:{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\n");
+                                Console.WriteLine(new string('-', 10));
                             }
 
                             Console.WriteLine("(Press ESC to go back)");
@@ -757,19 +768,35 @@ namespace LittleWebApplication
                             {
                                 break;
                             }
-                            while (userSubMenueSelection == FONE_HASH)
+                            //else if (userSubMenueSelection == FTWO_HASH)
+                            //{
+
+                            //}
+                            else if (userSubMenueSelection == FONE_HASH)
                             {
-                                //createBusinessUser method
-                                Console.WriteLine(new string('-', 10));
-                                Console.WriteLine("NEUEN BUSINESS-USER ANLEGEN");
-                                Console.WriteLine(new string('-', 10));
-                                Console.WriteLine("(Press ESC to go back or F1 to create another businessUser)");
-
-                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-
-                                if (userSubMenueSelection == ESC_HASH)
+                                while (userSubMenueSelection != ESC_HASH)
                                 {
-                                    break;
+                                    List<AccountInformations> accountList = Backup.LoadAccountRepository();
+                                    string accountNumber = CreateUser.CreateAccountNumber(accountList);
+                                    AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.AccountType.businessUser);
+                                    accountList.Add(newAccount);
+                                    Backup.StoreAccountRepository(accountList);
+
+                                    CreateUser newBusinessUser = CreateUser.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
+
+                                    //Console.WriteLine(newBusinessUser);
+                                    //Console.WriteLine("Drücke ENTER um neuen businessPartner anzulegen");
+                                    //string safeNewUser = Console.ReadLine();
+
+                                    businessUserList.Add(newBusinessUser);
+                                    Backup.StoreBusinessUserRepository(businessUserList);
+                                    
+                                    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                                    if (userSubMenueSelection == ESC_HASH)
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
