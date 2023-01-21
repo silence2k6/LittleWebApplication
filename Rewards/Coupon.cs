@@ -19,5 +19,11 @@ namespace LittleWebApplication.Rewards
         //int couponStocklevel;
         //string couponStatus;
         //doc couponPic;
+
+        //public Coupon CreateCoupon()
+        //{
+
+        //}
+
     }
 }

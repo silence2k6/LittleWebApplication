@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Accounts;
-using LittleWebApplication.ProfilData;
+﻿using LittleWebApplication.ProfilData;
 
 namespace LittleWebApplication.Users
 {
@@ -16,7 +15,7 @@ namespace LittleWebApplication.Users
         public static Random randomGenerator = new();
 
 
-        public static string CreateAccountNumber(List<AccountInformations> accountList)
+        public static string CreateAccountNumber(List<Account> accountList)
         {
             int listNumber = accountList.Count + 1;
             string accountNumber = listNumber.ToString("D6");

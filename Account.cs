@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LittleWebApplication.Accounts
+namespace LittleWebApplication
 {
-    public class AccountInformations
+    public class Account
     {
         public string accountNumber;
         public DateTime accountCreationDateTime;
         public Enums.Status accountStatus;
         public Enums.AccountType artOfUser;
 
-        public static AccountInformations CreateAccount(string accountNumber, Enums.AccountType artOfUser)
+        public static Account CreateAccount(string accountNumber, Enums.AccountType artOfUser)
         {
-            AccountInformations userAccount = new();
+            Account userAccount = new();
             userAccount.accountNumber = accountNumber;
             userAccount.accountCreationDateTime = DateTime.Now;
             userAccount.artOfUser = artOfUser;

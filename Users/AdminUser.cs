@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LittleWebApplication.Rewards;
 using LittleWebApplication.ProfilData;
 using LittleWebApplication.Challenges;
-using LittleWebApplication.Terminal;
+using LittleWebApplication.Terminals;
 using LittleWebApplication.Notifications;
 
 namespace LittleWebApplication.Users
@@ -19,9 +19,9 @@ namespace LittleWebApplication.Users
         public List<CreateUser> serviceUserList;
         public List<CreateUser> adminUserList;
         public List<Fundraiser> fundraiserList;
-        public List<CreateTerminal> terminalList;
+        public List<Terminal> terminalList;
         public List<CreateGoodie> goodieList;
-        public List<CreateCoupon> couponList;
+        public List<Coupon> couponList;
         public List<CreateChallenge> challengeList;
         public List<CreateNotification> notificationList;
         public List<Payment> paymentList;

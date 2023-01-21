@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Accounts;
-using LittleWebApplication.Terminal;
+﻿using LittleWebApplication.Terminals;
 using LittleWebApplication.Users;
 using System.Xml.Serialization;
 
@@ -7,8 +6,9 @@ namespace LittleWebApplication
 {
     public class Backup
     {
-        static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<AccountInformations>));
-        static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
+        static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<Account>));
+        static string ACCOUNT_PATH = "accountRepository.xml";
+        //static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
         //static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
         static XmlSerializer privateUserSerializer = new(typeof(List<CreateUser>));
         static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
@@ -22,7 +22,7 @@ namespace LittleWebApplication
         static XmlSerializer adminUserSerializer = new(typeof(List<CreateUser>));
         static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
         //static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
-        static XmlSerializer terminalSerializer = new(typeof(List<CreateTerminal>));
+        static XmlSerializer terminalSerializer = new(typeof(List<Terminal>));
         static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
         //static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
         static XmlSerializer fundraiserSerializer = new(typeof(List<Fundraiser>));
@@ -30,7 +30,7 @@ namespace LittleWebApplication
         //static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
 
 
-        public static void StoreAccountRepository(List<AccountInformations> accounts)
+        public static void StoreAccountRepository(List<Account> accounts)
         {
             using (FileStream file = File.Create(ACCOUNT_PATH))
             {
@@ -38,16 +38,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<AccountInformations> LoadAccountRepository()
+        public static List<Account> LoadAccountRepository()
         {
-            List<AccountInformations> accounts = new();
+            List<Account> accounts = new();
             bool backUpCheck = File.Exists(ACCOUNT_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(ACCOUNT_PATH))
                 {
-                    accounts = accountSerializer.Deserialize(file) as List<AccountInformations>;
+                    accounts = accountSerializer.Deserialize(file) as List<Account>;
                 }
             }
             else
@@ -165,7 +165,7 @@ namespace LittleWebApplication
             return users;
         }
 
-        public static void StoreTerminalRepository(List<CreateTerminal> terminals)
+        public static void StoreTerminalRepository(List<Terminal> terminals)
         {
             using (FileStream file = File.Create(TERMINAL_PATH))
             {
@@ -173,16 +173,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<CreateTerminal> LoadTerminalRepository()
+        public static List<Terminal> LoadTerminalRepository()
         {
-            List<CreateTerminal> terminals = new();
+            List<Terminal> terminals = new();
             bool backUpCheck = File.Exists(TERMINAL_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(TERMINAL_PATH))
                 {
-                    terminals = terminalSerializer.Deserialize(file) as List<CreateTerminal>;
+                    terminals = terminalSerializer.Deserialize(file) as List<Terminal>;
                 }
             }
             else

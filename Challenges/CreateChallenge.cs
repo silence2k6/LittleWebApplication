@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LittleWebApplication.Challenges
 {
-    internal class CreateChallenge
+    public class CreateChallenge
     {
         //public List<Achievement> achievementList = new List<Achievement>();
         //private Achievement achievement = new Achievement();

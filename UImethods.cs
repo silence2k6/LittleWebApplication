@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Accounts;
-using LittleWebApplication.ProfilData;
+﻿using LittleWebApplication.ProfilData;
 using LittleWebApplication.Users;
 using System.Reflection.Metadata.Ecma335;
 
@@ -776,9 +775,9 @@ namespace LittleWebApplication
                             {
                                 while (userSubMenueSelection != ESC_HASH)
                                 {
-                                    List<AccountInformations> accountList = Backup.LoadAccountRepository();
+                                    List<Account> accountList = Backup.LoadAccountRepository();
                                     string accountNumber = CreateUser.CreateAccountNumber(accountList);
-                                    AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.AccountType.businessUser);
+                                    Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
                                     accountList.Add(newAccount);
                                     Backup.StoreAccountRepository(accountList);
 
@@ -914,7 +913,7 @@ namespace LittleWebApplication
                 Console.WriteLine("Passwort wiederholen:\t");
                 string passwordConfirmation = Console.ReadLine();
 
-                if (passwordConfirmation == passwordConfirmation)
+                if (passwordConfirmation == newPassword)
                 {
                     break;
                 }
@@ -926,17 +925,89 @@ namespace LittleWebApplication
             return newPassword;
         }
 
-        //public static Donation ShowUserDonation(User user)
+        public static void EditUserProfil(List<CreateUser> userList)
+        {
+            bool validUserLogin = false;
+            string userLoginNumberInput = "";
+            Enums.AccountType artOfAccount = 0;
+            CreateUser userToEdit = new();
+
+            Console.WriteLine("USERPROFIL BEARBEITEN\n");
+
+            while (validUserLogin == false)
+            {
+                Console.WriteLine("Welchen User wollen Sie bearbeiten?");
+
+                bool validArtOfUser = false;
+
+                while (validArtOfUser == false)
+                {
+                    userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                    artOfAccount = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
+
+                    if (artOfAccount != 0)
+                    {
+                        break;
+                    }
+                }
+
+                userToEdit = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
+
+                if (userToEdit != null)
+                {
+                    break;
+                }
+            }
+            Console.WriteLine("Was möchten Sie ändern?");
+
+            int editOptions = 0;
+            int userSelection = 0;
+
+            while (userSelection != ESC_HASH)
+            {
+                if (artOfAccount == Enums.AccountType.privateUser || artOfAccount == Enums.AccountType.serviceUser)
+                {
+                    Console.WriteLine($"1.Name\n2.Adresse\n3.Kontakt\n4.Passwort\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                    editOptions = 4;
+                }
+                else if (artOfAccount == Enums.AccountType.businessUser)
+                {
+                    Console.WriteLine($"1.Firmenname\n2.Kontaktperson\n3.Firmenadresse\n4.Passwort\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                    editOptions = 4;
+                }
+
+                userSelection = AskforMenueSelection(editOptions);
+
+                if (userSelection == ESC_HASH)
+                {
+                    break;
+                }
+
+                while (userSelection != ESC_HASH)
+                {
+                    if (artOfAccount == Enums.AccountType.privateUser)
+                    {
+                        //if (userSelection == 1)
+                        //{
+                        //    Console.WriteLine($"aktueller Name:\t{userToEdit.userName}\n");
+                        //    Console.WriteLine($"Was möchten)
+                        //}
+                    }
+                }
+            }
+        }
+
+        //public static Donation ShowUserDonation(User userToEdit)
         //{
-            //List<Donation> userDonationList =
+        //List<Donation> userDonationList =
 
 
-            //foreach (Donation userDonation in userDonationList)
-            //{
-            //    int Donation
-            //}
+        //foreach (Donation userDonation in userDonationList)
+        //{
+        //    int Donation
+        //}
 
-            //return userDonation;
+        //return userDonation;
         //}
     }
 }

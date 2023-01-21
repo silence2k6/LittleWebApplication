@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Accounts;
-using LittleWebApplication.Terminal;
+﻿using LittleWebApplication.Terminals;
 using LittleWebApplication.Users;
 using System.Reflection.Metadata;
 using System.Xml.Serialization;
@@ -12,14 +11,14 @@ namespace LittleWebApplication
 
         static void Main(string[] args)
         {
-            List<AccountInformations> accountList = Backup.LoadAccountRepository();
+            List<Account> accountList = Backup.LoadAccountRepository();
             List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
 
             string accountNumber = CreateUser.CreateAccountNumber(accountList);
             string userNumber = CreateUser.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
 
-            AccountInformations newAccount = AccountInformations.CreateAccount(accountNumber, Enums.AccountType.privateUser);
+            Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.privateUser);
             accountList.Add(newAccount);
 
             CreateUser newUser = CreateUser.CreatePrivateUserDummy(accountNumber);
