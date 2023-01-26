@@ -2,7 +2,7 @@
 using LittleWebApplication.Rewards;
 using LittleWebApplication.Users;
 
-namespace LittleWebApplication.Terminals
+namespace LittleWebApplication
 {
     public class Terminal
     {
@@ -21,7 +21,7 @@ namespace LittleWebApplication.Terminals
         public List<Story> terminalStoryList;
         public List<Video> terminalVideoList;
         public List<Donation> terminalDonationList;
-        public List<TerminalService> terminalServiceList;
+        //public List<TerminalService> terminalServiceList;
 
         //public Terminal CreateTerminal()
         //{ 

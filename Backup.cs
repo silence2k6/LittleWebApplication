@@ -1,5 +1,4 @@
-﻿using LittleWebApplication.Terminals;
-using LittleWebApplication.Users;
+﻿using LittleWebApplication.Users;
 using System.Xml.Serialization;
 
 namespace LittleWebApplication
@@ -7,27 +6,28 @@ namespace LittleWebApplication
     public class Backup
     {
         static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<Account>));
-        static string ACCOUNT_PATH = "accountRepository.xml";
+        //static string ACCOUNT_PATH = "accountRepository.xml";
         //static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
-        //static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
-        static XmlSerializer privateUserSerializer = new(typeof(List<CreateUser>));
-        static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
-        //static string PRIVATE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privateUserRepository.xml";
-        static XmlSerializer businessUserSerializer = new(typeof(List<CreateUser>));
-        static string BUSINESS_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\businessUserList.xml";
-        //static string BUSINESS_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\pusinessUserRepository.xml";
-        static XmlSerializer serviceUserSerializer = new(typeof(List<CreateUser>));
-        static string SERVICE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\serviceUserList.xml";
-        //static string SERVICE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\serviceUserRepository.xml";
-        static XmlSerializer adminUserSerializer = new(typeof(List<CreateUser>));
-        static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
-        //static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
+        static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
+        static XmlSerializer privateUserSerializer = new(typeof(List<User>));
+        //static string PRIVATE_USER_PATH = "privateUserRepository.xml";
+        //static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
+        static string PRIVATE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privateUserRepository.xml";
+        static XmlSerializer businessUserSerializer = new(typeof(List<User>));
+        //static string BUSINESS_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\businessUserList.xml";
+        static string BUSINESS_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\pusinessUserRepository.xml";
+        static XmlSerializer serviceUserSerializer = new(typeof(List<User>));
+        //static string SERVICE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\serviceUserList.xml";
+        static string SERVICE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\serviceUserRepository.xml";
+        static XmlSerializer adminUserSerializer = new(typeof(List<User>));
+        //static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
+        static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
         static XmlSerializer terminalSerializer = new(typeof(List<Terminal>));
-        static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
-        //static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
+        //static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
+        static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
         static XmlSerializer fundraiserSerializer = new(typeof(List<Fundraiser>));
-        static string FUNDRAISER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\fundraiserRepository.xml";
-        //static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
+        //static string FUNDRAISER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\fundraiserRepository.xml";
+        static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
 
 
         public static void StoreAccountRepository(List<Account> accounts)
@@ -57,7 +57,7 @@ namespace LittleWebApplication
             return accounts;
         }
 
-        public static void StorePrivateUserRepository(List<CreateUser> users)
+        public static void StorePrivateUserRepository(List<User> users)
         {
             using (FileStream file = File.Create(PRIVATE_USER_PATH))
             {
@@ -65,16 +65,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<CreateUser> LoadPrivateUserRepository()
+        public static List<User> LoadPrivateUserRepository()
         {
-            List<CreateUser> users = new();
+            List<User> users = new();
             bool backUpCheck = File.Exists(PRIVATE_USER_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(PRIVATE_USER_PATH))
                 {
-                    users = privateUserSerializer.Deserialize(file) as List<CreateUser>;
+                    users = privateUserSerializer.Deserialize(file) as List<User>;
                 }
             }
             else
@@ -84,7 +84,7 @@ namespace LittleWebApplication
             return users;
         }
 
-        public static void StoreBusinessUserRepository(List<CreateUser> users)
+        public static void StoreBusinessUserRepository(List<User> users)
         {
             using (FileStream file = File.Create(BUSINESS_USER_PATH))
             {
@@ -92,16 +92,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<CreateUser> LoadBusinessUserRepository()
+        public static List<User> LoadBusinessUserRepository()
         {
-            List<CreateUser> users = new();
+            List<User> users = new();
             bool backUpCheck = File.Exists(BUSINESS_USER_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(BUSINESS_USER_PATH))
                 {
-                    users = businessUserSerializer.Deserialize(file) as List<CreateUser>;
+                    users = businessUserSerializer.Deserialize(file) as List<User>;
                 }
             }
             else
@@ -111,7 +111,7 @@ namespace LittleWebApplication
             return users;
         }
 
-        public static void StoreServiceUserRepository(List<CreateUser> users)
+        public static void StoreServiceUserRepository(List<User> users)
         {
             using (FileStream file = File.Create(SERVICE_USER_PATH))
             {
@@ -119,16 +119,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<CreateUser> LoadServiceUserRepository()
+        public static List<User> LoadServiceUserRepository()
         {
-            List<CreateUser> users = new();
+            List<User> users = new();
             bool backUpCheck = File.Exists(SERVICE_USER_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(SERVICE_USER_PATH))
                 {
-                    users = serviceUserSerializer.Deserialize(file) as List<CreateUser>;
+                    users = serviceUserSerializer.Deserialize(file) as List<User>;
                 }
             }
             else
@@ -138,7 +138,7 @@ namespace LittleWebApplication
             return users;
         }
 
-        public static void StoreAdminUserRepository(List<CreateUser> users)
+        public static void StoreAdminUserRepository(List<User> users)
         {
             using (FileStream file = File.Create(ADMIN_USER_PATH))
             {
@@ -146,16 +146,16 @@ namespace LittleWebApplication
             }
         }
 
-        public static List<CreateUser> LoadAdminUserRepository()
+        public static List<User> LoadAdminUserRepository()
         {
-            List<CreateUser> users = new();
+            List<User> users = new();
             bool backUpCheck = File.Exists(ADMIN_USER_PATH);
 
             if (backUpCheck == true)
             {
                 using (FileStream file = File.OpenRead(ADMIN_USER_PATH))
                 {
-                    users = adminUserSerializer.Deserialize(file) as List<CreateUser>;
+                    users = adminUserSerializer.Deserialize(file) as List<User>;
                 }
             }
             else

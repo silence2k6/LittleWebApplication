@@ -12,16 +12,16 @@ namespace LittleWebApplication
         static void Main(string[] args)
         {
             List<Account> accountList = Backup.LoadAccountRepository();
-            List<CreateUser> privateUserList = Backup.LoadPrivateUserRepository();
+            List<User> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
 
-            string accountNumber = CreateUser.CreateAccountNumber(accountList);
-            string userNumber = CreateUser.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
+            string accountNumber = User.CreateAccountNumber(accountList);
+            string userNumber = User.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
 
             Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.privateUser);
             accountList.Add(newAccount);
 
-            CreateUser newUser = CreateUser.CreatePrivateUserDummy(accountNumber);
+            User newUser = User.CreatePrivateUserDummy(accountNumber);
             privateUserList.Add(newUser);
 
             Backup.StoreAccountRepository(accountList);
@@ -31,7 +31,7 @@ namespace LittleWebApplication
             bool validArtOfUser = false;
             string userLoginNumberInput = "";
             Enums.AccountType artOfAccount = 0;
-            CreateUser user = new();
+            User user = new();
 
             while (validUserLogin == false)
             {
@@ -81,10 +81,7 @@ namespace LittleWebApplication
                 }
                 else
                 {
-                    if (artOfAccount == Enums.AccountType.privateUser)
-                    {
-                        UImethods.ShowPrivatUserSubMenue(userMainMenueSelection);
-                    }
+                    UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
                 }
             }
         }

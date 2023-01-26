@@ -2,7 +2,7 @@
 
 namespace LittleWebApplication.Users
 {
-    public class CreateUser
+    public class User
     {
         public string userNumber;
         public DateTime joinDateTime;
@@ -64,12 +64,14 @@ namespace LittleWebApplication.Users
         {
             int randomAdressStreetIndex = randomGenerator.Next(PrivateUserDummy.adressStreetDummyList.Count);
             int randomAdressNumberIndex = randomGenerator.Next(PrivateUserDummy.adressNumberDummyList.Count);
+            int randomAdressPostalCodeIndex = randomGenerator.Next(PrivateUserDummy.adressPostalCodeDummyList.Count);
             int randomAdressTownIndex = randomGenerator.Next(PrivateUserDummy.adressTownDummyList.Count);
             int randomAdressFederalStateIndex = randomGenerator.Next(PrivateUserDummy.adressFederalStateDummyList.Count);
 
             AdressInformations userAdress = new();
             userAdress.userAdressStreet = PrivateUserDummy.adressStreetDummyList[randomAdressStreetIndex];
             userAdress.userAdressNumber = PrivateUserDummy.adressNumberDummyList[randomAdressNumberIndex];
+            userAdress.userAdressPostalCode = PrivateUserDummy.adressPostalCodeDummyList[randomAdressPostalCodeIndex];
             userAdress.userAdressTown = PrivateUserDummy.adressTownDummyList[randomAdressTownIndex];
             userAdress.userAdressFederalState = PrivateUserDummy.adressFederalStateDummyList[randomAdressFederalStateIndex];
 
@@ -120,9 +122,9 @@ namespace LittleWebApplication.Users
             return userLogin;
         }
 
-        public static CreateUser CreatePrivateUserDummy(string accountNumber)
+        public static User CreatePrivateUserDummy(string accountNumber)
         {
-            CreateUser newPrivatUserDummy = new();
+            User newPrivatUserDummy = new();
             newPrivatUserDummy.userNumber = CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
             newPrivatUserDummy.userName = CreatePrivateUserDummyName();
             newPrivatUserDummy.userAdress = CreatePrivateUserDummyAdress();
@@ -133,26 +135,26 @@ namespace LittleWebApplication.Users
             return newPrivatUserDummy;
         }
 
-        public static CreateUser CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
+        public static User CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
         {
-            CreateUser newBusinessUser = new();
+            User newBusinessUser = new();
             newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
             newBusinessUser.userAdress = UImethods.AskForAdressInformations();
             newBusinessUser.userLogin.userLoginNumber = "B" + accountNumber;
-            newBusinessUser.userLogin.userLoginPassword = UImethods.AskForUserPassword();
+            newBusinessUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
 
             return newBusinessUser;
         }
 
-        public static CreateUser CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
+        public static User CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
         {
-            CreateUser newAdminUser = new();
+            User newAdminUser = new();
             newAdminUser.userNumber = CreateUserNumber(Enums.AccountType.adminUser, accountNumber);
             newAdminUser.userName = UImethods.AskForNameInformations();
             newAdminUser.userLogin.userLoginNumber = "A" + accountNumber;
-            newAdminUser.userLogin.userLoginPassword = UImethods.AskForUserLoginPassword();
+            newAdminUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
 
             return newAdminUser;
         }

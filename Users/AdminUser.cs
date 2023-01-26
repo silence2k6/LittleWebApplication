@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using LittleWebApplication.Rewards;
 using LittleWebApplication.ProfilData;
 using LittleWebApplication.Challenges;
-using LittleWebApplication.Terminals;
 using LittleWebApplication.Notifications;
 
 namespace LittleWebApplication.Users
 {
     internal class AdminUser
     {
-        public CreateUser adminUserProfil;
-        public List<CreateUser> privatUserList;
-        public List<CreateUser> businessUserList;
-        public List<CreateUser> serviceUserList;
-        public List<CreateUser> adminUserList;
+        public User adminUserProfil;
+        public List<User> privatUserList;
+        public List<User> businessUserList;
+        public List<User> serviceUserList;
+        public List<User> adminUserList;
         public List<Fundraiser> fundraiserList;
         public List<Terminal> terminalList;
         public List<CreateGoodie> goodieList;

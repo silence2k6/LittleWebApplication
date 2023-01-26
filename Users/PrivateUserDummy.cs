@@ -60,6 +60,11 @@ namespace LittleWebApplication.Users
             "Theodorstadt"
         };
 
+        public static List<string> adressPostalCodeDummyList = new()
+        {
+            "1001","1002","2001","2002","3001","3002","4001","4002","5001","5002","6001","6002","7001","7002","8001","8002","9001","9002"
+        };
+
         public static List<string> adressFederalStateDummyList = new()
         {
             "Wien",

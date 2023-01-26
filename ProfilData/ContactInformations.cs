@@ -13,7 +13,7 @@ namespace LittleWebApplication.ProfilData
 
         public override string ToString()
         {
-            return $"{userContactTel}\n\t\t{userContactMail}";
+            return $"{userContactTel}\n{userContactMail}";
         }
     }
 }

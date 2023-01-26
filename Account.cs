@@ -23,5 +23,9 @@ namespace LittleWebApplication
 
             return userAccount;
         }
+        public override string ToString()
+        {
+            return $"{accountStatus}\n";
+        }
     }
 }
