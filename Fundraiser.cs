@@ -1,10 +1,4 @@
-﻿using LittleWebApplication;
-using LittleWebApplication.ProfilData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LittleWebApplication.ProfilData;
 
 namespace LittleWebApplication
 {
@@ -14,7 +8,7 @@ namespace LittleWebApplication
         public CompanyInformations fundraiserCompany;
         public AdressInformations fundraiserAdress;
         public BankAccountInformations fundraiserBankAccount;
-        
+
         public static Fundraiser CreateFundraiser(List<Fundraiser> fundraiserList, Enums.AccountType artOfAccount)
         {
             int listNumber = fundraiserList.Count + 1;

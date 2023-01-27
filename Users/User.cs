@@ -12,15 +12,37 @@ namespace LittleWebApplication.Users
         public CompanyInformations userCompany;
         public BankAccountInformations userBankAccount;
         public LoginInformations userLogin;
+        public Enums.Status accountStatus;
         public static Random randomGenerator = new();
 
-
-        public static string CreateAccountNumber(List<Account> accountList)
+        public static User CreateSuperAdmin()
         {
-            int listNumber = accountList.Count + 1;
-            string accountNumber = listNumber.ToString("D6");
-            return accountNumber;
+            NameInformations userName = new();
+            userName.userFirstName = "Robert";
+            userName.userLastName = "Leithner";
+
+            AdressInformations userAdress = new();
+            userAdress.userAdressStreet = "Hauptstraße";
+            userAdress.userAdressNumber = "32";
+            userAdress.userAdressPostalCode = "2125";
+            userAdress.userAdressTown = "Neubau";
+            userAdress.userAdressFederalState = "Niederösterreich";
+
+            LoginInformations userLogin = new();
+            userLogin.userLoginNumber = "A000001";
+            userLogin.userLoginPassword = "0000";
+
+            User newSuperAdmin = new User();
+            newSuperAdmin.userName = userName;
+            newSuperAdmin.userAdress = userAdress;
+            newSuperAdmin.userLogin = userLogin;
+            newSuperAdmin.userNumber = "A#000001";
+            newSuperAdmin.joinDateTime = DateTime.Now;
+            newSuperAdmin.accountStatus = Enums.Status.active;
+
+            return newSuperAdmin;
         }
+
         public static string CreateUserNumber(Enums.AccountType artOfAccount, string accountNumber)
         {
             string userPreNumber = "";
@@ -125,12 +147,14 @@ namespace LittleWebApplication.Users
         public static User CreatePrivateUserDummy(string accountNumber)
         {
             User newPrivatUserDummy = new();
+            List<Account> accountList = Backup.LoadAccountRepository();
             newPrivatUserDummy.userNumber = CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
             newPrivatUserDummy.userName = CreatePrivateUserDummyName();
             newPrivatUserDummy.userAdress = CreatePrivateUserDummyAdress();
             newPrivatUserDummy.userContact = CreatePrivateUserDummyContact(newPrivatUserDummy.userName);
             newPrivatUserDummy.userLogin = CreatePrivateUserDummyLogin(accountNumber);
             newPrivatUserDummy.joinDateTime = DateTime.Now;
+            newPrivatUserDummy.accountStatus = Account.CheckAccountStatus(newPrivatUserDummy, accountList);
 
             return newPrivatUserDummy;
         }
@@ -138,15 +162,33 @@ namespace LittleWebApplication.Users
         public static User CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
         {
             User newBusinessUser = new();
+            List<Account> accountList = Backup.LoadAccountRepository();
             newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
             newBusinessUser.userAdress = UImethods.AskForAdressInformations();
             newBusinessUser.userLogin.userLoginNumber = "B" + accountNumber;
             newBusinessUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
+            newBusinessUser.accountStatus = Account.CheckAccountStatus(newBusinessUser, accountList);
+
 
             return newBusinessUser;
         }
+
+        public static User CreateServiceUser(string accountNumber)
+        {
+            User newServiceUser = new();
+            List<Account> accountList = Backup.LoadAccountRepository();
+            newServiceUser.joinDateTime = DateTime.Now;
+            newServiceUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
+            newServiceUser.userAdress = UImethods.AskForAdressInformations();
+            newServiceUser.userLogin.userLoginNumber = "B" + accountNumber;
+            newServiceUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
+            newServiceUser.accountStatus = Account.CheckAccountStatus(newServiceUser, accountList);
+
+            return newServiceUser;
+        }
+
 
         public static User CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
         {

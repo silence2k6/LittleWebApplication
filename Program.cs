@@ -1,7 +1,5 @@
-﻿using LittleWebApplication.Terminals;
+﻿using LittleWebApplication.ProfilData;
 using LittleWebApplication.Users;
-using System.Reflection.Metadata;
-using System.Xml.Serialization;
 
 namespace LittleWebApplication
 {
@@ -11,11 +9,13 @@ namespace LittleWebApplication
 
         static void Main(string[] args)
         {
+            User superAdminUser = User.CreateSuperAdmin();
+
             List<Account> accountList = Backup.LoadAccountRepository();
             List<User> privateUserList = Backup.LoadPrivateUserRepository();
             //List<CreateTerminal> terminalList = 
 
-            string accountNumber = User.CreateAccountNumber(accountList);
+            string accountNumber = Account.CreateAccountNumber(accountList);
             string userNumber = User.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);
 
             Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.privateUser);
@@ -31,6 +31,7 @@ namespace LittleWebApplication
             bool validArtOfUser = false;
             string userLoginNumberInput = "";
             Enums.AccountType artOfAccount = 0;
+            Enums.Status accountStatus = 0;
             User user = new();
 
             while (validUserLogin == false)
@@ -52,6 +53,13 @@ namespace LittleWebApplication
                 {
                     break;
                 }
+            }
+
+            accountStatus = Account.CheckAccountStatus(user, accountList);
+
+            if (accountStatus != Enums.Status.active)
+            {
+                UImethods.AccountInacticeNotificaton(artOfAccount);
             }
 
             bool validUserPassword = false;

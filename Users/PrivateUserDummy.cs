@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LittleWebApplication.ProfilData;
-
-namespace LittleWebApplication.Users
+﻿namespace LittleWebApplication.Users
 {
     public class PrivateUserDummy
     {
@@ -126,7 +119,7 @@ namespace LittleWebApplication.Users
             "Theodorner"
         };
 
-        public static List<string> telProviderDummyList = new ()
+        public static List<string> telProviderDummyList = new()
         {
             "0650", "0660", "0676", "0664", "0688", "0699"
         };

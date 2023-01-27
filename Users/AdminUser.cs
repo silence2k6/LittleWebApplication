@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LittleWebApplication.Rewards;
-using LittleWebApplication.ProfilData;
-using LittleWebApplication.Challenges;
+﻿using LittleWebApplication.Challenges;
 using LittleWebApplication.Notifications;
+using LittleWebApplication.Rewards;
 
 namespace LittleWebApplication.Users
 {
@@ -24,6 +18,6 @@ namespace LittleWebApplication.Users
         public List<CreateChallenge> challengeList;
         public List<CreateNotification> notificationList;
         public List<Payment> paymentList;
-        public List<Donation> donationList; 
+        public List<Donation> donationList;
     }
 }

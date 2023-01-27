@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using LittleWebApplication.Rewards;
-using LittleWebApplication.ProfilData;
-using LittleWebApplication.Challenges;
-
-namespace LittleWebApplication.Users
+﻿namespace LittleWebApplication.Users
 {
     public class PrivateUser
     {

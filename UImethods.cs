@@ -1,6 +1,5 @@
 ﻿using LittleWebApplication.ProfilData;
 using LittleWebApplication.Users;
-using System.Reflection.Metadata.Ecma335;
 
 namespace LittleWebApplication
 {
@@ -67,7 +66,7 @@ namespace LittleWebApplication
         /// <returns>selected user as an object</returns>
         public static User CheckUserLoginForUserNumberExist(string userLoginNumberInput, Enums.AccountType artOfAccount)
         {
-            List<User> userList = new(); 
+            List<User> userList = new();
 
             if (artOfAccount == Enums.AccountType.privateUser)
             {
@@ -92,7 +91,7 @@ namespace LittleWebApplication
             while (userObjectPos <= userList.Count)
             {
                 user = userList[userObjectPos];
-                
+
                 if (string.Equals(userLoginNumberInput, user.userLogin.userLoginNumber))
                 {
                     user = userList[userObjectPos];
@@ -113,12 +112,24 @@ namespace LittleWebApplication
             return user;
         }
 
+        public static void AccountInacticeNotificaton(Enums.AccountType artOfAccount)
+        {
+            if (artOfAccount == Enums.AccountType.privateUser)
+            {
+                Console.WriteLine("Dein Account ist leider nicht aktiv. Du kannst diesen über Deine Little-App reaktivieren.");
+            }
+            else if (artOfAccount == Enums.AccountType.serviceUser || artOfAccount == Enums.AccountType.businessUser)
+            {
+                Console.WriteLine("Ihr Account ist leider nicht aktiv. Bitte wenden Sie sich an Ihren Servicebetreuer.");
+            }
+        }
+
         /// <summary>
         /// asks user for his password
         /// </summary>
         /// <returns>user password input</returns>
         public static string AskForUserLoginPassword()
-        {             
+        {
             Console.Write("Passwort:\t");
             string userPasswordInput = Console.ReadLine();
             return userPasswordInput;
@@ -146,7 +157,7 @@ namespace LittleWebApplication
             }
             return validUserPassword;
         }
-        
+
         /// <summary>
         /// asks user for menue selection 
         /// </summary>
@@ -207,7 +218,7 @@ namespace LittleWebApplication
             return userMenueSelection;
         }
 
-        
+
         /// <summary>
         /// shows private/business/service or admin user main menue
         /// </summary>
@@ -241,7 +252,7 @@ namespace LittleWebApplication
             return mainMenueOptions;
         }
 
-        
+
         /// <summary>
         /// shows whole private user sub menue
         /// </summary>
@@ -667,7 +678,7 @@ namespace LittleWebApplication
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        else if(userSubMenueSelection == 2)
+                        else if (userSubMenueSelection == 2)
                         {
                             //show password administration
                             Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
@@ -716,7 +727,7 @@ namespace LittleWebApplication
                     subMenueOptions = 2;
 
                     int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-    
+
                     if (userSubMenueSelection == ESC_HASH)
                     {
                         break;
@@ -790,7 +801,7 @@ namespace LittleWebApplication
                             foreach (User user in privateUserList)
                             {
                                 Console.WriteLine(new string('-', 10));
-                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\n");
+                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n");
                                 Console.WriteLine(new string('-', 10));
                             }
 
@@ -811,7 +822,7 @@ namespace LittleWebApplication
                             foreach (User user in businessUserList)
                             {
                                 Console.WriteLine(new string('-', 10));
-                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress}\nPasswort:{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\n");
+                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress}\nPasswort:{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n");
                                 Console.WriteLine(new string('-', 10));
                             }
 
@@ -825,14 +836,14 @@ namespace LittleWebApplication
                             }
                             //else if (userSubMenueSelection == FTWO_HASH)
                             //{
-                                //editUserProfil(businessUserList);
+                            //editUserProfil(businessUserList);
                             //}
                             else if (userSubMenueSelection == FONE_HASH)
                             {
                                 while (userSubMenueSelection != ESC_HASH)
                                 {
                                     List<Account> accountList = Backup.LoadAccountRepository();
-                                    string accountNumber = User.CreateAccountNumber(accountList);
+                                    string accountNumber = Account.CreateAccountNumber(accountList);
                                     Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
                                     accountList.Add(newAccount);
                                     Backup.StoreAccountRepository(accountList);
@@ -845,7 +856,7 @@ namespace LittleWebApplication
 
                                     businessUserList.Add(newBusinessUser);
                                     Backup.StoreBusinessUserRepository(businessUserList);
-                                    
+
                                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
                                     if (userSubMenueSelection == ESC_HASH)
@@ -1187,7 +1198,59 @@ namespace LittleWebApplication
                         }
                         else if (userSelection == 5)
                         {
-                            //set account status
+                            List<Account> accountList = Backup.LoadAccountRepository();
+
+                            Enums.Status accountStatus = Account.CheckAccountStatus(userToEdit, accountList);
+
+                            Console.WriteLine($"aktueller Accountstatus:\n{new string('-', 10)}\n{accountStatus}\n{new string('-', 10)}\n");
+
+                            if (accountStatus == Enums.Status.active)
+                            {
+                                bool validInput = false;
+
+                                while (validInput == false)
+                                {
+                                    Console.WriteLine("Account deaktivieren? (Drücke 'Y' um Account zu deaktivieren oder 'ESC' um in das vorherige Menü zurück zu kehren):\t");
+                                    string deactivateAccount = Console.ReadLine().ToUpper();
+
+                                    if (deactivateAccount == "Y")
+                                    {
+                                        accountStatus = Enums.Status.disabled;
+                                        Console.WriteLine("Account deaktiviert!");
+                                        Backup.StoreAccountRepository(accountList);
+                                        break;
+                                    }
+                                    else if (deactivateAccount == Convert.ToString(ESC_HASH)) ;
+                                    {
+                                        break;
+                                    }
+                                    Console.WriteLine("!!!Account deaktivieren mit 'Y' oder 'ESC' um in das vorherige Menü zurück zu kehren!!!");
+                                }
+                            }
+                            else if (accountStatus == Enums.Status.disabled)
+                            {
+                                bool validInput = false;
+
+                                while (validInput == false)
+                                {
+                                    Console.WriteLine("Account aktivieren? (Drücke 'Y' um Account zu deaktivieren oder 'ESC' um in das vorherige Menü zurück zu kehren):\t");
+                                    string deactivateAccount = Console.ReadLine().ToUpper();
+
+                                    if (deactivateAccount == "Y")
+                                    {
+                                        accountStatus = Enums.Status.active;
+                                        Console.WriteLine("Account aktiviert!");
+                                        Backup.StoreAccountRepository(accountList);
+                                        break;
+                                    }
+                                    else if (deactivateAccount == Convert.ToString(ESC_HASH)) ;
+                                    {
+                                        break;
+                                    }
+                                    Console.WriteLine("!!!Account aktivieren mit 'Y' oder 'ESC' um in das vorherige Menü zurück zu kehren!!!");
+                                }
+                            }
+                            Console.WriteLine($"neuer Accountstatus:\n{new string('-', 10)}\n{accountStatus}\n{new string('-', 10)}\n");
                         }
                     }
                 }
@@ -1212,14 +1275,14 @@ namespace LittleWebApplication
             }
             else if (artOfAccount == Enums.AccountType.adminUser)
             {
-                 userList = Backup.LoadAdminUserRepository();
+                userList = Backup.LoadAdminUserRepository();
             }
 
             bool validInput = false;
 
             while (validInput == false)
             {
-                Console.WriteLine("Änderungenspeichern? (Y/N):\t");
+                Console.WriteLine("Änderungenspeichern? (Drücke 'Y' um zu speichern oder 'ESC' um Änderung zu verwerfen und in das vorherige Menü zurück zu kehren):\t");
                 string safeEdits = Console.ReadLine().ToUpper();
 
                 if (safeEdits == "Y")
@@ -1228,12 +1291,12 @@ namespace LittleWebApplication
                     Console.WriteLine("Änderungen gespeichert!");
                     break;
                 }
-                else if (safeEdits == "N")
+                else if (safeEdits == Convert.ToString(ESC_HASH)) ;
                 {
                     Console.WriteLine("Änderungen verworfen!");
                     break;
                 }
-                Console.WriteLine("!!!Änderungen speichern mit 'Y' oder verwerfen mit 'N'!!!");
+                Console.WriteLine("!!!Änderungen speichern mit 'Y' oder verwerfen und in das vorherigen Menü zurück kehren mit 'ESC'!!!");
             }
         }
 
