@@ -6,8 +6,8 @@ namespace LittleWebApplication
     public class UImethods
     {
         const int ESC_HASH = 1769499;
-        const int FONE_HASH = 112;
-        const int FTWO_HASH = 113;
+        const int FONE_HASH = 7340032;
+        const int FTWO_HASH = 7405568;
 
         /// <summary>
         /// asks user for login number
@@ -801,7 +801,7 @@ namespace LittleWebApplication
                             foreach (User user in privateUserList)
                             {
                                 Console.WriteLine(new string('-', 10));
-                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n");
+                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}");
                                 Console.WriteLine(new string('-', 10));
                             }
 
@@ -834,10 +834,6 @@ namespace LittleWebApplication
                             {
                                 break;
                             }
-                            //else if (userSubMenueSelection == FTWO_HASH)
-                            //{
-                            //editUserProfil(businessUserList);
-                            //}
                             else if (userSubMenueSelection == FONE_HASH)
                             {
                                 while (userSubMenueSelection != ESC_HASH)
@@ -865,6 +861,10 @@ namespace LittleWebApplication
                                     }
                                 }
                             }
+                            else if (userSubMenueSelection == FTWO_HASH)
+                            {
+                                EditUserProfil(businessUserList,Enums.AccountType.businessUser);
+                            }
                         }
                     }
                 }
@@ -872,31 +872,37 @@ namespace LittleWebApplication
                 {
                     Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
                     subMenueOptions = 4;
+                    //show finance administration
                 }
                 else if (userMainMenueSelection == 3)
                 {
                     Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
+                    //show terminal administration
                 }
                 else if (userMainMenueSelection == 4)
                 {
                     Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
+                    //show fundraiser administration
                 }
                 else if (userMainMenueSelection == 5)
                 {
                     Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
                     subMenueOptions = 3;
+                    //show reward administration
                 }
                 else if (userMainMenueSelection == 6)
                 {
                     Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
+                    //show achievement administration
                 }
                 else if (userMainMenueSelection == 7)
                 {
                     Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
                     subMenueOptions = 5;
+                    //show notification administration
                 }
             }
         }

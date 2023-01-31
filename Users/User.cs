@@ -154,7 +154,7 @@ namespace LittleWebApplication.Users
             newPrivatUserDummy.userContact = CreatePrivateUserDummyContact(newPrivatUserDummy.userName);
             newPrivatUserDummy.userLogin = CreatePrivateUserDummyLogin(accountNumber);
             newPrivatUserDummy.joinDateTime = DateTime.Now;
-            newPrivatUserDummy.accountStatus = Account.CheckAccountStatus(newPrivatUserDummy, accountList);
+            newPrivatUserDummy.accountStatus = Enums.Status.active;
 
             return newPrivatUserDummy;
         }

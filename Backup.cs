@@ -7,27 +7,27 @@ namespace LittleWebApplication
     {
         static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<Account>));
         //static string ACCOUNT_PATH = "accountRepository.xml";
-        //static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
-        static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
+        static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
+        //static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
         static XmlSerializer privateUserSerializer = new(typeof(List<User>));
         //static string PRIVATE_USER_PATH = "privateUserRepository.xml";
-        //static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
-        static string PRIVATE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privateUserRepository.xml";
+        static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
+        //static string PRIVATE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privateUserRepository.xml";
         static XmlSerializer businessUserSerializer = new(typeof(List<User>));
-        //static string BUSINESS_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\businessUserList.xml";
-        static string BUSINESS_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\pusinessUserRepository.xml";
+        static string BUSINESS_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\businessUserList.xml";
+        //static string BUSINESS_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\pusinessUserRepository.xml";
         static XmlSerializer serviceUserSerializer = new(typeof(List<User>));
-        //static string SERVICE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\serviceUserList.xml";
-        static string SERVICE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\serviceUserRepository.xml";
+        static string SERVICE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\serviceUserList.xml";
+        //static string SERVICE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\serviceUserRepository.xml";
         static XmlSerializer adminUserSerializer = new(typeof(List<User>));
-        //static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
-        static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
+        static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
+        //static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
         static XmlSerializer terminalSerializer = new(typeof(List<Terminal>));
-        //static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
-        static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
+        static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
+        //static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
         static XmlSerializer fundraiserSerializer = new(typeof(List<Fundraiser>));
-        //static string FUNDRAISER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\fundraiserRepository.xml";
-        static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
+        static string FUNDRAISER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\fundraiserRepository.xml";
+        //static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
 
 
         public static void StoreAccountRepository(List<Account> accounts)

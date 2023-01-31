@@ -9,11 +9,13 @@ namespace LittleWebApplication
 
         static void Main(string[] args)
         {
+            List<User> adminUserList = new();
             User superAdminUser = User.CreateSuperAdmin();
+            adminUserList.Add(superAdminUser);
+            Backup.StoreAdminUserRepository(adminUserList);
 
             List<Account> accountList = Backup.LoadAccountRepository();
             List<User> privateUserList = Backup.LoadPrivateUserRepository();
-            //List<CreateTerminal> terminalList = 
 
             string accountNumber = Account.CreateAccountNumber(accountList);
             string userNumber = User.CreateUserNumber(Enums.AccountType.privateUser, accountNumber);

@@ -7,7 +7,7 @@
 
         public override string ToString()
         {
-            return $"{userContactTel}\n{userContactMail}";
+            return $"{userContactTel}\n\t\t{userContactMail}";
         }
     }
 }

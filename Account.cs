@@ -4,6 +4,8 @@ namespace LittleWebApplication
 {
     public class Account
     {
+        const string SUPER_ADMIN = "A000001";
+
         public string accountNumber;
         public DateTime accountCreationDateTime;
         public Enums.Status accountStatus;
@@ -30,14 +32,19 @@ namespace LittleWebApplication
         public static Enums.Status CheckAccountStatus(User user, List<Account> accountList)
         {
             Account account = new();
-            string userNumber = user.userNumber;
-            string userAccountNumber = Convert.ToString(userNumber.Length - userNumber[0]);
+            string userNumber = user.userLogin.userLoginNumber;
+            string userAccountNumber = Convert.ToString(userNumber[1..7]);
 
             bool checkForEquality = false;
             int listPosition = 0;
 
             while (checkForEquality == false)
             {
+                if (user.userNumber == SUPER_ADMIN)
+                {
+                    break;
+                }
+
                 account = accountList[listPosition];
                 string accountNumber = account.accountNumber;
 
