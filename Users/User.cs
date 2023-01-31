@@ -162,15 +162,12 @@ namespace LittleWebApplication.Users
         public static User CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
         {
             User newBusinessUser = new();
-            List<Account> accountList = Backup.LoadAccountRepository();
             newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
             newBusinessUser.userAdress = UImethods.AskForAdressInformations();
-            newBusinessUser.userLogin.userLoginNumber = "B" + accountNumber;
-            newBusinessUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
-            newBusinessUser.accountStatus = Account.CheckAccountStatus(newBusinessUser, accountList);
-
+            newBusinessUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.businessUser);
+            newBusinessUser.accountStatus = Enums.Status.active;
 
             return newBusinessUser;
         }
@@ -182,21 +179,18 @@ namespace LittleWebApplication.Users
             newServiceUser.joinDateTime = DateTime.Now;
             newServiceUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newServiceUser.userAdress = UImethods.AskForAdressInformations();
-            newServiceUser.userLogin.userLoginNumber = "B" + accountNumber;
-            newServiceUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
+            newServiceUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.serviceUser);
             newServiceUser.accountStatus = Account.CheckAccountStatus(newServiceUser, accountList);
 
             return newServiceUser;
         }
-
 
         public static User CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
         {
             User newAdminUser = new();
             newAdminUser.userNumber = CreateUserNumber(Enums.AccountType.adminUser, accountNumber);
             newAdminUser.userName = UImethods.AskForNameInformations();
-            newAdminUser.userLogin.userLoginNumber = "A" + accountNumber;
-            newAdminUser.userLogin.userLoginPassword = UImethods.CreateUserPassword();
+            newAdminUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.adminUser);
 
             return newAdminUser;
         }

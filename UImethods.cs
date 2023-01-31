@@ -796,13 +796,11 @@ namespace LittleWebApplication
                             //add sort/search function
                             List<User> privateUserList = Backup.LoadPrivateUserRepository();
 
-                            Console.WriteLine("PRIVATE-USER ÜBERSICHT\n");
+                            Console.WriteLine("PRIVATE-USER ÜBERSICHT");
 
                             foreach (User user in privateUserList)
                             {
-                                Console.WriteLine(new string('-', 10));
-                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}");
-                                Console.WriteLine(new string('-', 10));
+                                Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
                             }
 
                             Console.WriteLine("(Press ESC to go back)");
@@ -817,15 +815,19 @@ namespace LittleWebApplication
                             //add sort/search function
                             List<User> businessUserList = Backup.LoadBusinessUserRepository();
 
-                            Console.WriteLine("BUSINESS-USER ÜBERSICHT\n");
+                            Console.WriteLine("BUSINESS-USER ÜBERSICHT");
 
-                            foreach (User user in businessUserList)
+                            if (businessUserList.Count <= 0)
                             {
-                                Console.WriteLine(new string('-', 10));
-                                Console.WriteLine($"Usernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress}\nPasswort:{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n");
-                                Console.WriteLine(new string('-', 10));
+                                Console.WriteLine($"{new string('-', 10)}\nKeine businessUser vorhanden\n{new string('-', 10)}");
                             }
-
+                            else
+                            {
+                                foreach (User user in businessUserList)
+                                {
+                                    Console.WriteLine($"{new string('-', 10)}\nUsernummer:\\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress}\nPasswort:{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                                }
+                            }
                             Console.WriteLine("(Press 'F1' to create new businessUser or 'F2' to edit businessUser)\n(Press ESC to go back)");
 
                             userSubMenueSelection = AskforMenueSelection(subMenueOptions);
@@ -836,35 +838,38 @@ namespace LittleWebApplication
                             }
                             else if (userSubMenueSelection == FONE_HASH)
                             {
-                                while (userSubMenueSelection != ESC_HASH)
+                                List<Account> accountList = Backup.LoadAccountRepository();
+                                string accountNumber = Account.CreateAccountNumber(accountList);
+                                Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
+
+                                User newBusinessUser = User.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
+
+                                Console.WriteLine($"{new string('-', 10)}\nNEUER BUSINESS-USER\n{newBusinessUser}{new string('-', 10)}");
+                                bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.businessUser);
+
+                                if (editsConfirmed == true)
                                 {
-                                    List<Account> accountList = Backup.LoadAccountRepository();
-                                    string accountNumber = Account.CreateAccountNumber(accountList);
-                                    Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
                                     accountList.Add(newAccount);
                                     Backup.StoreAccountRepository(accountList);
-
-                                    User newBusinessUser = User.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
-
-                                    //Console.WriteLine(newBusinessUser);
-                                    //Console.WriteLine("Drücke ENTER um neuen businessPartner anzulegen");
-                                    //string safeNewUser = Console.ReadLine();
-
-                                    businessUserList.Add(newBusinessUser);
-                                    Backup.StoreBusinessUserRepository(businessUserList);
-
-                                    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-
-                                    if (userSubMenueSelection == ESC_HASH)
-                                    {
-                                        break;
-                                    }
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
                                 }
                             }
                             else if (userSubMenueSelection == FTWO_HASH)
                             {
                                 EditUserProfil(businessUserList,Enums.AccountType.businessUser);
                             }
+                        }
+                        else if (userSubMenueSelection == 3)
+                        {
+                            //show serviceUser overview
+                        }
+                        else if (userSubMenueSelection == 4)
+                        {
+                            //show adminUser overview
                         }
                     }
                 }
@@ -939,9 +944,9 @@ namespace LittleWebApplication
         public static NameInformations AskForNameInformations()
         {
             NameInformations newName = new();
-            Console.WriteLine("Vorname:\t");
+            Console.Write("Vorname:\t");
             newName.userFirstName = Console.ReadLine();
-            Console.WriteLine("Familienname:\t");
+            Console.Write("Familienname:\t");
             newName.userLastName = Console.ReadLine();
 
             return newName;
@@ -958,22 +963,22 @@ namespace LittleWebApplication
 
             if (artOfAccount == Enums.AccountType.fundraiser)
             {
-                Console.WriteLine("Name Spendenorganisation:\t");
+                Console.Write("Name Spendenorganisation:\t");
             }
             if (artOfAccount == Enums.AccountType.businessUser)
             {
-                Console.WriteLine("Name Firma:\t");
+                Console.Write("Name Firma:\t");
             }
             newCompany.companyName = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Vorname:\t");
+            Console.Write("Kontaktperson Vorname:\t");
             newCompany.contactPersonFirstname = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Familienname:\t");
+            Console.Write("Kontaktperson Familienname:\t");
             newCompany.contactPersonFamilyname = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Firmenfunktion:\t");
+            Console.Write("Kontaktperson Firmenfunktion:\t");
             newCompany.contactPersonFunction = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Telefonnummer:\t");
+            Console.Write("Kontaktperson Telefonnummer:\t");
             newCompany.contactPersonTel = Console.ReadLine();
-            Console.WriteLine("Kontaktperson Email-Adresse:\t");
+            Console.Write("Kontaktperson Email-Adresse:\t");
             newCompany.contactPersonMail = Console.ReadLine();
 
             return newCompany;
@@ -986,15 +991,15 @@ namespace LittleWebApplication
         public static AdressInformations AskForAdressInformations()
         {
             AdressInformations newAdress = new();
-            Console.WriteLine("Straße:\t");
+            Console.Write("Straße:\t");
             newAdress.userAdressStreet = Console.ReadLine();
-            Console.WriteLine("Hausnummer:\t");
+            Console.Write("Hausnummer:\t");
             newAdress.userAdressNumber = Console.ReadLine();
-            Console.WriteLine("PLZ:\t");
+            Console.Write("PLZ:\t");
             newAdress.userAdressPostalCode = Console.ReadLine();
-            Console.WriteLine("Stadt:\t");
+            Console.Write("Stadt:\t");
             newAdress.userAdressTown = Console.ReadLine();
-            Console.WriteLine("Bundesland:\t");
+            Console.Write("Bundesland:\t");
             newAdress.userAdressFederalState = Console.ReadLine();
 
             return newAdress;
@@ -1021,7 +1026,37 @@ namespace LittleWebApplication
         /// aks user to put in a new password
         /// </summary>
         /// <returns>new user password</returns>
-        public static string CreateUserPassword()
+        public static LoginInformations CreateUserLogin(string accountNumber, Enums.AccountType artOfAccount)
+        {
+            LoginInformations newLogin = new();
+
+            string newPassword = AskForNewUserPassword();
+            newLogin.userLoginPassword = newPassword;
+
+            string newLoginNumber = "";
+
+            if(artOfAccount == Enums.AccountType.privateUser)
+            {
+                newLoginNumber = "P" + accountNumber;
+            }
+            else if(artOfAccount == Enums.AccountType.businessUser)
+            {
+                newLoginNumber = "B" + accountNumber;
+            }
+            else if (artOfAccount == Enums.AccountType.serviceUser)
+            {
+                newLoginNumber = "S" + accountNumber;
+            }
+            else if (artOfAccount == Enums.AccountType.adminUser)
+            {
+                newLoginNumber = "A" + accountNumber;
+            }
+            newLogin.userLoginNumber = newLoginNumber;
+
+            return newLogin;
+        }
+
+        public static string AskForNewUserPassword()
         {
             Console.WriteLine("Passwort wählen:\t");
             string newPassword = Console.ReadLine();
@@ -1030,7 +1065,7 @@ namespace LittleWebApplication
 
             while (validPaswordLength == false)
             {
-                if (newPassword.Length + 1 < 6)
+                if (newPassword.Length < 6)
                 {
                     Console.WriteLine("Passwort muss mindestens 6 Stellen haben");
                 }
@@ -1144,7 +1179,7 @@ namespace LittleWebApplication
 
                             Console.WriteLine($"neuer Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n");
 
-                            SaveUserEdits(artOfAccount);
+                            AskForSaveUserEdits(artOfAccount);
                         }
                         else if (userSelection == 2)
                         {
@@ -1163,7 +1198,7 @@ namespace LittleWebApplication
 
                             Console.WriteLine($"neuer Adresse:\n{new string('-', 10)}\n{userToEdit.userAdress}\n{new string('-', 10)}\n");
 
-                            SaveUserEdits(artOfAccount);
+                            AskForSaveUserEdits(artOfAccount);
                         }
                         else if (userSelection == 3)
                         {
@@ -1190,17 +1225,17 @@ namespace LittleWebApplication
 
                             Console.WriteLine($"neuer Kontakt:\n{new string('-', 10)}\n{userToEdit.userContact}\n{new string('-', 10)}\n");
 
-                            SaveUserEdits(artOfAccount);
+                            AskForSaveUserEdits(artOfAccount);
                         }
                         else if (userSelection == 4)
                         {
                             Console.WriteLine($"aktuelles Passwort:\n{new string('-', 10)}\n{userToEdit.userLogin.userLoginPassword}\n{new string('-', 10)}\n");
 
-                            userToEdit.userLogin.userLoginPassword = CreateUserPassword();
+                            userToEdit.userLogin.userLoginPassword = AskForNewUserPassword();
 
                             Console.WriteLine($"neues Passwort:\n{new string('-', 10)}\n{userToEdit.userLogin.userLoginPassword}\n{new string('-', 10)}\n");
 
-                            SaveUserEdits(artOfAccount);
+                            AskForSaveUserEdits(artOfAccount);
                         }
                         else if (userSelection == 5)
                         {
@@ -1263,9 +1298,10 @@ namespace LittleWebApplication
             }
         }
 
-        public static void SaveUserEdits(Enums.AccountType artOfAccount)
+        public static bool AskForSaveUserEdits(Enums.AccountType artOfAccount)
         {
             List<User> userList = new();
+            bool editsConfirmed = false;
 
             if (artOfAccount == Enums.AccountType.privateUser)
             {
@@ -1295,6 +1331,7 @@ namespace LittleWebApplication
                 {
                     Backup.StoreServiceUserRepository(userList);
                     Console.WriteLine("Änderungen gespeichert!");
+                    editsConfirmed = true;
                     break;
                 }
                 else if (safeEdits == Convert.ToString(ESC_HASH)) ;
@@ -1304,6 +1341,7 @@ namespace LittleWebApplication
                 }
                 Console.WriteLine("!!!Änderungen speichern mit 'Y' oder verwerfen und in das vorherigen Menü zurück kehren mit 'ESC'!!!");
             }
+            return editsConfirmed;
         }
 
         //public static Donation ShowUserDonation(User userToEdit)
