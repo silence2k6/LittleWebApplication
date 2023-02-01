@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return $"{companyName}\n{contactPersonFirstname} {contactPersonFamilyname}\n{contactPersonFunction}\n{contactPersonTel}";
+            return $"{companyName}\nKontaktperson:\t{contactPersonFirstname} {contactPersonFamilyname}\n\t\t{contactPersonFunction}\n\t\t{contactPersonTel}\n\t\t{contactPersonMail}";
         }
     }
 }

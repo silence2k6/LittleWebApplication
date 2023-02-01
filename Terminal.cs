@@ -12,7 +12,7 @@ namespace LittleWebApplication
         public string terminalLocation;
         public string terminalStatus;
         public AdressInformations terminalAdress;
-        public BusinessUser terminalOwner;
+        public User terminalOwner;
         public Fundraiser terminalFundraiser;
         public List<Coupon> terminalCouponList;
         public List<Cosmetic> terminalCosmeticList;
@@ -21,10 +21,14 @@ namespace LittleWebApplication
         public List<Story> terminalStoryList;
         public List<Video> terminalVideoList;
         public List<Donation> terminalDonationList;
-        //public List<TerminalService> terminalServiceList;
 
-        //public Terminal CreateTerminal()
+        //public static Terminal CreateTerminal()
         //{ 
+
+        //}
+
+        //public static void CreateTerminalService()
+        //{
 
         //}
     }
