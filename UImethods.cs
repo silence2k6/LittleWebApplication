@@ -1129,6 +1129,7 @@ namespace LittleWebApplication
 
                 int editOptions = 0;
                 int userSelection = 0;
+                bool editsConfirmed;
 
                 while (userSelection != ESC_HASH)
                 {
@@ -1154,7 +1155,20 @@ namespace LittleWebApplication
                     {
                         if (artOfAccount == Enums.AccountType.businessUser)
                         {
-                            //edit business user profil
+                            if (userSelection == 1)
+                            {
+                                Console.WriteLine($"aktueller Firmenname:\n{new string('-', 10)}\n{userToEdit.userCompany.companyName}\n{new string('-', 10)}\nneuer Firmenname:\t");
+                                string newCompanyName = Console.ReadLine();
+                                Console.WriteLine($"neuer Firmenname:\n{new string('-', 10)}\n{newCompanyName}\n{new string('-', 10)}\n");
+
+                                editsConfirmed = AskForSaveUserEdits(artOfAccount);
+
+                                if (editsConfirmed == true)
+                                {
+                                    userToEdit.userCompany.companyName = newCompanyName;
+                                    Backup.StoreBusinessUserRepository(userList);
+                                }
+                            }
                         }
 
                         else if (artOfAccount == Enums.AccountType.serviceUser)
@@ -1173,18 +1187,18 @@ namespace LittleWebApplication
 
                                 else if (userSelection == 1)
                                 {
-                                    Console.WriteLine("neuer Familienname:\t");
+                                    Console.Write("neuer Familienname:\t");
                                     userToEdit.userName.userLastName = Console.ReadLine();
                                 }
                                 else if (userSelection == 2)
                                 {
-                                    Console.WriteLine("neue Vorname:\t");
+                                    Console.Write("neue Vorname:\t");
                                     userToEdit.userName.userFirstName = Console.ReadLine();
                                 }
 
                                 Console.WriteLine($"neuer Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n");
 
-                                AskForSaveUserEdits(artOfAccount);
+                                //AskForSaveUserEdits(artOfAccount);
                             }
                             else if (userSelection == 2)
                             {
@@ -1203,7 +1217,7 @@ namespace LittleWebApplication
 
                                 Console.WriteLine($"neuer Adresse:\n{new string('-', 10)}\n{userToEdit.userAdress}\n{new string('-', 10)}\n");
 
-                                AskForSaveUserEdits(artOfAccount);
+                                //AskForSaveUserEdits(artOfAccount);
                             }
                             else if (userSelection == 3)
                             {
@@ -1230,7 +1244,7 @@ namespace LittleWebApplication
 
                                 Console.WriteLine($"neuer Kontakt:\n{new string('-', 10)}\n{userToEdit.userContact}\n{new string('-', 10)}\n");
 
-                                AskForSaveUserEdits(artOfAccount);
+                                //AskForSaveUserEdits(artOfAccount);
                             }
                             else if (userSelection == 4)
                             {
@@ -1240,7 +1254,7 @@ namespace LittleWebApplication
 
                                 Console.WriteLine($"neues Passwort:\n{new string('-', 10)}\n{userToEdit.userLogin.userLoginPassword}\n{new string('-', 10)}\n");
 
-                                AskForSaveUserEdits(artOfAccount);
+                                //AskForSaveUserEdits(artOfAccount);
                             }
                             else if (userSelection == 5)
                             {
