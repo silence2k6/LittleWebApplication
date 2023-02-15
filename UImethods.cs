@@ -5,9 +5,10 @@ namespace LittleWebApplication
 {
     public class UImethods
     {
-        const int ESC_HASH = 1769499;
-        const int FONE_HASH = 7340032;
-        const int FTWO_HASH = 7405568;
+        const int KEY_ESC_HASH = 1769499;
+        const int KEY_FONE_HASH = 7340032;
+        const int KEY_FTWO_HASH = 7405568;
+        const int KEY_Y_HASH = 39387225;
 
         /// <summary>
         /// asks user for login number
@@ -72,15 +73,15 @@ namespace LittleWebApplication
             {
                 userList = Backup.LoadPrivateUserRepository();
             }
-            if (artOfAccount == Enums.AccountType.businessUser)
+            else if (artOfAccount == Enums.AccountType.businessUser)
             {
                 userList = Backup.LoadBusinessUserRepository();
             }
-            if (artOfAccount == Enums.AccountType.serviceUser)
+            else if (artOfAccount == Enums.AccountType.serviceUser)
             {
                 userList = Backup.LoadServiceUserRepository();
             }
-            if (artOfAccount == Enums.AccountType.adminUser)
+            else if (artOfAccount == Enums.AccountType.adminUser)
             {
                 userList = Backup.LoadAdminUserRepository();
             }
@@ -103,7 +104,7 @@ namespace LittleWebApplication
 
                     if (userObjectPos == userList.Count)
                     {
-                        Console.WriteLine("Benutzername exitiert nicht! Neuen Account anlegen oder Eingabe überprüfen.\n");
+                        Console.WriteLine("Benutzername exitiert nicht!\n");
                         user = null;
                         break;
                     }
@@ -212,7 +213,7 @@ namespace LittleWebApplication
                 }
                 else
                 {
-                    Console.WriteLine("Nur Ziffern für die Menüauswahl möglich!");
+                    Console.WriteLine("Mögliche Menüauswahl beachten!!!");
                 }
             }
             return userMenueSelection;
@@ -261,7 +262,7 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != ESC_HASH)
+            while (userMainMenueSelection != KEY_ESC_HASH)
             {
                 int userSubMenueSelection;
 
@@ -274,7 +275,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -286,12 +287,12 @@ namespace LittleWebApplication
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         int subSubMenueOptions = 0;
 
@@ -302,12 +303,12 @@ namespace LittleWebApplication
 
                             int userSubSubMenueSelection = AskforMenueSelection(subSubMenueOptions);
 
-                            if (userSubSubMenueSelection == ESC_HASH)
+                            if (userSubSubMenueSelection == KEY_ESC_HASH)
                             {
                                 break;
                             }
 
-                            while (userSubSubMenueSelection != ESC_HASH)
+                            while (userSubSubMenueSelection != KEY_ESC_HASH)
                             {
                                 int subSubSubMenueOptions = 0;
 
@@ -320,7 +321,7 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
@@ -334,7 +335,7 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
@@ -348,7 +349,7 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
@@ -362,7 +363,7 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
@@ -376,7 +377,7 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
@@ -388,7 +389,7 @@ namespace LittleWebApplication
 
                                     int userSubSubSubMenueSelection = AskforMenueSelection(subSubSubMenueOptions);
 
-                                    while (userSubSubMenueSelection != ESC_HASH)
+                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
                                     {
                                         if (userSubSubSubMenueSelection == 1)
                                         {
@@ -399,7 +400,7 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != ESC_HASH)
+                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
@@ -413,7 +414,7 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != ESC_HASH)
+                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
@@ -427,7 +428,7 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != ESC_HASH)
+                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
@@ -441,7 +442,7 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != ESC_HASH)
+                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
@@ -459,7 +460,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -473,7 +474,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -488,7 +489,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -502,12 +503,12 @@ namespace LittleWebApplication
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         if (userSubMenueSelection == 1)
                         {
@@ -518,7 +519,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -532,7 +533,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -546,12 +547,12 @@ namespace LittleWebApplication
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         if (userSubMenueSelection == 1)
                         {
@@ -562,7 +563,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -576,7 +577,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -592,7 +593,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -606,7 +607,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -623,7 +624,7 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != ESC_HASH)
+            while (userMainMenueSelection != KEY_ESC_HASH)
             {
                 if (userMainMenueSelection == 1)
                 {
@@ -633,7 +634,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -646,7 +647,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -658,11 +659,11 @@ namespace LittleWebApplication
 
                     int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         if (userSubMenueSelection == 1)
                         {
@@ -673,7 +674,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -687,7 +688,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -706,7 +707,7 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != ESC_HASH)
+            while (userMainMenueSelection != KEY_ESC_HASH)
             {
                 if (userMainMenueSelection == 1)
                 {
@@ -716,7 +717,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != ESC_HASH)
+                    while (userMainMenueSelection != KEY_ESC_HASH)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -728,11 +729,11 @@ namespace LittleWebApplication
 
                     int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         if (userSubMenueSelection == 1)
                         {
@@ -743,7 +744,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -757,7 +758,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -776,7 +777,7 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != ESC_HASH)
+            while (userMainMenueSelection != KEY_ESC_HASH)
             {
                 if (userMainMenueSelection == 1)
                 {
@@ -785,11 +786,11 @@ namespace LittleWebApplication
 
                     int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == ESC_HASH)
+                    if (userSubMenueSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != ESC_HASH)
+                    while (userSubMenueSelection != KEY_ESC_HASH)
                     {
                         if (userSubMenueSelection == 1)
                         {
@@ -805,64 +806,72 @@ namespace LittleWebApplication
 
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != ESC_HASH)
+                            while (userSubMenueSelection != KEY_ESC_HASH)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
                         else if (userSubMenueSelection == 2)
                         {
-                            //add sort/search function
-                            List<User> businessUserList = Backup.LoadBusinessUserRepository();
-
-                            Console.WriteLine("BUSINESS-USER ÜBERSICHT");
-
-                            if (businessUserList.Count <= 0)
+                            while (userMainMenueSelection != KEY_ESC_HASH)
                             {
-                                Console.WriteLine($"{new string('-', 10)}\nKeine businessUser vorhanden\n{new string('-', 10)}");
-                            }
-                            else
-                            {
-                                foreach (User user in businessUserList)
+                                //add sort/search function
+                                List<User> businessUserList = Backup.LoadBusinessUserRepository();
+
+                                Console.WriteLine("BUSINESS-USER ÜBERSICHT");
+
+                                if (businessUserList.Count <= 0)
                                 {
-                                    Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress.userAdressStreet} {user.userAdress.userAdressNumber}\n\t\t{user.userAdress.userAdressPostalCode} {user.userAdress.userAdressTown}\n\t\t{user.userAdress.userAdressFederalState}\nBenutzername:\t{user.userLogin.userLoginNumber}\nPasswort:\t{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
-                                }
-                            }
-                            Console.WriteLine("(Press 'F1' to create new businessUser or 'F2' to edit businessUser)\n(Press ESC to go back)");
-
-                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-
-                            if (userSubMenueSelection == ESC_HASH)
-                            {
-                                break;
-                            }
-                            else if (userSubMenueSelection == FONE_HASH)
-                            {
-                                List<Account> accountList = Backup.LoadAccountRepository();
-                                string accountNumber = Account.CreateAccountNumber(accountList);
-                                Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
-
-                                User newBusinessUser = User.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
-
-                                Console.WriteLine($"{new string('-', 10)}\nNEUER BUSINESS-USER\nUsernummer:\t{newBusinessUser.userNumber}\nFirma:\t\t{newBusinessUser.userCompany}\nFirmenadresse:\t{newBusinessUser.userAdress.userAdressStreet} {newBusinessUser.userAdress.userAdressNumber}\n\t{newBusinessUser.userAdress.userAdressPostalCode} {newBusinessUser.userAdress.userAdressTown}\n\t{newBusinessUser.userAdress.userAdressFederalState}\nBenutzername:\t{newBusinessUser.userLogin.userLoginNumber}\nPasswort:\t{newBusinessUser.userLogin.userLoginPassword}\n{new string('-', 10)}");
-                                bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.businessUser);
-
-                                if (editsConfirmed == true)
-                                {
-                                    accountList.Add(newAccount);
-                                    Backup.StoreAccountRepository(accountList);
-                                    businessUserList.Add(newBusinessUser);
-                                    Backup.StoreBusinessUserRepository(businessUserList);
-                                    break;
+                                    Console.WriteLine($"{new string('-', 10)}\nKeine businessUser vorhanden\n{new string('-', 10)}");
                                 }
                                 else
                                 {
+                                    foreach (User user in businessUserList)
+                                    {
+                                        Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress.userAdressStreet} {user.userAdress.userAdressNumber}\n\t\t{user.userAdress.userAdressPostalCode} {user.userAdress.userAdressTown}\n\t\t{user.userAdress.userAdressFederalState}\nBenutzername:\t{user.userLogin.userLoginNumber}\nPasswort:\t{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                                    }
+                                }
+                                Console.WriteLine("(Press 'F1' to create new businessUser or 'F2' to edit businessUser)\n(Press ESC to go back)");
+
+                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                                if (userSubMenueSelection == KEY_ESC_HASH)
+                                {
                                     break;
                                 }
-                            }
-                            else if (userSubMenueSelection == FTWO_HASH)
-                            {
-                                EditUserProfil(businessUserList,Enums.AccountType.businessUser);
+                                else if (userSubMenueSelection == KEY_FONE_HASH)
+                                {
+                                    List<Account> accountList = Backup.LoadAccountRepository();
+                                    string accountNumber = Account.CreateAccountNumber(accountList);
+                                    Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
+
+                                    User newBusinessUser = User.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
+
+                                    Console.WriteLine($"{new string('-', 10)}\nNEUER BUSINESS-USER\nUsernummer:\t{newBusinessUser.userNumber}\nFirma:\t\t{newBusinessUser.userCompany}\nFirmenadresse:\t{newBusinessUser.userAdress.userAdressStreet} {newBusinessUser.userAdress.userAdressNumber}\n\t{newBusinessUser.userAdress.userAdressPostalCode} {newBusinessUser.userAdress.userAdressTown}\n\t{newBusinessUser.userAdress.userAdressFederalState}\nBenutzername:\t{newBusinessUser.userLogin.userLoginNumber}\nPasswort:\t{newBusinessUser.userLogin.userLoginPassword}\n{new string('-', 10)}");
+                                    bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.businessUser);
+
+                                    if (editsConfirmed == true)
+                                    {
+                                        accountList.Add(newAccount);
+                                        Backup.StoreAccountRepository(accountList);
+                                        businessUserList.Add(newBusinessUser);
+                                        Backup.StoreBusinessUserRepository(businessUserList);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                                else if (userSubMenueSelection == KEY_FTWO_HASH)
+                                {
+                                    int editUserProfil = 0;
+
+                                    while (editUserProfil != KEY_ESC_HASH)
+                                    {
+                                        editUserProfil = EditUserProfil(businessUserList, Enums.AccountType.businessUser);
+                                    }
+                                }
                             }
                         }
                         else if (userSubMenueSelection == 3)
@@ -1103,36 +1112,65 @@ namespace LittleWebApplication
         /// <summary>
         /// enables user to edit existing user profil
         /// </summary>
-        /// <param name="userList">private/business/service or admin user list</param>
-        public static void EditUserProfil(List<User> userList, Enums.AccountType artOfAccount)
+        /// <param name="userList">business/service or admin user list</param>
+        public static int EditUserProfil(List<User> userList, Enums.AccountType artOfAccount)
         {
-            bool validUserLogin = false;
-            string userLoginNumberInput = "";
-            User userToEdit = new();
+            int editUserProfil = 0;
 
-            Console.WriteLine("USERPROFIL BEARBEITEN\n");
-
-            while (validUserLogin == false)
+            while (editUserProfil != KEY_ESC_HASH)
             {
-                Console.WriteLine("Welchen User wollen Sie bearbeiten?");
+                int userDecision = 0;
+                User userToEdit = new();
 
-                userLoginNumberInput = UImethods.AskForUserLoginNumber();
-
-                userToEdit = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
-
-                if (userToEdit != null)
+                while (userDecision != KEY_ESC_HASH)
                 {
-                    Console.WriteLine($"USERPROFIL:\n{new string('-', 10)}\nUsernummer:\t{userToEdit.userNumber}\nFirma:\t\t{userToEdit.userCompany}\nFirmenadresse:\t{userToEdit.userAdress.userAdressStreet} {userToEdit.userAdress.userAdressNumber}\n\t\t{userToEdit.userAdress.userAdressPostalCode} {userToEdit.userAdress.userAdressTown}\n\t\t{userToEdit.userAdress.userAdressFederalState}\nBenutzername:\t{userToEdit.userLogin.userLoginNumber}\nPasswort:\t{userToEdit.userLogin.userLoginPassword}\nPartner seit:\t{userToEdit.joinDateTime}\t{userToEdit.accountStatus}\n{new string('-', 10)}");
+                    Console.WriteLine("\nUSERPROFIL BEARBEITEN\nWelchen User wollen Sie bearbeiten?");
+
+                    string userLoginNumberInput = UImethods.AskForUserLoginNumber();
+
+                    userToEdit = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
+
+                    if (userToEdit != null)
+                    {
+                        if (artOfAccount == Enums.AccountType.businessUser)
+                        {
+                            Console.WriteLine($"\nAKTUELLES USERPROFIL:\n{new string('-', 10)}\nUsernummer:\t{userToEdit.userNumber}\nFirma:\t\t{userToEdit.userCompany}\nFirmenadresse:\t{userToEdit.userAdress.userAdressStreet} {userToEdit.userAdress.userAdressNumber}\n\t\t{userToEdit.userAdress.userAdressPostalCode} {userToEdit.userAdress.userAdressTown}\n\t\t{userToEdit.userAdress.userAdressFederalState}\nBenutzername:\t{userToEdit.userLogin.userLoginNumber}\nPasswort:\t{userToEdit.userLogin.userLoginPassword}\nPartner seit:\t{userToEdit.joinDateTime}\t{userToEdit.accountStatus}\n{new string('-', 10)}");
+                            break;
+                        }
+                        else if (artOfAccount == Enums.AccountType.serviceUser)
+                        {
+                            //show serviceUserProfil
+                        }
+                        else if (artOfAccount == Enums.AccountType.adminUser)
+                        {
+                            //show adminUserProfil
+                            //attention: if userToEditSelection is mainAdmin(a000001) "not possible to edit!!!"
+                        }
+                    }
+                    else
+                    {
+                        userDecision = AskSomeQuestionOrPressESC("Auswahl ändern 'Y' oder Menü verlassen 'ESC':", "\n", "Userbearbeitung ABGEBROCHEN!");
+
+                        if (userDecision == KEY_ESC_HASH)
+                        {
+                            editUserProfil = KEY_ESC_HASH;
+                        }
+                    }
                 }
 
-                Console.WriteLine("Was möchten Sie ändern?");
+                if (editUserProfil == KEY_ESC_HASH)
+                {
+                    break;
+                }
 
                 int editOptions = 0;
                 int userSelection = 0;
                 bool editsConfirmed;
 
-                while (userSelection != ESC_HASH)
+                while (userSelection != KEY_ESC_HASH)
                 {
+                    Console.WriteLine("Was möchten Sie ändern?");
+
                     if (artOfAccount == Enums.AccountType.businessUser)
                     {
                         Console.WriteLine($"1.Firmenname\n2.Kontaktperson\n3.Firmenadresse\n4.Passwort\n5.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
@@ -1146,29 +1184,35 @@ namespace LittleWebApplication
 
                     userSelection = AskforMenueSelection(editOptions);
 
-                    if (userSelection == ESC_HASH)
+                    if (userSelection == KEY_ESC_HASH)
                     {
                         break;
                     }
 
-                    while (userSelection != ESC_HASH)
+                    while (userSelection != KEY_ESC_HASH)
                     {
                         if (artOfAccount == Enums.AccountType.businessUser)
                         {
                             if (userSelection == 1)
                             {
-                                Console.WriteLine($"aktueller Firmenname:\n{new string('-', 10)}\n{userToEdit.userCompany.companyName}\n{new string('-', 10)}\nneuer Firmenname:\t");
-                                string newCompanyName = Console.ReadLine();
-                                Console.WriteLine($"neuer Firmenname:\n{new string('-', 10)}\n{newCompanyName}\n{new string('-', 10)}\n");
+                                Console.Write($"aktueller Firmenname:\n{new string('-', 10)}\n{userToEdit.userCompany.companyName}\n{new string('-', 10)}\nneuer Firmenname:\t");
+                                string oldCompanyName = userToEdit.userCompany.companyName;
+                                userToEdit.userCompany.companyName = Console.ReadLine();
+                                Console.WriteLine($"\nNEUES USERPROFIL:\n{new string('-', 10)}\nUsernummer:\t{userToEdit.userNumber}\nFirma:\t\t{userToEdit.userCompany}\nFirmenadresse:\t{userToEdit.userAdress.userAdressStreet} {userToEdit.userAdress.userAdressNumber}\n\t\t{userToEdit.userAdress.userAdressPostalCode} {userToEdit.userAdress.userAdressTown}\n\t\t{userToEdit.userAdress.userAdressFederalState}\nBenutzername:\t{userToEdit.userLogin.userLoginNumber}\nPasswort:\t{userToEdit.userLogin.userLoginPassword}\nPartner seit:\t{userToEdit.joinDateTime}\t{userToEdit.accountStatus}\n{new string('-', 10)}");
 
                                 editsConfirmed = AskForSaveUserEdits(artOfAccount);
 
                                 if (editsConfirmed == true)
                                 {
-                                    userToEdit.userCompany.companyName = newCompanyName;
+                                    Backup.StoreBusinessUserRepository(userList);
+                                }
+                                else if (editsConfirmed == false)
+                                {
+                                    userToEdit.userCompany.companyName = oldCompanyName;
                                     Backup.StoreBusinessUserRepository(userList);
                                 }
                             }
+                            break;
                         }
 
                         else if (artOfAccount == Enums.AccountType.serviceUser)
@@ -1180,7 +1224,7 @@ namespace LittleWebApplication
 
                                 userSelection = AskforMenueSelection(editOptions);
 
-                                if (userSelection == ESC_HASH)
+                                if (userSelection == KEY_ESC_HASH)
                                 {
                                     break;
                                 }
@@ -1226,7 +1270,7 @@ namespace LittleWebApplication
 
                                 userSelection = AskforMenueSelection(editOptions);
 
-                                if (userSelection == ESC_HASH)
+                                if (userSelection == KEY_ESC_HASH)
                                 {
                                     break;
                                 }
@@ -1280,7 +1324,7 @@ namespace LittleWebApplication
                                             Backup.StoreAccountRepository(accountList);
                                             break;
                                         }
-                                        else if (deactivateAccount == Convert.ToString(ESC_HASH)) ;
+                                        else if (deactivateAccount == Convert.ToString(KEY_ESC_HASH)) ;
                                         {
                                             break;
                                         }
@@ -1303,7 +1347,7 @@ namespace LittleWebApplication
                                             Backup.StoreAccountRepository(accountList);
                                             break;
                                         }
-                                        else if (deactivateAccount == Convert.ToString(ESC_HASH)) ;
+                                        else if (deactivateAccount == Convert.ToString(KEY_ESC_HASH)) ;
                                         {
                                             break;
                                         }
@@ -1316,6 +1360,7 @@ namespace LittleWebApplication
                     }
                 }
             }
+            return editUserProfil;
         }
 
         public static bool AskForSaveUserEdits(Enums.AccountType artOfAccount)
@@ -1340,28 +1385,41 @@ namespace LittleWebApplication
                 userList = Backup.LoadAdminUserRepository();
             }
 
-            bool validInput = false;
+            int userDecision = AskSomeQuestionOrPressESC("Drücke 'Y' um zu speichern oder 'ESC' um Änderung zu verwerfen und in das vorherige Menü zurück zu kehren:\t", "Änderungen GESPEICHERT!", "Änderungen VERWORFEN!");
 
-            while (validInput == false)
+            if (userDecision == KEY_Y_HASH)
             {
-                Console.Write("(Drücke 'Y' um zu speichern oder 'ESC' um Änderung zu verwerfen und in das vorherige Menü zurück zu kehren)\nÄnderungen speichern?:\t");
-                string safeEdits = Console.ReadLine().ToUpper();
-
-                if (safeEdits == "Y")
-                {
-                    Backup.StoreServiceUserRepository(userList);
-                    Console.WriteLine("Änderungen gespeichert!");
-                    editsConfirmed = true;
-                    break;
-                }
-                else if (safeEdits == Convert.ToString(ESC_HASH)) ;
-                {
-                    Console.WriteLine("Änderungen verworfen!");
-                    break;
-                }
-                Console.WriteLine("!!!Änderungen speichern mit 'Y' oder verwerfen und in das vorherigen Menü zurück kehren mit 'ESC'!!!");
+                editsConfirmed = true;
             }
             return editsConfirmed;
+        }
+
+        public static int AskSomeQuestionOrPressESC (string someQuestion, string confirmText, string escapeText)
+        {
+            ConsoleKeyInfo userInput;
+            int userDesicion = 0;
+            bool validUserInput = false;
+
+            while (validUserInput == false)
+            {
+                Console.Write($"{someQuestion}\t");
+                userInput = Console.ReadKey();
+
+                if (userInput.Key == ConsoleKey.Y)
+                {
+                    userDesicion = KEY_Y_HASH;
+                    Console.WriteLine($"\n{confirmText}");
+                    break;
+                }
+                else if (userInput.Key == ConsoleKey.Escape)
+                {
+                    userDesicion = KEY_ESC_HASH;
+                    Console.WriteLine($"\n{escapeText}");
+                    break;
+                }
+                Console.WriteLine("Eingabe ungültig! Bitte Auswahl beachten.");
+            }
+            return userDesicion;
         }
 
         //public static Donation ShowUserDonation(User userToEdit)

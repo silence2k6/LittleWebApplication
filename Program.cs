@@ -6,7 +6,6 @@ namespace LittleWebApplication
     internal class Progamm
     {
         const int ESC_HASH = 1769499;
-
         static void Main(string[] args)
         {
             List<User> adminUserList = new();
