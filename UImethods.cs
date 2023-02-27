@@ -5,11 +5,6 @@ namespace LittleWebApplication
 {
     public class UImethods
     {
-        const int KEY_ESC_HASH = 1769499;
-        const int KEY_FONE_HASH = 7340032;
-        const int KEY_FTWO_HASH = 7405568;
-        const int KEY_Y_HASH = 39387225;
-
         /// <summary>
         /// asks user for login number
         /// </summary>
@@ -164,11 +159,10 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="menueOptions">how many menues are aviable</param>
         /// <returns>selected menue</returns>
-        public static int AskforMenueSelection(int menueOptions)
+        public static ConsoleKey AskforMenueSelection(int menueOptions)
         {
             bool validUserInput = false;
-            ConsoleKeyInfo userInput;
-            int userMenueSelection = 0;
+            ConsoleKeyInfo userInput = new();
 
             while (validUserInput == false)
             {
@@ -178,9 +172,9 @@ namespace LittleWebApplication
 
                 if (char.IsDigit(userInput.KeyChar))
                 {
-                    userMenueSelection = int.Parse(userInput.KeyChar.ToString());
+                    int intNumber = Convert.ToInt32(userInput.KeyChar.ToString());
 
-                    if (userMenueSelection <= 0 || userMenueSelection > menueOptions)
+                    if (intNumber <= 0 || intNumber > menueOptions)
                     {
                         if (menueOptions > 0)
                         {
@@ -198,17 +192,14 @@ namespace LittleWebApplication
                 }
                 else if (userInput.Key == ConsoleKey.Escape)
                 {
-                    userMenueSelection = userInput.GetHashCode();
                     break;
                 }
                 else if (userInput.Key == ConsoleKey.F1)
                 {
-                    userMenueSelection = userInput.GetHashCode();
                     break;
                 }
                 else if (userInput.Key == ConsoleKey.F2)
                 {
-                    userMenueSelection = userInput.GetHashCode();
                     break;
                 }
                 else
@@ -216,9 +207,8 @@ namespace LittleWebApplication
                     Console.WriteLine("Mögliche Menüauswahl beachten!!!");
                 }
             }
-            return userMenueSelection;
+            return userInput.Key;
         }
-
 
         /// <summary>
         /// shows private/business/service or admin user main menue
@@ -253,20 +243,19 @@ namespace LittleWebApplication
             return mainMenueOptions;
         }
 
-
         /// <summary>
         /// shows whole private user sub menue
         /// </summary>
         /// <param name="userMainMenueSelection">users selected menue</param>
-        public static void ShowPrivatUserSubMenue(int userMainMenueSelection)
+        public static void ShowPrivatUserSubMenue(ConsoleKey userMainMenueSelection)
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != KEY_ESC_HASH)
+            while (userMainMenueSelection != ConsoleKey.Escape)
             {
-                int userSubMenueSelection;
+                ConsoleKey userSubMenueSelection;
 
-                if (userMainMenueSelection == 1)
+                if (userMainMenueSelection == ConsoleKey.D1)
                 {
                     //show donation list + sort/print function
                     Console.WriteLine("SPENDENÜBERSICHT");
@@ -275,44 +264,44 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
-                else if (userMainMenueSelection == 2)
+                else if (userMainMenueSelection == ConsoleKey.D2)
                 {
                     Console.WriteLine("\nSAMMLUNGEN\n1.Meine Gewinne\n2.Achievements\n3.Dailys\n4.Little-Missions\n(Press ESC to go back)");
                     subMenueOptions = 4;
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
                         int subSubMenueOptions = 0;
 
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             Console.WriteLine("\nMEINE GEWINNE\n1.Cosmetics\n2.Bilder\n3.Videos\n4.Storys\n5.Zitate\n6.Coupons\n(Press ESC to go back)");
                             subSubMenueOptions = 6;
 
-                            int userSubSubMenueSelection = AskforMenueSelection(subSubMenueOptions);
+                            ConsoleKey userSubSubMenueSelection = AskforMenueSelection(subSubMenueOptions);
 
-                            if (userSubSubMenueSelection == KEY_ESC_HASH)
+                            if (userSubSubMenueSelection == ConsoleKey.Escape)
                             {
                                 break;
                             }
 
-                            while (userSubSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubSubMenueSelection != ConsoleKey.Escape)
                             {
                                 int subSubSubMenueOptions = 0;
 
-                                if (userSubSubMenueSelection == 1)
+                                if (userSubSubMenueSelection == ConsoleKey.D1)
                                 {
                                     //Show userCosmetics
                                     Console.WriteLine("COSMETICS");
@@ -321,12 +310,12 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
                                 }
-                                else if (userSubSubMenueSelection == 2)
+                                else if (userSubSubMenueSelection == ConsoleKey.D2)
                                 {
                                     //Show userCosmetics
                                     Console.WriteLine("BILDER");
@@ -335,12 +324,12 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
                                 }
-                                else if (userSubSubMenueSelection == 3)
+                                else if (userSubSubMenueSelection == ConsoleKey.D3)
                                 {
                                     //Show userCosmetics
                                     Console.WriteLine("VIDEOS");
@@ -349,12 +338,12 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
                                 }
-                                else if (userSubSubMenueSelection == 4)
+                                else if (userSubSubMenueSelection == ConsoleKey.D4)
                                 {
                                     //Show userCosmetics
                                     Console.WriteLine("STORYS");
@@ -363,12 +352,12 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
                                 }
-                                else if (userSubSubMenueSelection == 5)
+                                else if (userSubSubMenueSelection == ConsoleKey.D5)
                                 {
                                     //Show userCosmetics
                                     Console.WriteLine("ZITATE");
@@ -377,21 +366,21 @@ namespace LittleWebApplication
                                     Console.WriteLine(new string('-', 10));
                                     Console.WriteLine("(Press ESC to go back)");
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
                                         userSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                     }
                                 }
-                                else if (userSubSubMenueSelection == 6)
+                                else if (userSubSubMenueSelection == ConsoleKey.D6)
                                 {
                                     Console.WriteLine("\nCOUPONS\n1.Aktive Coupons\n2.Spezial Coupons\n3.eingelöste Coupons\n4.abgelaufene Coupons\n(Press ESC to go back)");
                                     subSubSubMenueOptions = 4;
 
-                                    int userSubSubSubMenueSelection = AskforMenueSelection(subSubSubMenueOptions);
+                                    ConsoleKey userSubSubSubMenueSelection = AskforMenueSelection(subSubSubMenueOptions);
 
-                                    while (userSubSubMenueSelection != KEY_ESC_HASH)
+                                    while (userSubSubMenueSelection != ConsoleKey.Escape)
                                     {
-                                        if (userSubSubSubMenueSelection == 1)
+                                        if (userSubSubSubMenueSelection == ConsoleKey.D1)
                                         {
                                             //show all active Coupons
                                             Console.WriteLine("AKTIVE COUPONS\n");
@@ -400,12 +389,12 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
+                                            while (userSubSubSubMenueSelection != ConsoleKey.Escape)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
                                         }
-                                        if (userSubSubSubMenueSelection == 2)
+                                        if (userSubSubSubMenueSelection == ConsoleKey.D2)
                                         {
                                             //show all active Coupons
                                             Console.WriteLine("SPEZIAL COUPONS\n");
@@ -414,12 +403,12 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
+                                            while (userSubSubSubMenueSelection != ConsoleKey.Escape)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
                                         }
-                                        if (userSubSubSubMenueSelection == 3)
+                                        if (userSubSubSubMenueSelection == ConsoleKey.D3)
                                         {
                                             //show all active Coupons
                                             Console.WriteLine("EINGELÖSTE COUPONS\n");
@@ -428,12 +417,12 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
+                                            while (userSubSubSubMenueSelection != ConsoleKey.Escape)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
                                         }
-                                        if (userSubSubSubMenueSelection == 4)
+                                        if (userSubSubSubMenueSelection == ConsoleKey.D4)
                                         {
                                             //show all active Coupons
                                             Console.WriteLine("ABGELAUFENE COUPONS\n");
@@ -442,7 +431,7 @@ namespace LittleWebApplication
                                             Console.WriteLine(new string('-', 10));
                                             Console.WriteLine("(Press ESC to go back)");
 
-                                            while (userSubSubSubMenueSelection != KEY_ESC_HASH)
+                                            while (userSubSubSubMenueSelection != ConsoleKey.Escape)
                                             {
                                                 userSubSubSubMenueSelection = AskforMenueSelection(subMenueOptions);
                                             }
@@ -451,7 +440,7 @@ namespace LittleWebApplication
                                 }
                             }
                         }
-                        else if (userSubMenueSelection == 2)
+                        else if (userSubMenueSelection == ConsoleKey.D2)
                         {
                             //show all achievements (finished ones in color and lighted)
                             Console.WriteLine("ACHIEVEMENTS\n");
@@ -460,12 +449,12 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        else if (userSubMenueSelection == 3)
+                        else if (userSubMenueSelection == ConsoleKey.D3)
                         {
                             //show daily challenges
                             Console.WriteLine("DAILY CHALLENGES\n");
@@ -474,13 +463,13 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
 
                         }
-                        else if (userSubMenueSelection == 4)
+                        else if (userSubMenueSelection == ConsoleKey.D4)
                         {
                             //show regular events if if eventList isn't empty
                             Console.WriteLine("EVENTS\n");
@@ -489,28 +478,28 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
                     }
                 }
-                else if (userMainMenueSelection == 3)
+                else if (userMainMenueSelection == ConsoleKey.D2)
                 {
                     Console.WriteLine("\nMELDUNGEN\n1.Nachrichten\n2.Couponerinnerungen\n(Press ESC to go back)");
                     subMenueOptions = 2;
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             //show all notifications (non read in bold)
                             Console.WriteLine("NACHRICHTEN\n");
@@ -519,12 +508,12 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        if (userSubMenueSelection == 2)
+                        if (userSubMenueSelection == ConsoleKey.D2)
                         {
                             //show all couponreminder
                             Console.WriteLine("COUPONERINNERUNGEN\n");
@@ -533,28 +522,28 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
                     }
                 }
-                else if (userMainMenueSelection == 4)
+                else if (userMainMenueSelection == ConsoleKey.D4)
                 {
                     Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n(Press ESC to go back)");
                     subMenueOptions = 2;
 
                     userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
 
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             //show userProfil
                             Console.WriteLine("PROFILEINSTELLUNGEN\n");
@@ -563,12 +552,12 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        if (userSubMenueSelection == 2)
+                        if (userSubMenueSelection == ConsoleKey.D2)
                         {
                             //show password administration
                             Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
@@ -577,14 +566,14 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
                     }
                 }
-                else if (userMainMenueSelection == 5)
+                else if (userMainMenueSelection == ConsoleKey.D5)
                 {
                     //userNotification administration
                     Console.WriteLine("TICKET ERSTELLEN");
@@ -593,12 +582,12 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
-                else if (userMainMenueSelection == 6)
+                else if (userMainMenueSelection == ConsoleKey.D6)
                 {
                     //show map(Google) with all terminal destinations
                     Console.WriteLine("LITTLE-STANDORTE");
@@ -607,7 +596,7 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
@@ -620,13 +609,13 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="userMainMenueSelection">selected menue</param>
         /// <returns></returns>
-        public static void ShowBusinessUserSubMenue(int userMainMenueSelection)
+        public static void ShowBusinessUserSubMenue(ConsoleKey userMainMenueSelection)
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != KEY_ESC_HASH)
+            while (userMainMenueSelection != ConsoleKey.Escape)
             {
-                if (userMainMenueSelection == 1)
+                if (userMainMenueSelection == ConsoleKey.D1)
                 {
                     //show userTerminals
                     Console.WriteLine(new string('-', 10));
@@ -634,12 +623,12 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
-                else if (userMainMenueSelection == 2)
+                else if (userMainMenueSelection == ConsoleKey.D2)
                 {
                     //show userCoupons
                     Console.WriteLine(new string('-', 10));
@@ -647,25 +636,25 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
-                else if (userMainMenueSelection == 3)
+                else if (userMainMenueSelection == ConsoleKey.D3)
                 {
                     Console.WriteLine("\nEINSTELLUNGEN\n1.Profileinstellungen\n2.Passworteinstellungen\n(Press ESC to go back)");
                     subMenueOptions = 2;
 
-                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                    ConsoleKey userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             //show userProfil
                             Console.WriteLine("PROFILEINSTELLUNGEN\n");
@@ -674,12 +663,12 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        else if (userSubMenueSelection == 2)
+                        else if (userSubMenueSelection == ConsoleKey.D2)
                         {
                             //show password administration
                             Console.WriteLine("PASSWORTEINSTELLUNGEN\n");
@@ -688,7 +677,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -703,13 +692,13 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="userMainMenueSelection">selected menue</param>
         /// <returns></returns>
-        public static void ShowServiceUserSubMenue(int userMainMenueSelection)
+        public static void ShowServiceUserSubMenue(ConsoleKey userMainMenueSelection)
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != KEY_ESC_HASH)
+            while (userMainMenueSelection != ConsoleKey.Escape)
             {
-                if (userMainMenueSelection == 1)
+                if (userMainMenueSelection == ConsoleKey.D1)
                 {
                     //show userTerminals
                     Console.WriteLine(new string('-', 10));
@@ -717,25 +706,25 @@ namespace LittleWebApplication
                     Console.WriteLine(new string('-', 10));
                     Console.WriteLine("(Press ESC to go back)");
 
-                    while (userMainMenueSelection != KEY_ESC_HASH)
+                    while (userMainMenueSelection != ConsoleKey.Escape)
                     {
                         userMainMenueSelection = AskforMenueSelection(subMenueOptions);
                     }
                 }
-                else if (userMainMenueSelection == 2)
+                else if (userMainMenueSelection == ConsoleKey.D2)
                 {
                     Console.WriteLine("\nMELDUNGEN\n1.Terminalmeldungen\n2.Meine Aufgaben\n(Press ESC to go back)");
                     subMenueOptions = 2;
 
-                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                    ConsoleKey userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             //show all terminalNotifications (complete notification to disapear)
                             Console.WriteLine("TERMINALMELDUNGEN\n");
@@ -744,12 +733,12 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D2)
                         {
                             //show all adminTasks (add note and complete task to disapear)
                             Console.WriteLine("MEINE AUFGABEN\n");
@@ -758,7 +747,7 @@ namespace LittleWebApplication
                             Console.WriteLine(new string('-', 10));
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
@@ -773,26 +762,26 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="userMainMenueSelection">selected menue</param>
         /// <returns></returns>
-        public static void ShowAdminUserSubMenue(int userMainMenueSelection)
+        public static void ShowAdminUserSubMenue(ConsoleKey userMainMenueSelection)
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != KEY_ESC_HASH)
+            while (userMainMenueSelection != ConsoleKey.Escape)
             {
-                if (userMainMenueSelection == 1)
+                if (userMainMenueSelection == ConsoleKey.D1)
                 {
                     Console.WriteLine("\nUSERVERWALTUNG\n1.PrivateUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
                     subMenueOptions = 4;
 
-                    int userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+                    ConsoleKey userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                    if (userSubMenueSelection == KEY_ESC_HASH)
+                    if (userSubMenueSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
-                    while (userSubMenueSelection != KEY_ESC_HASH)
+                    while (userSubMenueSelection != ConsoleKey.Escape)
                     {
-                        if (userSubMenueSelection == 1)
+                        if (userSubMenueSelection == ConsoleKey.D1)
                         {
                             //add sort/search function
                             List<User> privateUserList = Backup.LoadPrivateUserRepository();
@@ -806,14 +795,14 @@ namespace LittleWebApplication
 
                             Console.WriteLine("(Press ESC to go back)");
 
-                            while (userSubMenueSelection != KEY_ESC_HASH)
+                            while (userSubMenueSelection != ConsoleKey.Escape)
                             {
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
                             }
                         }
-                        else if (userSubMenueSelection == 2)
+                        else if (userSubMenueSelection == ConsoleKey.D2)
                         {
-                            while (userMainMenueSelection != KEY_ESC_HASH)
+                            while (userMainMenueSelection != ConsoleKey.Escape)
                             {
                                 //add sort/search function
                                 List<User> businessUserList = Backup.LoadBusinessUserRepository();
@@ -835,11 +824,11 @@ namespace LittleWebApplication
 
                                 userSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-                                if (userSubMenueSelection == KEY_ESC_HASH)
+                                if (userSubMenueSelection == ConsoleKey.Escape)
                                 {
                                     break;
                                 }
-                                else if (userSubMenueSelection == KEY_FONE_HASH)
+                                else if (userSubMenueSelection == ConsoleKey.F1)
                                 {
                                     List<Account> accountList = Backup.LoadAccountRepository();
                                     string accountNumber = Account.CreateAccountNumber(accountList);
@@ -863,58 +852,58 @@ namespace LittleWebApplication
                                         break;
                                     }
                                 }
-                                else if (userSubMenueSelection == KEY_FTWO_HASH)
+                                else if (userSubMenueSelection == ConsoleKey.F2)
                                 {
-                                    int editUserProfil = 0;
+                                    ConsoleKey editUserProfil = 0;
 
-                                    while (editUserProfil != KEY_ESC_HASH)
+                                    while (editUserProfil != ConsoleKey.Escape)
                                     {
                                         editUserProfil = EditUserProfil(businessUserList, Enums.AccountType.businessUser);
                                     }
                                 }
                             }
                         }
-                        else if (userSubMenueSelection == 3)
+                        else if (userSubMenueSelection == ConsoleKey.D3)
                         {
                             //show serviceUser overview
                         }
-                        else if (userSubMenueSelection == 4)
+                        else if (userSubMenueSelection == ConsoleKey.D4)
                         {
                             //show adminUser overview
                         }
                     }
                 }
-                else if (userMainMenueSelection == 2)
+                else if (userMainMenueSelection == ConsoleKey.D2)
                 {
                     Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
                     subMenueOptions = 4;
                     //show finance administration
                 }
-                else if (userMainMenueSelection == 3)
+                else if (userMainMenueSelection == ConsoleKey.D3)
                 {
                     Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
                     //show terminal administration
                 }
-                else if (userMainMenueSelection == 4)
+                else if (userMainMenueSelection == ConsoleKey.D4)
                 {
                     Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
                     //show fundraiser administration
                 }
-                else if (userMainMenueSelection == 5)
+                else if (userMainMenueSelection == ConsoleKey.D5)
                 {
                     Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
                     subMenueOptions = 3;
                     //show reward administration
                 }
-                else if (userMainMenueSelection == 6)
+                else if (userMainMenueSelection == ConsoleKey.D6)
                 {
                     Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
                     subMenueOptions = 2;
                     //show achievement administration
                 }
-                else if (userMainMenueSelection == 7)
+                else if (userMainMenueSelection == ConsoleKey.D7)
                 {
                     Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
                     subMenueOptions = 5;
@@ -928,7 +917,7 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="artOfAccount">art of user account</param>
         /// <param name="userMainMenueSelection">selected menue</param>
-        public static void ShowSubMenue(Enums.AccountType artOfAccount, int userMainMenueSelection)
+        public static void ShowSubMenue(Enums.AccountType artOfAccount, ConsoleKey userMainMenueSelection)
         {
             if (artOfAccount == Enums.AccountType.privateUser)
             {
@@ -1113,16 +1102,16 @@ namespace LittleWebApplication
         /// enables user to edit existing user profil
         /// </summary>
         /// <param name="userList">business/service or admin user list</param>
-        public static int EditUserProfil(List<User> userList, Enums.AccountType artOfAccount)
+        public static ConsoleKey EditUserProfil(List<User> userList, Enums.AccountType artOfAccount)
         {
-            int editUserProfil = 0;
+            ConsoleKey editUserProfil = new();
 
-            while (editUserProfil != KEY_ESC_HASH)
+            while (editUserProfil != ConsoleKey.Escape)
             {
-                int userDecision = 0;
+                ConsoleKey userDecision = new();
                 User userToEdit = new();
 
-                while (userDecision != KEY_ESC_HASH)
+                while (userDecision != ConsoleKey.Escape)
                 {
                     Console.WriteLine("\nUSERPROFIL BEARBEITEN\nWelchen User wollen Sie bearbeiten?");
 
@@ -1151,23 +1140,18 @@ namespace LittleWebApplication
                     {
                         userDecision = AskSomeQuestionOrPressESC("Auswahl ändern 'Y' oder Menü verlassen 'ESC':", "\n", "Userbearbeitung ABGEBROCHEN!");
 
-                        if (userDecision == KEY_ESC_HASH)
+                        if (userDecision == ConsoleKey.Escape)
                         {
-                            editUserProfil = KEY_ESC_HASH;
+                            break;
                         }
                     }
                 }
 
-                if (editUserProfil == KEY_ESC_HASH)
-                {
-                    break;
-                }
-
                 int editOptions = 0;
-                int userSelection = 0;
+                ConsoleKey userSelection = new();
                 bool editsConfirmed;
 
-                while (userSelection != KEY_ESC_HASH)
+                while (userSelection != ConsoleKey.Escape)
                 {
                     Console.WriteLine("Was möchten Sie ändern?");
 
@@ -1184,16 +1168,16 @@ namespace LittleWebApplication
 
                     userSelection = AskforMenueSelection(editOptions);
 
-                    if (userSelection == KEY_ESC_HASH)
+                    if (userSelection == ConsoleKey.Escape)
                     {
                         break;
                     }
 
-                    while (userSelection != KEY_ESC_HASH)
+                    while (userSelection != ConsoleKey.Escape)
                     {
                         if (artOfAccount == Enums.AccountType.businessUser)
                         {
-                            if (userSelection == 1)
+                            if (userSelection == ConsoleKey.D1)
                             {
                                 Console.Write($"aktueller Firmenname:\n{new string('-', 10)}\n{userToEdit.userCompany.companyName}\n{new string('-', 10)}\nneuer Firmenname:\t");
                                 string oldCompanyName = userToEdit.userCompany.companyName;
@@ -1217,24 +1201,23 @@ namespace LittleWebApplication
 
                         else if (artOfAccount == Enums.AccountType.serviceUser)
                         {
-                            if (userSelection == 1)
+                            if (userSelection == ConsoleKey.D1)
                             {
                                 Console.WriteLine($"aktueller Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n1.Familienname ändern\n2.Vorname ändern\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
                                 editOptions = 2;
 
                                 userSelection = AskforMenueSelection(editOptions);
 
-                                if (userSelection == KEY_ESC_HASH)
+                                if (userSelection == ConsoleKey.Escape)
                                 {
                                     break;
                                 }
-
-                                else if (userSelection == 1)
+                                else if (userSelection == ConsoleKey.D1)
                                 {
                                     Console.Write("neuer Familienname:\t");
                                     userToEdit.userName.userLastName = Console.ReadLine();
                                 }
-                                else if (userSelection == 2)
+                                else if (userSelection == ConsoleKey.D2)
                                 {
                                     Console.Write("neue Vorname:\t");
                                     userToEdit.userName.userFirstName = Console.ReadLine();
@@ -1244,7 +1227,7 @@ namespace LittleWebApplication
 
                                 //AskForSaveUserEdits(artOfAccount);
                             }
-                            else if (userSelection == 2)
+                            else if (userSelection == ConsoleKey.D2)
                             {
                                 Console.WriteLine($"aktuelle Adresse:\n{new string('-', 10)}\n{userToEdit.userAdress}\n{new string('-', 10)}\n");
 
@@ -1263,24 +1246,24 @@ namespace LittleWebApplication
 
                                 //AskForSaveUserEdits(artOfAccount);
                             }
-                            else if (userSelection == 3)
+                            else if (userSelection == ConsoleKey.D3)
                             {
                                 Console.WriteLine($"aktueller Kontakt:\n{new string('-', 10)}\n{userToEdit.userContact}\n{new string('-', 10)}\n1.Telefonnummer ändern\n2.Mailadresse ändern\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
                                 editOptions = 2;
 
                                 userSelection = AskforMenueSelection(editOptions);
 
-                                if (userSelection == KEY_ESC_HASH)
+                                if (userSelection == ConsoleKey.Escape)
                                 {
                                     break;
                                 }
 
-                                else if (userSelection == 1)
+                                else if (userSelection == ConsoleKey.D1)
                                 {
                                     Console.WriteLine("neue Telefonnummer:\t");
                                     userToEdit.userContact.userContactTel = Console.ReadLine();
                                 }
-                                else if (userSelection == 2)
+                                else if (userSelection == ConsoleKey.D2)
                                 {
                                     Console.WriteLine("neue Mailadresse:\t");
                                     userToEdit.userContact.userContactMail = Console.ReadLine();
@@ -1290,7 +1273,7 @@ namespace LittleWebApplication
 
                                 //AskForSaveUserEdits(artOfAccount);
                             }
-                            else if (userSelection == 4)
+                            else if (userSelection == ConsoleKey.D4)
                             {
                                 Console.WriteLine($"aktuelles Passwort:\n{new string('-', 10)}\n{userToEdit.userLogin.userLoginPassword}\n{new string('-', 10)}\n");
 
@@ -1300,7 +1283,7 @@ namespace LittleWebApplication
 
                                 //AskForSaveUserEdits(artOfAccount);
                             }
-                            else if (userSelection == 5)
+                            else if (userSelection == ConsoleKey.D5)
                             {
                                 List<Account> accountList = Backup.LoadAccountRepository();
 
@@ -1324,7 +1307,7 @@ namespace LittleWebApplication
                                             Backup.StoreAccountRepository(accountList);
                                             break;
                                         }
-                                        else if (deactivateAccount == Convert.ToString(KEY_ESC_HASH)) ;
+                                        else if (deactivateAccount == Convert.ToString(ConsoleKey.Escape))
                                         {
                                             break;
                                         }
@@ -1347,7 +1330,7 @@ namespace LittleWebApplication
                                             Backup.StoreAccountRepository(accountList);
                                             break;
                                         }
-                                        else if (deactivateAccount == Convert.ToString(KEY_ESC_HASH)) ;
+                                        else if (deactivateAccount == Convert.ToString(ConsoleKey.Escape))
                                         {
                                             break;
                                         }
@@ -1385,35 +1368,33 @@ namespace LittleWebApplication
                 userList = Backup.LoadAdminUserRepository();
             }
 
-            int userDecision = AskSomeQuestionOrPressESC("Drücke 'Y' um zu speichern oder 'ESC' um Änderung zu verwerfen und in das vorherige Menü zurück zu kehren:\t", "Änderungen GESPEICHERT!", "Änderungen VERWORFEN!");
+            ConsoleKey userDecision = AskSomeQuestionOrPressESC("Drücke 'Y' um zu speichern oder 'ESC' um Änderung zu verwerfen und in das vorherige Menü zurück zu kehren:\t", "Änderungen GESPEICHERT!", "Änderungen VERWORFEN!");
 
-            if (userDecision == KEY_Y_HASH)
+            if (userDecision == ConsoleKey.Y)
             {
                 editsConfirmed = true;
             }
             return editsConfirmed;
         }
 
-        public static int AskSomeQuestionOrPressESC (string someQuestion, string confirmText, string escapeText)
+        public static ConsoleKey AskSomeQuestionOrPressESC(string someQuestion, string confirmText, string escapeText)
         {
-            ConsoleKeyInfo userInput;
-            int userDesicion = 0;
+            ConsoleKey userDesicion = new();
             bool validUserInput = false;
 
             while (validUserInput == false)
             {
                 Console.Write($"{someQuestion}\t");
-                userInput = Console.ReadKey();
+                ConsoleKeyInfo userInput = Console.ReadKey();
+                userDesicion = userInput.Key;
 
                 if (userInput.Key == ConsoleKey.Y)
                 {
-                    userDesicion = KEY_Y_HASH;
                     Console.WriteLine($"\n{confirmText}");
                     break;
                 }
                 else if (userInput.Key == ConsoleKey.Escape)
                 {
-                    userDesicion = KEY_ESC_HASH;
                     Console.WriteLine($"\n{escapeText}");
                     break;
                 }

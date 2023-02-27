@@ -4,7 +4,8 @@
     {
         public enum AccountType
         {
-            privateUser = 1,
+            UNDEFINED,
+            privateUser,
             businessUser,
             serviceUser,
             adminUser,
@@ -14,7 +15,8 @@
 
         public enum Status
         {
-            active = 1,
+            UNDEFINED,
+            active,
             disabled,
             expired,
             used
@@ -22,7 +24,8 @@
 
         public enum TerminalService
         {
-            emptying = 1,
+            UNDEFINED,
+            emptying,
             repair,
             remove,
             installation

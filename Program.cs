@@ -5,7 +5,6 @@ namespace LittleWebApplication
 {
     internal class Progamm
     {
-        const int ESC_HASH = 1769499;
         static void Main(string[] args)
         {
             List<User> adminUserList = new();
@@ -81,9 +80,9 @@ namespace LittleWebApplication
             while (mainMenueNavigation == false)
             {
                 int mainMainMenueOptions = UImethods.ShowMainMenue(artOfAccount);
-                int userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
+                ConsoleKey userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
 
-                if (userMainMenueSelection == ESC_HASH)
+                if (userMainMenueSelection == ConsoleKey.Escape)
                 {
                     Environment.Exit(0);
                     //Go Back To Login
