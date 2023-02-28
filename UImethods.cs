@@ -790,7 +790,7 @@ namespace LittleWebApplication
 
                             foreach (User user in privateUserList)
                             {
-                                Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                                Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
                             }
 
                             Console.WriteLine("(Press ESC to go back)");
@@ -862,6 +862,7 @@ namespace LittleWebApplication
                                     }
                                 }
                             }
+                            break;
                         }
                         else if (userSubMenueSelection == ConsoleKey.D3)
                         {
@@ -970,10 +971,8 @@ namespace LittleWebApplication
                 Console.Write("Name Firma:\t\t\t");
             }
             newCompany.companyName = Console.ReadLine();
-            Console.Write("Kontaktperson Vorname:\t\t");
-            newCompany.contactPersonFirstname = Console.ReadLine();
-            Console.Write("Kontaktperson Familienname:\t");
-            newCompany.contactPersonFamilyname = Console.ReadLine();
+            Console.WriteLine("Kontaktperson Name:");
+            newCompany.contactPersonName = AskForNameInformations();
             Console.Write("Kontaktperson Firmenfunktion:\t");
             newCompany.contactPersonFunction = Console.ReadLine();
             Console.Write("Kontaktperson Telefonnummer:\t");
@@ -1128,12 +1127,20 @@ namespace LittleWebApplication
                         }
                         else if (artOfAccount == Enums.AccountType.serviceUser)
                         {
-                            //show serviceUserProfil
+                            Console.WriteLine($"\nAKTUELLES USERPROFIL:\n{new string('-', 10)}\nUsernummer:\t{userToEdit.userNumber}\nMitarbeiter:\t\t{userToEdit.userName}\nAdresse:\t{userToEdit.userAdress.userAdressStreet} {userToEdit.userAdress.userAdressNumber}\n\t\t{userToEdit.userAdress.userAdressPostalCode} {userToEdit.userAdress.userAdressTown}\n\t\t{userToEdit.userAdress.userAdressFederalState}\nBenutzername:\t{userToEdit.userLogin.userLoginNumber}\nPasswort:\t{userToEdit.userLogin.userLoginPassword}\nMitarbeiter seit:\t{userToEdit.joinDateTime}\t{userToEdit.accountStatus}\n{new string('-', 10)}");
+                            break;
                         }
                         else if (artOfAccount == Enums.AccountType.adminUser)
                         {
-                            //show adminUserProfil
-                            //attention: if userToEditSelection is mainAdmin(a000001) "not possible to edit!!!"
+                            if (userToEdit.userNumber == "A#000001")
+                            {
+                                Console.WriteLine("Bearbeitung des Hautadmins nicht möglich!!!");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\nAKTUELLES USERPROFIL:\n{new string('-', 10)}\nUsernummer:\t{userToEdit.userNumber}\nAdmin:\t\t{userToEdit.userName}\nBenutzername:\t{userToEdit.userLogin.userLoginNumber}\nPasswort:\t{userToEdit.userLogin.userLoginPassword}\nAdmin seit:\t{userToEdit.joinDateTime}\t{userToEdit.accountStatus}\n{new string('-', 10)}");
+                                break;
+                            }
                         }
                     }
                     else
@@ -1162,7 +1169,12 @@ namespace LittleWebApplication
                     }
                     else if (artOfAccount == Enums.AccountType.serviceUser)
                     {
-                        Console.WriteLine($"1.Name\n2.Adresse\n3.Kontakt\n4.Passwort\n5.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                        Console.WriteLine($"1.Name Mitarbeiter\n2.Adresse\n3.Kontakt\n4.Passwort\n5.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                        editOptions = 5;
+                    }
+                    else if (artOfAccount == Enums.AccountType.adminUser)
+                    {
+                        Console.WriteLine($"1.Name Admin\n2.Adresse\n3.Kontakt\n4.Passwort\n5.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
                         editOptions = 5;
                     }
 
@@ -1196,14 +1208,10 @@ namespace LittleWebApplication
                                     Backup.StoreBusinessUserRepository(userList);
                                 }
                             }
-                            break;
-                        }
-
-                        else if (artOfAccount == Enums.AccountType.serviceUser)
-                        {
-                            if (userSelection == ConsoleKey.D1)
+                            if (userSelection == ConsoleKey.D2)
                             {
-                                Console.WriteLine($"aktueller Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n1.Familienname ändern\n2.Vorname ändern\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                                NameInformations oldContactPerson = userToEdit.userName;
+                                Console.WriteLine($"aktuelle Kontaktperson:\n{new string('-', 10)}\n{userToEdit.userCompany.contactPersonName.userFirstName} {userToEdit.userCompany.contactPersonName.userLastName.ToUpper()}\n{new string('-', 10)}\n1.Familienname ändern\n2.Vorname ändern\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
                                 editOptions = 2;
 
                                 userSelection = AskforMenueSelection(editOptions);
@@ -1212,20 +1220,56 @@ namespace LittleWebApplication
                                 {
                                     break;
                                 }
-                                else if (userSelection == ConsoleKey.D1)
+                                else
                                 {
-                                    Console.Write("neuer Familienname:\t");
-                                    userToEdit.userName.userLastName = Console.ReadLine();
-                                }
-                                else if (userSelection == ConsoleKey.D2)
-                                {
-                                    Console.Write("neue Vorname:\t");
-                                    userToEdit.userName.userFirstName = Console.ReadLine();
+                                    userToEdit.userName = EditUserName(userToEdit, userSelection);
                                 }
 
-                                Console.WriteLine($"neuer Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n");
+                                editsConfirmed = AskForSaveUserEdits(artOfAccount);
 
-                                //AskForSaveUserEdits(artOfAccount);
+                                if (editsConfirmed == true)
+                                {
+                                    Backup.StoreBusinessUserRepository(userList);
+                                }
+                                else if (editsConfirmed == false)
+                                {
+                                    userToEdit.userName = oldContactPerson;
+                                    Backup.StoreBusinessUserRepository(userList);
+                                }
+                            }
+                            break;
+                        }
+
+                        else if (artOfAccount == Enums.AccountType.serviceUser)
+                        {
+                            if (userSelection == ConsoleKey.D1)
+                            {
+                                NameInformations oldUserName = userToEdit.userName;
+                                Console.WriteLine($"aktueller Name:\n{new string('-', 10)}\n{userToEdit.userName.userFirstName} {userToEdit.userName.userLastName.ToUpper()}\n{new string('-', 10)}\n1.Familienname ändern\n2.Vorname ändern\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                                editOptions = 2;
+
+                                userSelection = AskforMenueSelection(editOptions);
+
+                                if (userSelection == ConsoleKey.Escape)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    userToEdit.userName = EditUserName(userToEdit, userSelection);
+                                }
+
+                                editsConfirmed = AskForSaveUserEdits(artOfAccount);
+
+                                if (editsConfirmed == true)
+                                {
+                                    Backup.StoreServiceUserRepository(userList);
+                                }
+                                else if (editsConfirmed == false)
+                                {
+                                    userToEdit.userName = oldUserName;
+                                    Backup.StoreServiceUserRepository(userList);
+                                }
                             }
                             else if (userSelection == ConsoleKey.D2)
                             {
@@ -1344,6 +1388,22 @@ namespace LittleWebApplication
                 }
             }
             return editUserProfil;
+        }
+
+        public static NameInformations EditUserName(User userToEdit, ConsoleKey userSelection)
+        {
+            if (userSelection == ConsoleKey.D1)
+            {
+                Console.Write("neuer Familienname:\t");
+                userToEdit.userName.userLastName = Console.ReadLine();
+            }
+            else if (userSelection == ConsoleKey.D2)
+            {
+                Console.Write("neue Vorname:\t");
+                userToEdit.userName.userFirstName = Console.ReadLine();
+            }
+            Console.WriteLine($"neuer Name:\n{new string('-', 10)}\n{userToEdit.userName}\n{new string('-', 10)}\n");
+            return userToEdit.userName;
         }
 
         public static bool AskForSaveUserEdits(Enums.AccountType artOfAccount)

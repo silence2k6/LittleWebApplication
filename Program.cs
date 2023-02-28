@@ -27,6 +27,7 @@ namespace LittleWebApplication
             Backup.StoreAccountRepository(accountList);
             Backup.StorePrivateUserRepository(privateUserList);
 
+            bool userLogin = false;
             bool validUserLogin = false;
             bool validArtOfUser = false;
             string userLoginNumberInput = "";
@@ -34,62 +35,64 @@ namespace LittleWebApplication
             Enums.Status accountStatus = 0;
             User user = new();
 
-            while (validUserLogin == false)
+            while (userLogin == false)
             {
-                while (validArtOfUser == false)
+                while (validUserLogin == false)
                 {
-                    userLoginNumberInput = UImethods.AskForUserLoginNumber();
-                    artOfAccount = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
+                    while (validArtOfUser == false)
+                    {
+                        userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                        artOfAccount = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
 
-                    if (artOfAccount != 0)
+                        if (artOfAccount != 0)
+                        {
+                            break;
+                        }
+                    }
+
+                    user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
+
+                    if (user != null)
                     {
                         break;
                     }
                 }
 
-                user = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
+                accountStatus = Account.CheckAccountStatus(user, accountList);
 
-                if (user != null)
+                if (accountStatus != Enums.Status.active)
                 {
-                    break;
+                    UImethods.AccountInacticeNotificaton(artOfAccount);
                 }
-            }
 
-            accountStatus = Account.CheckAccountStatus(user, accountList);
+                bool validUserPassword = false;
 
-            if (accountStatus != Enums.Status.active)
-            {
-                UImethods.AccountInacticeNotificaton(artOfAccount);
-            }
-
-            bool validUserPassword = false;
-
-            while (validUserPassword == false)
-            {
-                string userLoginPasswordInput = UImethods.AskForUserLoginPassword();
-                validUserPassword = UImethods.CheckUserLoginForValidPassword(user, userLoginPasswordInput);
-
-                if (validUserPassword == true)
+                while (validUserPassword == false)
                 {
-                    break;
+                    string userLoginPasswordInput = UImethods.AskForUserLoginPassword();
+                    validUserPassword = UImethods.CheckUserLoginForValidPassword(user, userLoginPasswordInput);
+
+                    if (validUserPassword == true)
+                    {
+                        break;
+                    }
                 }
-            }
 
-            bool mainMenueNavigation = false;
+                bool mainMenueNavigation = false;
 
-            while (mainMenueNavigation == false)
-            {
-                int mainMainMenueOptions = UImethods.ShowMainMenue(artOfAccount);
-                ConsoleKey userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
-
-                if (userMainMenueSelection == ConsoleKey.Escape)
+                while (mainMenueNavigation == false)
                 {
-                    Environment.Exit(0);
-                    //Go Back To Login
-                }
-                else
-                {
-                    UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
+                    int mainMainMenueOptions = UImethods.ShowMainMenue(artOfAccount);
+                    ConsoleKey userMainMenueSelection = UImethods.AskforMenueSelection(mainMainMenueOptions);
+
+                    if (userMainMenueSelection == ConsoleKey.Escape)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
+                    }
                 }
             }
         }
