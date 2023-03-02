@@ -5,6 +5,8 @@ namespace LittleWebApplication
 {
     internal class Progamm
     {
+        //Vorname und NACHNAME funktioniert bei Listenanzeige nicht
+        //Logout aus Admin Hauptmenü funktioniert nicht
         static void Main(string[] args)
         {
             List<User> adminUserList = new();

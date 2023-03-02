@@ -159,15 +159,17 @@ namespace LittleWebApplication.Users
             return newPrivatUserDummy;
         }
 
-        public static User CreateBusinessUser(Enums.AccountType artOfAccount, string accountNumber)
+        public static User CreateBusinessUser(string accountNumber)
         {
             User newBusinessUser = new();
             newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
-            newBusinessUser.userCompany = UImethods.AskForCompanyInformations(artOfAccount);
+            newBusinessUser.userCompany = UImethods.AskForCompanyInformations(Enums.AccountType.businessUser);
             newBusinessUser.userAdress = UImethods.AskForAdressInformations();
             newBusinessUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.businessUser);
             newBusinessUser.accountStatus = Enums.Status.active;
+
+            Console.WriteLine($"{new string('-', 10)}\nNEUER BUSINESS-USER\nUsernummer:\t{newBusinessUser.userNumber}\nFirma:\t\t{newBusinessUser.userCompany}\nFirmenadresse:\t{newBusinessUser.userAdress.userAdressStreet} {newBusinessUser.userAdress.userAdressNumber}\n\t{newBusinessUser.userAdress.userAdressPostalCode} {newBusinessUser.userAdress.userAdressTown}\n\t{newBusinessUser.userAdress.userAdressFederalState}\nBenutzername:\t{newBusinessUser.userLogin.userLoginNumber}\nPasswort:\t{newBusinessUser.userLogin.userLoginPassword}\n{new string('-', 10)}");
 
             return newBusinessUser;
         }
@@ -177,7 +179,7 @@ namespace LittleWebApplication.Users
             User newServiceUser = new();
             List<Account> accountList = Backup.LoadAccountRepository();
             newServiceUser.joinDateTime = DateTime.Now;
-            newServiceUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
+            newServiceUser.userNumber = CreateUserNumber(Enums.AccountType.serviceUser, accountNumber);
             newServiceUser.userAdress = UImethods.AskForAdressInformations();
             newServiceUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.serviceUser);
             newServiceUser.accountStatus = Account.CheckAccountStatus(newServiceUser, accountList);
@@ -185,12 +187,13 @@ namespace LittleWebApplication.Users
             return newServiceUser;
         }
 
-        public static User CreateAdminUser(Enums.AccountType artOfAccount, string accountNumber)
+        public static User CreateAdminUser(string accountNumber)
         {
             User newAdminUser = new();
             newAdminUser.userNumber = CreateUserNumber(Enums.AccountType.adminUser, accountNumber);
             newAdminUser.userName = UImethods.AskForNameInformations();
             newAdminUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.adminUser);
+            newAdminUser.accountStatus = Enums.Status.active;
 
             return newAdminUser;
         }

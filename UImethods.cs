@@ -118,6 +118,10 @@ namespace LittleWebApplication
             {
                 Console.WriteLine("Ihr Account ist leider nicht aktiv. Bitte wenden Sie sich an Ihren Servicebetreuer.");
             }
+            else if (artOfAccount == Enums.AccountType.adminUser)
+            {
+                Console.WriteLine("Dein Account wurde leider deaktiviert. Bitte wende Dich an Deinen Supervisor.");
+            }
         }
 
         /// <summary>
@@ -770,109 +774,7 @@ namespace LittleWebApplication
             {
                 if (userMainMenueSelection == ConsoleKey.D1)
                 {
-                    Console.WriteLine("\nUSERVERWALTUNG\n1.PrivateUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
-                    subMenueOptions = 4;
-
-                    ConsoleKey userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-
-                    if (userSubMenueSelection == ConsoleKey.Escape)
-                    {
-                        break;
-                    }
-                    while (userSubMenueSelection != ConsoleKey.Escape)
-                    {
-                        if (userSubMenueSelection == ConsoleKey.D1)
-                        {
-                            //add sort/search function
-                            List<User> privateUserList = Backup.LoadPrivateUserRepository();
-
-                            Console.WriteLine("PRIVATE-USER ÜBERSICHT");
-
-                            foreach (User user in privateUserList)
-                            {
-                                Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
-                            }
-
-                            Console.WriteLine("(Press ESC to go back)");
-
-                            while (userSubMenueSelection != ConsoleKey.Escape)
-                            {
-                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-                            }
-                        }
-                        else if (userSubMenueSelection == ConsoleKey.D2)
-                        {
-                            while (userMainMenueSelection != ConsoleKey.Escape)
-                            {
-                                //add sort/search function
-                                List<User> businessUserList = Backup.LoadBusinessUserRepository();
-
-                                Console.WriteLine("BUSINESS-USER ÜBERSICHT");
-
-                                if (businessUserList.Count <= 0)
-                                {
-                                    Console.WriteLine($"{new string('-', 10)}\nKeine businessUser vorhanden\n{new string('-', 10)}");
-                                }
-                                else
-                                {
-                                    foreach (User user in businessUserList)
-                                    {
-                                        Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress.userAdressStreet} {user.userAdress.userAdressNumber}\n\t\t{user.userAdress.userAdressPostalCode} {user.userAdress.userAdressTown}\n\t\t{user.userAdress.userAdressFederalState}\nBenutzername:\t{user.userLogin.userLoginNumber}\nPasswort:\t{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
-                                    }
-                                }
-                                Console.WriteLine("(Press 'F1' to create new businessUser or 'F2' to edit businessUser)\n(Press ESC to go back)");
-
-                                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
-
-                                if (userSubMenueSelection == ConsoleKey.Escape)
-                                {
-                                    break;
-                                }
-                                else if (userSubMenueSelection == ConsoleKey.F1)
-                                {
-                                    List<Account> accountList = Backup.LoadAccountRepository();
-                                    string accountNumber = Account.CreateAccountNumber(accountList);
-                                    Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
-
-                                    User newBusinessUser = User.CreateBusinessUser(Enums.AccountType.businessUser, accountNumber);
-
-                                    Console.WriteLine($"{new string('-', 10)}\nNEUER BUSINESS-USER\nUsernummer:\t{newBusinessUser.userNumber}\nFirma:\t\t{newBusinessUser.userCompany}\nFirmenadresse:\t{newBusinessUser.userAdress.userAdressStreet} {newBusinessUser.userAdress.userAdressNumber}\n\t{newBusinessUser.userAdress.userAdressPostalCode} {newBusinessUser.userAdress.userAdressTown}\n\t{newBusinessUser.userAdress.userAdressFederalState}\nBenutzername:\t{newBusinessUser.userLogin.userLoginNumber}\nPasswort:\t{newBusinessUser.userLogin.userLoginPassword}\n{new string('-', 10)}");
-                                    bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.businessUser);
-
-                                    if (editsConfirmed == true)
-                                    {
-                                        accountList.Add(newAccount);
-                                        Backup.StoreAccountRepository(accountList);
-                                        businessUserList.Add(newBusinessUser);
-                                        Backup.StoreBusinessUserRepository(businessUserList);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else if (userSubMenueSelection == ConsoleKey.F2)
-                                {
-                                    ConsoleKey editUserProfil = 0;
-
-                                    while (editUserProfil != ConsoleKey.Escape)
-                                    {
-                                        editUserProfil = EditUserProfil(businessUserList, Enums.AccountType.businessUser);
-                                    }
-                                }
-                            }
-                            break;
-                        }
-                        else if (userSubMenueSelection == ConsoleKey.D3)
-                        {
-                            //show serviceUser overview
-                        }
-                        else if (userSubMenueSelection == ConsoleKey.D4)
-                        {
-                            //show adminUser overview
-                        }
-                    }
+                    UserAdministration();
                 }
                 else if (userMainMenueSelection == ConsoleKey.D2)
                 {
@@ -911,6 +813,257 @@ namespace LittleWebApplication
                     //show notification administration
                 }
             }
+        }
+
+        /// <summary>
+        /// administration method for edit existing user and create new user 
+        /// </summary>
+        /// <param name="userMainMenueSelection">user selection from main menue</param>
+        public static void UserAdministration()
+        {
+            ConsoleKey userSubMenueSelection = new();
+
+            while (userSubMenueSelection != ConsoleKey.Escape)
+            {
+                int subMenueOptions;
+            
+                Console.WriteLine("\nUSERVERWALTUNG\n1.PrivateUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
+                subMenueOptions = 4;
+
+                userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                if (userSubMenueSelection == ConsoleKey.Escape)
+                {
+                    break;
+                }
+                while (userSubMenueSelection != ConsoleKey.Escape)
+                {
+                    List<User> userList = new();
+
+                    if (userSubMenueSelection == ConsoleKey.D1)
+                    {
+                        //add sort/search function
+                        userList = ShowUserList(Enums.AccountType.privateUser);
+
+                        while (userSubMenueSelection != ConsoleKey.Escape)
+                        {
+                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                            if (userSubMenueSelection == ConsoleKey.Escape)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else if (userSubMenueSelection == ConsoleKey.D2)
+                    {
+                        while (userSubMenueSelection != ConsoleKey.Escape)
+                        {
+                            //add sort/search function
+                            userList = ShowUserList(Enums.AccountType.businessUser);
+
+                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                            if (userSubMenueSelection == ConsoleKey.Escape)
+                            {
+                                break;
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F1)
+                            {
+                                List<Account> accountList = Backup.LoadAccountRepository();
+                                string accountNumber = Account.CreateAccountNumber(accountList);
+                                Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.businessUser);
+
+                                User newBusinessUser = User.CreateBusinessUser(accountNumber);
+
+                                bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.businessUser);
+
+                                if (editsConfirmed == true)
+                                {
+                                    accountList.Add(newAccount);
+                                    Backup.StoreAccountRepository(accountList);
+                                    userList.Add(newBusinessUser);
+                                    Backup.StoreBusinessUserRepository(userList);
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F2)
+                            {
+                                ConsoleKey editUserProfil = 0;
+
+                                while (editUserProfil != ConsoleKey.Escape)
+                                {
+                                    editUserProfil = EditUserProfil(userList, Enums.AccountType.businessUser);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    else if (userSubMenueSelection == ConsoleKey.D3)
+                    {
+                        while (userSubMenueSelection != ConsoleKey.Escape)
+                        {
+                            //add sort/search function
+                            userList = ShowUserList(Enums.AccountType.serviceUser);
+
+                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                            if (userSubMenueSelection == ConsoleKey.Escape)
+                            {
+                                break;
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F1)
+                            {
+                                List<Account> accountList = Backup.LoadAccountRepository();
+                                string accountNumber = Account.CreateAccountNumber(accountList);
+                                Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.serviceUser);
+
+                                User newServiceUser = User.CreateServiceUser(accountNumber);
+
+                                bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.serviceUser);
+
+                                if (editsConfirmed == true)
+                                {
+                                    accountList.Add(newAccount);
+                                    Backup.StoreAccountRepository(accountList);
+                                    userList.Add(newServiceUser);
+                                    Backup.StoreServiceUserRepository(userList);
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F2)
+                            {
+                                ConsoleKey editUserProfil = 0;
+
+                                while (editUserProfil != ConsoleKey.Escape)
+                                {
+                                    editUserProfil = EditUserProfil(userList, Enums.AccountType.serviceUser);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    else if (userSubMenueSelection == ConsoleKey.D4)
+                    {
+                        while (userSubMenueSelection != ConsoleKey.Escape)
+                        {
+                            //add sort/search function
+                            userList = ShowUserList(Enums.AccountType.adminUser);
+
+                            userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+                            if (userSubMenueSelection == ConsoleKey.Escape)
+                            {
+                                break;
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F1)
+                            {
+                                List<Account> accountList = Backup.LoadAccountRepository();
+                                string accountNumber = Account.CreateAccountNumber(accountList);
+                                Account newAccount = Account.CreateAccount(accountNumber, Enums.AccountType.adminUser);
+
+                                User newAdminUser = User.CreateAdminUser(accountNumber);
+
+                                bool editsConfirmed = AskForSaveUserEdits(Enums.AccountType.adminUser);
+
+                                if (editsConfirmed == true)
+                                {
+                                    accountList.Add(newAccount);
+                                    Backup.StoreAccountRepository(accountList);
+                                    userList.Add(newAdminUser);
+                                    Backup.StoreAdminUserRepository(userList);
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else if (userSubMenueSelection == ConsoleKey.F2)
+                            {
+                                ConsoleKey editUserProfil = 0;
+
+                                while (editUserProfil != ConsoleKey.Escape)
+                                {
+                                    editUserProfil = EditUserProfil(userList, Enums.AccountType.adminUser);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Shows all user profils which are saved in repository
+        /// </summary>
+        /// <param name="artOfAccount">determine repository</param>
+        public static List<User> ShowUserList (Enums.AccountType artOfAccount)
+        {
+            List<User> userList = new();
+
+            if (artOfAccount == Enums.AccountType.privateUser)
+            {
+                userList = Backup.LoadPrivateUserRepository();
+                Console.WriteLine("PRIVATE-USER ÜBERSICHT");
+            }
+            else if (artOfAccount == Enums.AccountType.businessUser)
+            {
+                userList = Backup.LoadBusinessUserRepository();
+                Console.WriteLine("BUSINESS-USER ÜBERSICHT");
+            }
+            else if (artOfAccount == Enums.AccountType.serviceUser)
+            {
+                userList = Backup.LoadServiceUserRepository();
+                Console.WriteLine("SERVICE-USER ÜBERSICHT");
+            }
+            else if (artOfAccount == Enums.AccountType.adminUser)
+            {
+                userList = Backup.LoadAdminUserRepository();
+                Console.WriteLine("ADMIN-USER ÜBERSICHT");
+            }
+
+            if (userList.Count <= 0)
+            {
+                Console.WriteLine($"{new string('-', 10)}\nKeine User vorhanden\n{new string('-', 10)}");
+            }
+            else
+            {
+                foreach (User user in userList)
+                {
+                    if (artOfAccount == Enums.AccountType.privateUser)
+                    {
+                        Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                        Console.WriteLine("(Drücke ESC um Menü zu verlassen)");
+                    }
+                    else
+                    {
+                        if (artOfAccount == Enums.AccountType.businessUser)
+                        {
+                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nFirma:\t\t{user.userCompany}\nFirmenadresse:\t{user.userAdress.userAdressStreet} {user.userAdress.userAdressNumber}\n\t\t{user.userAdress.userAdressPostalCode} {user.userAdress.userAdressTown}\n\t\t{user.userAdress.userAdressFederalState}\nBenutzername:\t{user.userLogin.userLoginNumber}\nPasswort:\t{user.userLogin.userLoginPassword}\nPartner seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                        }
+                        else if (artOfAccount == Enums.AccountType.serviceUser)
+                        {
+                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                        }
+                        else if (artOfAccount == Enums.AccountType.adminUser)
+                        {
+                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\n{new string('-', 10)}");
+                        }
+                        Console.WriteLine("(Drücke 'F1' um einen neuen User zu erstellen oder 'F2' um einen User zu bearbeiten)\n(Drücke ESC um Menü zu verlassen)");
+                    }
+                }
+            }
+            return userList;
         }
 
         /// <summary>
@@ -1174,8 +1327,8 @@ namespace LittleWebApplication
                     }
                     else if (artOfAccount == Enums.AccountType.adminUser)
                     {
-                        Console.WriteLine($"1.Name Admin\n2.Adresse\n3.Kontakt\n4.Passwort\n5.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
-                        editOptions = 5;
+                        Console.WriteLine($"1.Name Admin\n2.Passwort\n3.Accountstatus\n(Drücke ESC um Profilbearbeitung zu verlassen)\n");
+                        editOptions = 3;
                     }
 
                     userSelection = AskforMenueSelection(editOptions);
