@@ -7,11 +7,10 @@ namespace LittleWebApplication
     public class Terminal
     {
         public string terminalNumber;
-        public string terminalName;
+        public string terminalAdress;
         public string terminalAdressExtraText;
         public string terminalLocation;
-        public string terminalStatus;
-        public AdressInformations terminalAdress;
+        public Enums.Status terminalStatus;
         public User terminalOwner;
         public Fundraiser terminalFundraiser;
         public List<Coupon> terminalCouponList;
@@ -21,6 +20,17 @@ namespace LittleWebApplication
         public List<Story> terminalStoryList;
         public List<Video> terminalVideoList;
         public List<Donation> terminalDonationList;
+
+        public override string ToString()
+        {
+            return $"{new string('-', 10)}\n" +
+            $"Terminalnummer:\t{terminalNumber}\n" +
+            $"Standort:\t\t{terminalAdress}\n" +
+            $"Zusatztext:\t{terminalAdressExtraText}\n" +
+            $"Location(GPS):\t{terminalLocation}\tTerminalstatus:\t{terminalStatus}\n" +
+            $"{new string('-', 10)}";
+        }
+
 
         //public static Terminal CreateTerminal()
         //{ 

@@ -770,48 +770,43 @@ namespace LittleWebApplication
         {
             int subMenueOptions = 0;
 
-            while (userMainMenueSelection != ConsoleKey.Escape)
+            if (userMainMenueSelection == ConsoleKey.D1)
             {
-                if (userMainMenueSelection == ConsoleKey.D1)
-                {
                     UserAdministration();
-                }
-                else if (userMainMenueSelection == ConsoleKey.D2)
-                {
-                    Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
-                    subMenueOptions = 4;
-                    //show finance administration
-                }
-                else if (userMainMenueSelection == ConsoleKey.D3)
-                {
-                    Console.WriteLine("\nTERMINALVERWALTUNG\n1.Terminal-Übersicht\n2.Terminal erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 2;
-                    //show terminal administration
-                }
-                else if (userMainMenueSelection == ConsoleKey.D4)
-                {
-                    Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 2;
-                    //show fundraiser administration
-                }
-                else if (userMainMenueSelection == ConsoleKey.D5)
-                {
-                    Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 3;
-                    //show reward administration
-                }
-                else if (userMainMenueSelection == ConsoleKey.D6)
-                {
-                    Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 2;
-                    //show achievement administration
-                }
-                else if (userMainMenueSelection == ConsoleKey.D7)
-                {
-                    Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
-                    subMenueOptions = 5;
-                    //show notification administration
-                }
+            }
+            else if (userMainMenueSelection == ConsoleKey.D2)
+            {
+                Console.WriteLine("\nFINANZVERWALTUNG\n1.Gesamtspenden anzeigen\n2.Entleerungen anzeigen\n3.Spendenüberweisungen anzeigen\n4.Provisionen anzeigen\n(Press ESC to go back)");
+                subMenueOptions = 4;
+                //show finance administration
+            }
+            else if (userMainMenueSelection == ConsoleKey.D3)
+            {
+                //show terminal administration
+            }
+            else if (userMainMenueSelection == ConsoleKey.D4)
+            {
+                Console.WriteLine("\nSPENDENORGANISATIONSVERWALTUNG\n1.Spendenorganisationen-Übersicht\n2.Spendenorganisation erstellen\n(Press ESC to go back)");
+                subMenueOptions = 2;
+                //show fundraiser administration
+            }
+            else if (userMainMenueSelection == ConsoleKey.D5)
+            {
+                Console.WriteLine("\nGEWINNVERWALTUNG\n1.Sofortgewinne-Übersicht\n2.Coupon-Übersicht\n3.Gewinn erstellen\n(Press ESC to go back)");
+                subMenueOptions = 3;
+                //show reward administration
+            }
+            else if (userMainMenueSelection == ConsoleKey.D6)
+            {
+                Console.WriteLine("\nACHIEVEMENTVERWALTUNG\n1.Achievement-Übersicht\n2.Achievement erstellen\n(Press ESC to go back)");
+                subMenueOptions = 2;
+                //show achievement administration
+            }
+            else if (userMainMenueSelection == ConsoleKey.D7)
+            {
+                Console.WriteLine("\nNACHRICHTEN\n1.Terminal-Benachrichtigungen\n2.User-Benachrichtigungen\n3.Nachricht erstellen\n4.Aufgabe erstellen\n5.News erstellen\n(Press ESC to go back)");
+                subMenueOptions = 5;
+                //show notification administration
             }
         }
 
@@ -821,10 +816,11 @@ namespace LittleWebApplication
         /// <param name="userMainMenueSelection">user selection from main menue</param>
         public static void UserAdministration()
         {
-            ConsoleKey userSubMenueSelection = new();
+            bool userMenueSelection = false;
 
-            while (userSubMenueSelection != ConsoleKey.Escape)
+            while (userMenueSelection == false)
             {
+                ConsoleKey userSubMenueSelection = new();
                 int subMenueOptions;
             
                 Console.WriteLine("\nUSERVERWALTUNG\n1.PrivateUser-Übersicht\n2.BusinessUser-Übersicht\n3.ServiceUser-Übersicht\n4.AdminUser-Übersicht\n(Press ESC to go back)");
@@ -836,6 +832,7 @@ namespace LittleWebApplication
                 {
                     break;
                 }
+
                 while (userSubMenueSelection != ConsoleKey.Escape)
                 {
                     List<User> userList = new();
@@ -1003,6 +1000,21 @@ namespace LittleWebApplication
             }
         }
 
+        public static void TerminalAdministration()
+        {
+            //List<Terminal> terminalList = ShowTerminalList(Enums.AccountType.privateUser);
+
+            //while (userSubMenueSelection != ConsoleKey.Escape)
+            //{
+            //    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+
+            //    if (userSubMenueSelection == ConsoleKey.Escape)
+            //    {
+            //        break;
+            //    }
+            //}
+        }
+
         /// <summary>
         /// Shows all user profils which are saved in repository
         /// </summary>
@@ -1042,7 +1054,7 @@ namespace LittleWebApplication
                 {
                     if (artOfAccount == Enums.AccountType.privateUser)
                     {
-                        Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                        Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userLastName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
                         Console.WriteLine("(Drücke ESC um Menü zu verlassen)");
                     }
                     else
@@ -1053,17 +1065,42 @@ namespace LittleWebApplication
                         }
                         else if (artOfAccount == Enums.AccountType.serviceUser)
                         {
-                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
+                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userLastName.ToUpper()}\nAdresse:\t{user.userAdress}\nKontakt:\t{user.userContact}\nAktiv seit:\t{user.joinDateTime}\t{user.accountStatus}\n{new string('-', 10)}");
                         }
                         else if (artOfAccount == Enums.AccountType.adminUser)
                         {
-                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userFirstName.ToUpper()}\n{new string('-', 10)}");
+                            Console.WriteLine($"{new string('-', 10)}\nUsernummer:\t{user.userNumber}\nName:\t\t{user.userName.userFirstName} {user.userName.userLastName.ToUpper()}\n{new string('-', 10)}");
                         }
                         Console.WriteLine("(Drücke 'F1' um einen neuen User zu erstellen oder 'F2' um einen User zu bearbeiten)\n(Drücke ESC um Menü zu verlassen)");
                     }
                 }
             }
             return userList;
+        }
+
+        public static List<Terminal> ShowTerminalList()
+        {
+            List<Terminal> terminalList = Backup.LoadTerminalRepository();
+            Console.WriteLine("TERMINAL ÜBERSICHT");
+
+            if (terminalList.Count <= 0)
+            {
+                Console.WriteLine($"{new string('-', 10)}\nKeine Terminals vorhanden\n{new string('-', 10)}");
+            }
+            else
+            {
+                foreach (Terminal terminal in terminalList)
+                {
+                    Console.WriteLine(terminal); //+Terminal Owner +Terminal Fundraiser +Terminal Rewards +Terminal Coupons +Terminal Donations
+                }
+                Console.WriteLine("(Drücke 'F1' um einen neuen Terminal zu erstellen)\n" +
+                "(Drücke 'F2' um in die Detailansicht eines Terminals zu gelangen)\n" +
+                "(Drücke 'F3' um einen Terminal zu bearbeiten)\n" +
+                "(Drücke ESC um Menü zu verlassen)");
+
+                //Show SubMenues
+            }
+            return terminalList;
         }
 
         /// <summary>
