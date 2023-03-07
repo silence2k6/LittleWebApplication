@@ -16,7 +16,7 @@ namespace LittleWebApplication
             Fundraiser fundraiser = new();
             fundraiser.fundraiserNumber = "F#" + listNumber.ToString("D6");
             fundraiser.fundraiserCompany = UImethods.AskForCompanyInformations(artOfAccount);
-            fundraiser.fundraiserAdress = UImethods.AskForAdressInformations();
+            fundraiser.fundraiserAdress = UImethods.AskForUserAdressInformations();
             fundraiser.fundraiserBankAccount = UImethods.AskForBankAccountInformations();
 
             return fundraiser;

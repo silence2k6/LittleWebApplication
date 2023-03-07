@@ -1177,21 +1177,34 @@ namespace LittleWebApplication
         /// asks user for adress informations
         /// </summary>
         /// <returns>adress as an object</returns>
-        public static AdressInformations AskForAdressInformations()
+        public static AdressInformations AskForUserAdressInformations()
         {
-            AdressInformations newAdress = new();
+            AdressInformations newUserAdress = new();
             Console.Write("Straße:\t\t");
-            newAdress.userAdressStreet = Console.ReadLine();
+            newUserAdress.userAdressStreet = Console.ReadLine();
             Console.Write("Hausnummer:\t");
-            newAdress.userAdressNumber = Console.ReadLine();
+            newUserAdress.userAdressNumber = Console.ReadLine();
             Console.Write("PLZ:\t\t");
-            newAdress.userAdressPostalCode = Console.ReadLine();
+            newUserAdress.userAdressPostalCode = Console.ReadLine();
             Console.Write("Stadt:\t\t");
-            newAdress.userAdressTown = Console.ReadLine();
+            newUserAdress.userAdressTown = Console.ReadLine();
             Console.Write("Bundesland:\t");
-            newAdress.userAdressFederalState = Console.ReadLine();
+            newUserAdress.userAdressFederalState = Console.ReadLine();
 
-            return newAdress;
+            return newUserAdress;
+        }
+
+        public static AdressInformations AskForTerminalAdressInformations()
+        {
+            AdressInformations newTerminalAdress = new();
+            Console.Write("Adressbezeichnung:\t");
+            newTerminalAdress.terminalAdress = Console.ReadLine();
+            Console.Write("Adresszusatz:\t\t");
+            newTerminalAdress.terminalAdressExtraText = Console.ReadLine();
+            Console.Write("GPS-Code:\t\t\t");
+            newTerminalAdress.terminalAdressLocation = Console.ReadLine();
+
+            return newTerminalAdress;
         }
 
         /// <summary>

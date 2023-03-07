@@ -165,7 +165,7 @@ namespace LittleWebApplication.Users
             newBusinessUser.joinDateTime = DateTime.Now;
             newBusinessUser.userNumber = CreateUserNumber(Enums.AccountType.businessUser, accountNumber);
             newBusinessUser.userCompany = UImethods.AskForCompanyInformations(Enums.AccountType.businessUser);
-            newBusinessUser.userAdress = UImethods.AskForAdressInformations();
+            newBusinessUser.userAdress = UImethods.AskForUserAdressInformations();
             newBusinessUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.businessUser);
             newBusinessUser.accountStatus = Enums.Status.active;
 
@@ -180,7 +180,7 @@ namespace LittleWebApplication.Users
             List<Account> accountList = Backup.LoadAccountRepository();
             newServiceUser.joinDateTime = DateTime.Now;
             newServiceUser.userNumber = CreateUserNumber(Enums.AccountType.serviceUser, accountNumber);
-            newServiceUser.userAdress = UImethods.AskForAdressInformations();
+            newServiceUser.userAdress = UImethods.AskForUserAdressInformations();
             newServiceUser.userLogin = UImethods.CreateUserLogin(accountNumber, Enums.AccountType.serviceUser);
             newServiceUser.accountStatus = Account.CheckAccountStatus(newServiceUser, accountList);
 

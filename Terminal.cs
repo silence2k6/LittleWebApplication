@@ -7,9 +7,7 @@ namespace LittleWebApplication
     public class Terminal
     {
         public string terminalNumber;
-        public string terminalAdress;
-        public string terminalAdressExtraText;
-        public string terminalLocation;
+        public AdressInformations terminalAdress;
         public Enums.Status terminalStatus;
         public User terminalOwner;
         public Fundraiser terminalFundraiser;
@@ -25,17 +23,30 @@ namespace LittleWebApplication
         {
             return $"{new string('-', 10)}\n" +
             $"Terminalnummer:\t{terminalNumber}\n" +
-            $"Standort:\t\t{terminalAdress}\n" +
-            $"Zusatztext:\t{terminalAdressExtraText}\n" +
-            $"Location(GPS):\t{terminalLocation}\tTerminalstatus:\t{terminalStatus}\n" +
+            $"Standort:\t\t{terminalAdress.terminalAdress}\n\t\t\t{terminalAdress.terminalAdressExtraText}\n\t\t\t{terminalAdress.terminalAdressLocation}" +
+            $"\t{terminalStatus}\n" +
             $"{new string('-', 10)}";
         }
 
+        public static int CreateTerminalNumber()
+        {
+            List<Terminal> terminalList = Backup.LoadTerminalRepository();
 
-        //public static Terminal CreateTerminal()
-        //{ 
+            int listNumber = terminalList.Count + 1;
+            int terminalNumber = Convert.ToInt32(listNumber.ToString("D6"));
+            return terminalNumber;
+        }
 
-        //}
+        public static Terminal CreateTerminal()
+        {
+            Terminal newTerminal = new();
+            newTerminal.terminalNumber = "T#" + CreateTerminalNumber();
+            newTerminal.terminalAdress = UImethods.AskForTerminalAdressInformations();
+            newTerminal.terminalStatus = Enums.Status.active;
+            //newTerminal.terminalOwner =
+
+            return newTerminal;
+        }
 
         //public static void CreateTerminalService()
         //{
