@@ -43,9 +43,49 @@ namespace LittleWebApplication
             newTerminal.terminalNumber = "T#" + CreateTerminalNumber();
             newTerminal.terminalAdress = UImethods.AskForTerminalAdressInformations();
             newTerminal.terminalStatus = Enums.Status.active;
-            //newTerminal.terminalOwner =
+            newTerminal.terminalOwner = SetTerminalOwner(newTerminal);
 
             return newTerminal;
+        }
+
+        public static User SetTerminalOwner(Terminal newTerminal)
+        {
+            UImethods.PrintSomethingToConsole("Wähle einen Firmenkunden dem dieser Terminal zugeordnet werden soll.");
+
+            User terminalOwner = new();
+            bool validUserLogin = false;
+
+            while (validUserLogin == false)
+            {
+                string userLoginNumberInput = UImethods.AskForUserLoginNumber("BussinessUser wählen");
+                terminalOwner = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.businessUser);
+            
+                if (terminalOwner != null)
+                {
+                    break;
+                }
+            }
+            return terminalOwner;
+        }
+
+        public static Fundraiser SetTerminalFundraiser(Fundraiser newFundraiser)
+        {
+            UImethods.PrintSomethingToConsole("Wähle eine Spendenorganisation die aus Spenden aus diesem Terminal begünstigt werden soll.");
+
+            Fundraiser terminalFundraiser = new();
+            bool validUserLogin = false;
+
+            while (validUserLogin == false)
+            {
+                //string userLoginNumberInput = UImethods.AskForUserLoginNumber("Spendenorganisation wählen");
+                //terminalFundraiser = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.fundraiser);
+
+                //if (terminalFundraiser != null)
+                //{
+                //    break;
+                //}
+            }
+            return terminalFundraiser;
         }
 
         //public static void CreateTerminalService()

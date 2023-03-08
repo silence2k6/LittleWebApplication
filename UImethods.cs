@@ -6,12 +6,21 @@ namespace LittleWebApplication
     public class UImethods
     {
         /// <summary>
+        /// prints a string to console
+        /// </summary>
+        /// <param name="something">anything you want to print on console</param>
+        public static void PrintSomethingToConsole(string something)
+        {
+            Console.WriteLine(something);
+        }
+
+        /// <summary>
         /// asks user for login number
         /// </summary>
         /// <returns>user login number input</returns>
-        public static string AskForUserLoginNumber()
+        public static string AskForUserLoginNumber(string question)
         {
-            Console.Write("Benutzername:\t");
+            Console.Write($"{question}:\t");
             string userLoginNumberInput = Console.ReadLine().ToUpper();
             return userLoginNumberInput;
         }
@@ -1317,7 +1326,7 @@ namespace LittleWebApplication
                 {
                     Console.WriteLine("\nUSERPROFIL BEARBEITEN\nWelchen User wollen Sie bearbeiten?");
 
-                    string userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                    string userLoginNumberInput = UImethods.AskForUserLoginNumber("Benutzername");
 
                     userToEdit = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, artOfAccount);
 

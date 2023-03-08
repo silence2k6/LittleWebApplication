@@ -5,7 +5,7 @@ namespace LittleWebApplication
 {
     internal class Progamm
     {
-        //Anzeige ShowPrivat/Business/Service/Admin in Class mit "override" definieren 
+        //user-/termina-/fundraiserNumber als int definieren und "PreNumber(P#,...) nur als readonly auslesen
         static void Main(string[] args)
         {
             List<User> adminUserList = new();
@@ -42,7 +42,7 @@ namespace LittleWebApplication
                 {
                     while (validArtOfUser == false)
                     {
-                        userLoginNumberInput = UImethods.AskForUserLoginNumber();
+                        userLoginNumberInput = UImethods.AskForUserLoginNumber("Benutzername");
                         artOfAccount = UImethods.CheckUserLoginForArtOfUser(userLoginNumberInput);
 
                         if (artOfAccount != 0)
