@@ -4,7 +4,7 @@ namespace LittleWebApplication
 {
     public class Fundraiser
     {
-        public string fundraiserNumber;
+        public int fundraiserNumber;
         public CompanyInformations fundraiserCompany;
         public AdressInformations fundraiserAdress;
         public BankAccountInformations fundraiserBankAccount;
@@ -23,7 +23,7 @@ namespace LittleWebApplication
             int listNumber = fundraiserList.Count + 1;
 
             Fundraiser fundraiser = new();
-            fundraiser.fundraiserNumber = "F#" + CreateFundraiserNumber();
+            fundraiser.fundraiserNumber = CreateFundraiserNumber();
             fundraiser.fundraiserCompany = UImethods.AskForCompanyInformations(artOfAccount);
             fundraiser.fundraiserAdress = UImethods.AskForUserAdressInformations();
             fundraiser.fundraiserBankAccount = UImethods.AskForBankAccountInformations();

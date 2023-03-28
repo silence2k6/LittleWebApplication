@@ -19,7 +19,8 @@
             active,
             disabled,
             expired,
-            used
+            used,
+            incomplete
         }
 
         public enum TerminalService

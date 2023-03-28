@@ -117,6 +117,40 @@ namespace LittleWebApplication
             return user;
         }
 
+        public static Fundraiser CheckForFundraiserNumberExist()
+        {
+            List<Fundraiser> fundraiserList = Backup.LoadFundraiserRepository();
+
+            Console.Write("Spendenorganisation wählen:\t");
+            int fundraiserNumberInput = Convert.ToInt32(Console.ReadLine());
+
+            int fundraiserObjectPos = 0;
+            Fundraiser fundraiser = new();
+
+            while (fundraiserObjectPos <= fundraiserList.Count)
+            {
+                fundraiser = fundraiserList[fundraiserObjectPos];
+
+                if (int.Equals(fundraiserNumberInput, fundraiser.fundraiserNumber))
+                {
+                    fundraiser = fundraiserList[fundraiserObjectPos];
+                    break;
+                }
+                else
+                {
+                    fundraiserObjectPos++;
+
+                    if (fundraiserObjectPos == fundraiserList.Count)
+                    {
+                        Console.WriteLine("Fundraiser exitiert nicht!\n");
+                        fundraiser = null;
+                        break;
+                    }
+                }
+            }
+            return fundraiser;
+        }
+
         public static void AccountInacticeNotificaton(Enums.AccountType artOfAccount)
         {
             if (artOfAccount == Enums.AccountType.privateUser)
@@ -781,7 +815,7 @@ namespace LittleWebApplication
 
             if (userMainMenueSelection == ConsoleKey.D1)
             {
-                    UserAdministration();
+                UserAdministration();
             }
             else if (userMainMenueSelection == ConsoleKey.D2)
             {
@@ -791,7 +825,7 @@ namespace LittleWebApplication
             }
             else if (userMainMenueSelection == ConsoleKey.D3)
             {
-                //show terminal administration
+                TerminalAdministration();
             }
             else if (userMainMenueSelection == ConsoleKey.D4)
             {
@@ -1011,17 +1045,32 @@ namespace LittleWebApplication
 
         public static void TerminalAdministration()
         {
-            //List<Terminal> terminalList = ShowTerminalList(Enums.AccountType.privateUser);
+            List<Terminal> terminalList = ShowTerminalList();
+            int subMenueOptions = 0;
 
-            //while (userSubMenueSelection != ConsoleKey.Escape)
-            //{
-            //    userSubMenueSelection = AskforMenueSelection(subMenueOptions);
+            ConsoleKey terminalSubMenueSelection = AskforMenueSelection(subMenueOptions);
 
-            //    if (userSubMenueSelection == ConsoleKey.Escape)
-            //    {
-            //        break;
-            //    }
-            //}
+            while (terminalSubMenueSelection != ConsoleKey.Escape)
+            {
+                if (terminalSubMenueSelection == ConsoleKey.Escape)
+                {
+                    break;
+                }
+                else if (terminalSubMenueSelection == ConsoleKey.F1)
+                {
+                    //load terminal repository
+                    Terminal.CreateTerminal();
+                    //break if terminal creation get stopped
+                    //show new terminal
+                    //ask user if want to save new terminal
+                    //store new terminal in terminal repository
+                }
+                else if (terminalSubMenueSelection == ConsoleKey.F2)
+                {
+                    //show terminal details
+                    //ask user if want to edit terminal
+                }
+            }
         }
 
         /// <summary>
@@ -1104,10 +1153,7 @@ namespace LittleWebApplication
                 }
                 Console.WriteLine("(Drücke 'F1' um einen neuen Terminal zu erstellen)\n" +
                 "(Drücke 'F2' um in die Detailansicht eines Terminals zu gelangen)\n" +
-                "(Drücke 'F3' um einen Terminal zu bearbeiten)\n" +
                 "(Drücke ESC um Menü zu verlassen)");
-
-                //Show SubMenues
             }
             return terminalList;
         }

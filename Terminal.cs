@@ -6,7 +6,7 @@ namespace LittleWebApplication
 {
     public class Terminal
     {
-        public string terminalNumber;
+        public int terminalNumber;
         public AdressInformations terminalAdress;
         public Enums.Status terminalStatus;
         public User terminalOwner;
@@ -40,11 +40,32 @@ namespace LittleWebApplication
         public static Terminal CreateTerminal()
         {
             Terminal newTerminal = new();
-            newTerminal.terminalNumber = "T#" + CreateTerminalNumber();
-            newTerminal.terminalAdress = UImethods.AskForTerminalAdressInformations();
-            newTerminal.terminalStatus = Enums.Status.active;
-            newTerminal.terminalOwner = SetTerminalOwner(newTerminal);
+            bool stopTerminalCreation = false;
 
+            while (stopTerminalCreation == false)
+            {
+                newTerminal.terminalNumber = CreateTerminalNumber();
+                newTerminal.terminalAdress = UImethods.AskForTerminalAdressInformations();
+                newTerminal.terminalStatus = Enums.Status.active;
+
+                newTerminal.terminalOwner = SetTerminalOwner(newTerminal);
+                if (newTerminal.terminalOwner == null)
+                {
+                    UImethods.PrintSomethingToConsole("Terminalerstellung abgebrochen!");
+                    newTerminal.terminalStatus = Enums.Status.incomplete;
+                    break;
+                }
+
+                newTerminal.terminalFundraiser = SetTerminalFundraiser();
+                if (newTerminal.terminalFundraiser == null)
+                {
+                    UImethods.PrintSomethingToConsole("Terminalerstellung abgebrochen!");
+                    newTerminal.terminalStatus = Enums.Status.incomplete;
+                    break;
+                }
+
+                //newTerminal.terminalCouponList = 
+            }
             return newTerminal;
         }
 
@@ -59,8 +80,17 @@ namespace LittleWebApplication
             {
                 string userLoginNumberInput = UImethods.AskForUserLoginNumber("BussinessUser wählen");
                 terminalOwner = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.businessUser);
-            
-                if (terminalOwner != null)
+
+                if (terminalOwner == null)
+                {
+                    ConsoleKey tryAnotherUserNumber = UImethods.AskSomeQuestionOrPressESC("Drücke 'Y' für neue Auswahl oder 'ESC' um Menü zu verlassen", "", "");
+
+                    if (tryAnotherUserNumber == ConsoleKey.Escape)
+                    {
+                        break;
+                    }
+                }
+                else
                 {
                     break;
                 }
@@ -68,7 +98,7 @@ namespace LittleWebApplication
             return terminalOwner;
         }
 
-        public static Fundraiser SetTerminalFundraiser(Fundraiser newFundraiser)
+        public static Fundraiser SetTerminalFundraiser()
         {
             UImethods.PrintSomethingToConsole("Wähle eine Spendenorganisation die aus Spenden aus diesem Terminal begünstigt werden soll.");
 
@@ -77,13 +107,21 @@ namespace LittleWebApplication
 
             while (validUserLogin == false)
             {
-                //string userLoginNumberInput = UImethods.AskForUserLoginNumber("Spendenorganisation wählen");
-                //terminalFundraiser = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.fundraiser);
+                terminalFundraiser = UImethods.CheckForFundraiserNumberExist();
 
-                //if (terminalFundraiser != null)
-                //{
-                //    break;
-                //}
+                if (terminalFundraiser == null)
+                {
+                    ConsoleKey tryAnotherFundraiserNumber = UImethods.AskSomeQuestionOrPressESC("Drücke 'Y' für neue Auswahln oder 'ESC' um Menü zu verlassen", "", "");
+
+                    if (tryAnotherFundraiserNumber == ConsoleKey.Escape)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
             return terminalFundraiser;
         }
