@@ -19,6 +19,10 @@ namespace LittleWebApplication
         public List<Video> terminalVideoList;
         public List<Donation> terminalDonationList;
 
+        /// <summary>
+        /// method prints terminal object with basic informations to console
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{new string('-', 10)}\n" +
@@ -28,15 +32,10 @@ namespace LittleWebApplication
             $"{new string('-', 10)}";
         }
 
-        public static int CreateTerminalNumber()
-        {
-            List<Terminal> terminalList = Backup.LoadTerminalRepository();
-
-            int listNumber = terminalList.Count + 1;
-            int terminalNumber = Convert.ToInt32(listNumber.ToString("D6"));
-            return terminalNumber;
-        }
-
+        /// <summary>
+        /// method creates new terminal object
+        /// </summary>
+        /// <returns>new terminal (object)</returns>
         public static Terminal CreateTerminal()
         {
             Terminal newTerminal = new();
@@ -56,7 +55,7 @@ namespace LittleWebApplication
                     break;
                 }
 
-                newTerminal.terminalFundraiser = SetTerminalFundraiser();
+                newTerminal.terminalFundraiser = SetTerminalFundraiser(newTerminal);
                 if (newTerminal.terminalFundraiser == null)
                 {
                     UImethods.PrintSomethingToConsole("Terminalerstellung abgebrochen!");
@@ -69,17 +68,34 @@ namespace LittleWebApplication
             return newTerminal;
         }
 
+        /// <summary>
+        /// method creates new terminal number
+        /// </summary>
+        /// <returns>terminal number (int)</returns>
+        public static int CreateTerminalNumber()
+        {
+            List<Terminal> terminalList = Backup.LoadTerminalRepository();
+
+            int listNumber = terminalList.Count + 1;
+            int terminalNumber = Convert.ToInt32(listNumber.ToString("D6"));
+            return terminalNumber;
+        }
+
+        /// <summary>
+        /// method link existing user to terminal
+        /// </summary>
+        /// <param name="newTerminal"></param>
+        /// <returns>terminal owner (object)</returns>
         public static User SetTerminalOwner(Terminal newTerminal)
         {
             UImethods.PrintSomethingToConsole("Wähle einen Firmenkunden dem dieser Terminal zugeordnet werden soll.");
 
-            User terminalOwner = new();
             bool validUserLogin = false;
 
             while (validUserLogin == false)
             {
                 string userLoginNumberInput = UImethods.AskForUserLoginNumber("BussinessUser wählen");
-                terminalOwner = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.businessUser);
+                User terminalOwner = UImethods.CheckUserLoginForUserNumberExist(userLoginNumberInput, Enums.AccountType.businessUser);
 
                 if (terminalOwner == null)
                 {
@@ -92,22 +108,27 @@ namespace LittleWebApplication
                 }
                 else
                 {
+                    newTerminal.terminalOwner = terminalOwner;
                     break;
                 }
             }
-            return terminalOwner;
+            return newTerminal.terminalOwner;
         }
 
-        public static Fundraiser SetTerminalFundraiser()
+        /// <summary>
+        /// method link existing fundraiser to terminal
+        /// </summary>
+        /// <param name="newTerminal"></param>
+        /// <returns>terminal fundraiser (object)</returns>
+        public static Fundraiser SetTerminalFundraiser(Terminal newTerminal)
         {
             UImethods.PrintSomethingToConsole("Wähle eine Spendenorganisation die aus Spenden aus diesem Terminal begünstigt werden soll.");
 
-            Fundraiser terminalFundraiser = new();
             bool validUserLogin = false;
 
             while (validUserLogin == false)
             {
-                terminalFundraiser = UImethods.CheckForFundraiserNumberExist();
+                Fundraiser terminalFundraiser = UImethods.CheckForFundraiserNumberExist();
 
                 if (terminalFundraiser == null)
                 {
@@ -120,10 +141,11 @@ namespace LittleWebApplication
                 }
                 else
                 {
+                    newTerminal.terminalFundraiser = terminalFundraiser;
                     break;
                 }
             }
-            return terminalFundraiser;
+            return newTerminal.terminalFundraiser;
         }
 
         //public static void CreateTerminalService()

@@ -10,7 +10,8 @@
             serviceUser,
             adminUser,
             fundraiser,
-            terminal
+            terminal,
+            coupon
         }
 
         public enum Status

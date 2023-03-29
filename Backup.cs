@@ -1,4 +1,5 @@
-﻿using LittleWebApplication.Users;
+﻿using LittleWebApplication.Rewards;
+using LittleWebApplication.Users;
 using System.Xml.Serialization;
 
 namespace LittleWebApplication
@@ -6,28 +7,36 @@ namespace LittleWebApplication
     public class Backup
     {
         static XmlSerializer accountSerializer = new XmlSerializer(typeof(List<Account>));
-        //static string ACCOUNT_PATH = "accountRepository.xml";
         static string ACCOUNT_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\accountRepository.xml";
         //static string ACCOUNT_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\accountRepository.xml";
+        
         static XmlSerializer privateUserSerializer = new(typeof(List<User>));
-        //static string PRIVATE_USER_PATH = "privateUserRepository.xml";
         static string PRIVATE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\privateUserList.xml";
         //static string PRIVATE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\privateUserRepository.xml";
+        
         static XmlSerializer businessUserSerializer = new(typeof(List<User>));
         static string BUSINESS_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\businessUserList.xml";
         //static string BUSINESS_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\pusinessUserRepository.xml";
+        
         static XmlSerializer serviceUserSerializer = new(typeof(List<User>));
         static string SERVICE_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\serviceUserList.xml";
         //static string SERVICE_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\serviceUserRepository.xml";
+        
         static XmlSerializer adminUserSerializer = new(typeof(List<User>));
         static string ADMIN_USER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\adminUserList.xml";
         //static string ADMIN_USER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\adminUserRepository.xml";
+        
         static XmlSerializer terminalSerializer = new(typeof(List<Terminal>));
         static string TERMINAL_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\terminalList.xml";
         //static string TERMINAL_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\terminalRepository.xml";
+        
         static XmlSerializer fundraiserSerializer = new(typeof(List<Fundraiser>));
         static string FUNDRAISER_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\fundraiserRepository.xml";
         //static string FUNDRAISER_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\fundraiserRepositoryRepository.xml";
+
+        static XmlSerializer couponSerializer = new(typeof(List<Coupon>));
+        static string COUPON_PATH = @"C:\Users\user\source\repos\LittleWebApplication\Backup\couponRepository.xml";
+        //static string COUPON_PATH = @"C:\Users\Bimbi\source\repos\silence2k6\LittleWebApplication\Backup\couponRepositoryRepository.xml";
 
 
         public static void StoreAccountRepository(List<Account> accounts)
@@ -218,5 +227,31 @@ namespace LittleWebApplication
             return fundraisers;
         }
 
+        public static void StoreCouponRepository(List<Coupon> coupon)
+        {
+            using (FileStream file = File.Create(COUPON_PATH))
+            {
+                couponSerializer.Serialize(file, coupon);
+            }
+        }
+
+        public static List<Coupon> LoadCouponRepository()
+        {
+            List<Coupon> coupon = new();
+            bool backUpCheck = File.Exists(COUPON_PATH);
+
+            if (backUpCheck == true)
+            {
+                using (FileStream file = File.OpenRead(COUPON_PATH))
+                {
+                    coupon = couponSerializer.Deserialize(file) as List<Coupon>;
+                }
+            }
+            else
+            {
+                StoreCouponRepository(coupon);
+            }
+            return coupon;
+        }
     }
 }

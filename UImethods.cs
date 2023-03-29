@@ -15,6 +15,18 @@ namespace LittleWebApplication
         }
 
         /// <summary>
+        /// print request to console and call for answer
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>console input (string)</returns>
+        public static string GetConsoleInputToRequest (string request)
+        {
+            Console.Write($"{request}\t");
+            string consoleInput = Console.ReadLine();
+            return consoleInput;
+        }
+
+        /// <summary>
         /// asks user for login number
         /// </summary>
         /// <returns>user login number input</returns>
@@ -1163,7 +1175,7 @@ namespace LittleWebApplication
         /// </summary>
         /// <param name="artOfAccount">art of user account</param>
         /// <param name="userMainMenueSelection">selected menue</param>
-        public static void ShowSubMenue(Enums.AccountType artOfAccount, ConsoleKey userMainMenueSelection)
+        public static void ShowUserSubMenues(Enums.AccountType artOfAccount, ConsoleKey userMainMenueSelection)
         {
             if (artOfAccount == Enums.AccountType.privateUser)
             {
@@ -1211,7 +1223,7 @@ namespace LittleWebApplication
             {
                 Console.Write("Name Spendenorganisation:\t");
             }
-            if (artOfAccount == Enums.AccountType.businessUser)
+            else if (artOfAccount == Enums.AccountType.businessUser)
             {
                 Console.Write("Name Firma:\t\t\t");
             }

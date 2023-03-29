@@ -92,7 +92,7 @@ namespace LittleWebApplication
                     }
                     else
                     {
-                        UImethods.ShowSubMenue(artOfAccount, userMainMenueSelection);
+                        UImethods.ShowUserSubMenues(artOfAccount, userMainMenueSelection);
                     }
                 }
             }
